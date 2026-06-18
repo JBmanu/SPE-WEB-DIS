@@ -76,7 +76,7 @@ jobs:
 
 ### DRY con YAML
 Le pipeline di automazione/integrazione sono parte del software, quindi soggette agli stessi (o anche più elevati) standard di qualità: si applicano tutti i buoni principi di ingegneria del software. YAML è spesso usato dai sistemi di CI come linguaggio di configurazione preferito perché abilita alcune forme di DRY tramite **anchor** (`&`/`*`) e **merge key** (`<<:`):
-```yaml
+```text
 hey: &ref
   look: at
   me: [ "I'm", 'dancing' ]
@@ -117,7 +117,7 @@ jobs:
     steps:
       - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
       - name: Run a one-line script
-        run: echo Hello from a \${{ runner.os }} machine!
+        run: echo Hello from a ${{ runner.os }} machine!
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
@@ -129,7 +129,7 @@ jobs:
     if: always() # normalmente gli step dopo un fallimento non vengono eseguiti, a meno di always()
     steps:
       - name: Run something on powershell
-        run: echo By default, \${{ runner.os }} runners execute with powershell
+        run: echo By default, ${{ runner.os }} runners execute with powershell
       - name: Run something on bash
         shell: bash
         run: echo it is allowed to force the shell type
