@@ -1,17 +1,17 @@
 import {defineConfig} from 'vitepress'
 import {withMermaid} from "vitepress-plugin-mermaid";
 
-let reportPath = '/report'
-let scopingPath = reportPath + '/scoping'
-let planningPath = reportPath + '/planning'
 // https://vitepress.dev/reference/site-config
+let courseSPE = "/spe"
+let courseWEB = "/web"
+let courseDistributed = "/distributed"
 
 
 export default withMermaid(
     defineConfig({
-        base: '/AthenaPlay-PM/',
-        title: "AthenaPlay-PM",
-        description: "Ulisse an Train Infrastructure Similator",
+        base: '/SPE-WEB-DIS/',
+        title: "SPE-WEB-DIS",
+        description: "Courses summaries of Software Project Engineering, Web Programming and Distributed Systems",
         themeConfig: {
             // https://vitepress.dev/reference/default-theme-config
             nav: [
@@ -22,12 +22,49 @@ export default withMermaid(
                 {
                     text: 'Report',
                     items: [
-                        {text: 'Contesto', link: `${reportPath}/0-contesto`},
-                        {text: 'Scoping', link: `${reportPath}/1-scoping`},
-                        {text: 'Planning', link: `${reportPath}/2-planning`},
-                        {text: 'Launching/Execution', link: `${reportPath}/3-launching-execution`},
-                        {text: 'Monitoring E controlling', link: `${reportPath}/4-monitoring-E-controlling`},
-                        {text: 'Closing', link: `${reportPath}/5-closing`},
+                        {
+                            text: 'SPE',
+                            collapsed: true,
+                            items: [
+                                {text: '00-indice', link: `${courseSPE}/00-INDICE`},
+                                {text: '01-devops', link: `${courseSPE}/01-devops`},
+                                {text: '02-kotlin', link: `${courseSPE}/02-kotlin`},
+                                {text: '03-', link: `${courseSPE}/1-meeting`},
+                                {text: '04-build-automation-gradle', link: `${courseSPE}/04-build-automation-gradle`},
+                                {text: '05-versioning-e-licensing', link: `${courseSPE}/05-versioning-e-licensing`},
+                                {text: '06-continuous-integration', link: `${courseSPE}/06-continuous-integration`},
+                                {text: '07-git-avanzato-e-workflow', link: `${courseSPE}/07-git-avanzato-e-workflow`},
+                                {text: '08-containerizzazione-docker', link: `${courseSPE}/08-containerizzazione-docker`},
+                                {text: '09-DDD-domain-driven-design', link: `${courseSPE}/09-domain-driven-design`},
+                                {text: '10-model-driven-development', link: `${courseSPE}/10-model-driven-development`},
+                                {text: '11-multiplatform-programming', link: `${courseSPE}/11-multiplatform-programming`},
+                                {text: '12-kubernetes', link: `${courseSPE}/12-kubernetes`},
+                                {text: '13-extra', link: `${courseSPE}/13-extra-complementi-pratici`},
+                            ]
+                        },
+                        {
+                            text: 'WEB',
+                            collapsed: true,
+                            items: [
+                                {text: '1-Meeting', link: `${courseWEB}/1-meeting`},
+                            ]
+                        },
+                        {
+                            text: 'DISTRIBUTED',
+                            collapsed: true,
+                            items: [
+                                {text: '1-Meeting', link: `${courseDistributed}/1-meeting`},
+                            ]
+                        },
+                        {
+                            text: 'Exams-Requirements',
+                            collapsed: true,
+                            items: [
+                                {text: 'SPE', link: `${courseSPE}/requirements`},
+                                {text: 'WEB', link: `${courseWEB}/requirements`},
+                                {text: 'DISTRIBUTED', link: `${courseDistributed}/requirements`},
+                            ]
+                        }
                     ]
                 },
                 {
@@ -40,12 +77,6 @@ export default withMermaid(
                                 {text: '1-Meeting', link: `${scopingPath}/1-meeting`},
                                 {text: '2-Meeting', link: `${scopingPath}/2-meeting`},
                                 {text: '3-Meeting', link: `${scopingPath}/3-meeting`},
-                                {text: 'Market Analysis', link: `${scopingPath}/Market-Analysis`},
-                                {text: 'POS', link: `${scopingPath}/POS`},
-                                {text: 'Risk Analysis', link: `${scopingPath}/Risk-Analysis`},
-                                {text: 'Feasibility studies', link: `${scopingPath}/Feasibility-Studies`},
-                                {text: 'RBS', link: `${scopingPath}/RBS`},
-                                {text: 'SWOT Analysis', link: `${scopingPath}/SWOT-Analysis`},
                             ]
                         },
                         {
@@ -65,7 +96,7 @@ export default withMermaid(
             ],
 
             socialLinks: [
-                {icon: 'github', link: 'https://github.com/JBmanu/AthenaPlay-PM'}
+                {icon: 'github', link: 'https://github.com/JBmanu/SPE-WEB-DIS'}
             ]
         }
     })
