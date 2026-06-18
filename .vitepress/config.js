@@ -4,7 +4,7 @@ import {withMermaid} from "vitepress-plugin-mermaid";
 // https://vitepress.dev/reference/site-config
 // -------- SPE --------
 let courseSPE = "/spe"
-let speSummaries = courseSPE + "/slides-summary"
+let speSummary = courseSPE + "/slides-summary"
 
 // -------- WEB --------
 let courseWEB = "/web"
@@ -12,7 +12,8 @@ let webSummaries = courseWEB + "/slides-summary"
 
 // -------- DISTRIBUTED --------
 let courseDistributed = "/distributed"
-let distributedSummaries = courseDistributed + "/slides-summary"
+let distributedSummaryModule1 = courseDistributed + "/module-1-summary"
+let distributedSummaryModule2 = courseDistributed + "/module-2-summary"
 
 
 export default withMermaid(
@@ -39,20 +40,20 @@ export default withMermaid(
                                     text: 'Summary',
                                     collapsed: true,
                                     items: [
-                                        {text: '00-indice', link: `${speSummaries}/00-INDICE`},
-                                        {text: '01-devops', link: `${speSummaries}/01-devops`},
-                                        {text: '02-kotlin', link: `${speSummaries}/02-kotlin`},
-                                        // {text: '03-', link: `${courseSPE}/1-meeting`},
-                                        {text: '04-build-automation-gradle', link: `${speSummaries}/04-build-automation-gradle`},
-                                        {text: '05-versioning-e-licensing', link: `${speSummaries}/05-versioning-e-licensing`},
-                                        {text: '06-continuous-integration', link: `${speSummaries}/06-continuous-integration`},
-                                        {text: '07-git-avanzato-e-workflow', link: `${speSummaries}/07-git-avanzato-e-workflow`},
-                                        {text: '08-containerizzazione-docker', link: `${speSummaries}/08-containerizzazione-docker`},
-                                        {text: '09-DDD-domain-driven-design', link: `${speSummaries}/09-domain-driven-design`},
-                                        {text: '10-model-driven-development', link: `${speSummaries}/10-model-driven-development`},
-                                        {text: '11-multiplatform-programming', link: `${speSummaries}/11-multiplatform-programming`},
-                                        {text: '12-kubernetes', link: `${speSummaries}/12-kubernetes`},
-                                        {text: '13-extra', link: `${speSummaries}/13-extra-complementi-pratici`},
+                                        {text: '00-indice', link: `${speSummary}/00-INDICE`},
+                                        {text: '01-devops', link: `${speSummary}/01-devops`},
+                                        {text: '02-kotlin', link: `${speSummary}/02-kotlin`},
+                                        {text: '03-kotlin-dsl-interne', link: `${courseSPE}/03-kotlin-dsl-interne`},
+                                        {text: '04-build-automation-gradle', link: `${speSummary}/04-build-automation-gradle`},
+                                        {text: '05-versioning-e-licensing', link: `${speSummary}/05-versioning-e-licensing`},
+                                        {text: '06-continuous-integration', link: `${speSummary}/06-continuous-integration`},
+                                        {text: '07-git-avanzato-e-workflow', link: `${speSummary}/07-git-avanzato-e-workflow`},
+                                        {text: '08-containerizzazione-docker', link: `${speSummary}/08-containerizzazione-docker`},
+                                        {text: '09-DDD-domain-driven-design', link: `${speSummary}/09-domain-driven-design`},
+                                        {text: '10-model-driven-development', link: `${speSummary}/10-model-driven-development`},
+                                        {text: '11-multiplatform-programming', link: `${speSummary}/11-multiplatform-programming`},
+                                        {text: '12-kubernetes', link: `${speSummary}/12-kubernetes`},
+                                        {text: '13-extra', link: `${speSummary}/13-extra-complementi-pratici`},
                                     ]
 
                                 },
@@ -65,7 +66,7 @@ export default withMermaid(
                             items: [
                                 // {text: '1-Meeting', link: `${courseWEB}/1-meeting`},
                                 {
-                                    text: 'Summaries',
+                                    text: 'Summary',
                                     collapsed: true,
                                     items: []
                                 }
@@ -75,9 +76,28 @@ export default withMermaid(
                             text: 'DISTRIBUTED',
                             collapsed: true,
                             items: [
-                                // {text: '1-Meeting', link: `${courseDistributed}/1-meeting`},
+                                {text: 'Exam-module-1-requirements', link: `${courseDistributed}/01-requirements`},
                                 {
-                                    text: 'Summaries',
+                                    text: 'Module-1-Summary',
+                                    collapsed: true,
+                                    items: [
+                                        {text: '00-Indice_e_Struttura', link: `${distributedSummaryModule1}/00-Indice_e_Struttura`},
+                                        {text: '01-A0_Organizzazione_Corso', link: `${distributedSummaryModule1}/01-A0_Organizzazione_Corso`},
+                                        {text: '02-Fondamenti_M0_M2_M4_M5', link: `${distributedSummaryModule1}/02-Fondamenti_M0_M2_M4_M5`},
+                                        {text: '03-Dependability_M1', link: `${distributedSummaryModule1}/03-Dependability_M1`},
+                                        {text: '04-Replication_Consistency_M3', link: `${distributedSummaryModule1}/04-Replication_Consistency_M3`},
+                                        {text: '05-Tempo_Spazio_M6_M7', link: `${distributedSummaryModule1}/05-Tempo_Spazio_M6_M7`},
+                                        {text: '06-Architetture_ProcessAlgebra_M8_M7bis', link: `${distributedSummaryModule1}/06-Architetture_ProcessAlgebra_M8_M7bis`},
+                                        {text: '07-CAP_Theorem_C1', link: `${distributedSummaryModule1}/07-CAP_Theorem_C1`},
+                                        {text: '08-Logging_Checkpointing_C2', link: `${distributedSummaryModule1}/08-Logging_Checkpointing_C2`},
+                                        {text: '09-Logical_Clocks_C5', link: `${distributedSummaryModule1}/09-Logical_Clocks_C5`},
+                                        {text: '10-Distributed_Consensus_C3', link: `${distributedSummaryModule1}/10-Distributed_Consensus_C3`},
+                                        {text: '11-Code_Mobility_Kubernetes_C6', link: `${distributedSummaryModule1}/11-Code_Mobility_Kubernetes_C6`},
+                                        {text: '12-DLT_Blockchain_SmartContracts_C4', link: `${distributedSummaryModule1}/12-DLT_Blockchain_SmartContracts_C4`},
+                                    ]
+                                },
+                                {
+                                    text: 'Module-2-Summary',
                                     collapsed: true,
                                     items: []
                                 }

@@ -7,17 +7,18 @@ Riassunto completo (in italiano) delle slide del corso di **Software Process Eng
 | # | File | Argomento |
 |---|---|---|
 | 1 | `01-devops.md` | Filosofia DevOps: Development vs Operations, cultura DevOps, principi/pratiche/strumenti, due casi di studio reali (Maggioli S.p.A. e progetto "DIR") |
-| 2 | `02-kotlin.md` | Kotlin per sviluppatori Scala: dalle basi (101) alla programmazione funzionale (202) e ai DSL interni (203) |
-| 3 | `04-build-automation-gradle.md` | Build automation in generale e Gradle in dettaglio: lifecycle, dipendenze, task, plugin, toolchain, QA, pubblicazione |
-| 4 | `05-versioning-e-licensing.md` | Versioning del software (SemVer, conventional commits, semantic-release) e licensing (copyleft/copyright, licenze FOSS principali) |
-| 5 | `06-continuous-integration.md` | Continuous Integration con GitHub Actions: struttura, espressioni, secret, DRY, automazione avanzata, template issue/PR |
-| 6 | `07-git-avanzato-e-workflow.md` | Git avanzato (rebase, squash, bisezione, submodule, hook...) e modelli di workflow (trunk-based, Gitflow, fork) |
-| 7 | `08-containerizzazione-docker.md` | Containerizzazione con Docker (immagini, volumi, reti) e orchestrazione con Docker Compose/Swarm |
-| 8 | `09-domain-driven-design.md` | Domain Driven Design: building block, bounded context, architettura esagonale, Event Sourcing, CQRS |
-| 9 | `10-model-driven-development.md` | Model Driven Development: meta-modelling, DSL, esempio guidato con Xtext (linguaggio "Sheduler") |
-| 10 | `11-multiplatform-programming.md` | Programmazione multi-piattaforma: Kotlin Multiplatform ("write once build anywhere") e JPype ("write first wrap elsewhere") |
-| 11 | `12-kubernetes.md` | Kubernetes: architettura, Pod/Deployment/Service, autoscaling pratico con Minikube |
-| 12 | `13-complementi-pratici.md` | Complementi: basi di Git, esempi pratici di QA, delivery targets, struttura ufficiale del corso |
+| 2 | `02-kotlin.md` | Kotlin per sviluppatori Scala: dalle basi (101) alla programmazione funzionale (202) |
+| 3 | `03-kotlin-dsl-interne.md` | Kotlin 203: costruzione di DSL interne (type-safe builder), caso di studio della DSL HTML, `@DslMarker` |
+| 4 | `04-build-automation-gradle.md` | Build automation in generale e Gradle in dettaglio: lifecycle, dipendenze, task, plugin, toolchain, QA, pubblicazione |
+| 5 | `05-versioning-e-licensing.md` | Versioning del software (SemVer, conventional commits, semantic-release) e licensing (copyleft/copyright, licenze FOSS principali) |
+| 6 | `06-continuous-integration.md` | Continuous Integration con GitHub Actions: struttura, espressioni, secret, DRY, automazione avanzata, template issue/PR |
+| 7 | `07-git-avanzato-e-workflow.md` | Git avanzato (rebase, squash, bisezione, submodule, hook...) e modelli di workflow (trunk-based, Gitflow, fork) |
+| 8 | `08-containerizzazione-docker.md` | Containerizzazione con Docker (immagini, volumi, reti) e orchestrazione con Docker Compose/Swarm |
+| 9 | `09-domain-driven-design.md` | Domain Driven Design: building block, bounded context, architettura esagonale, Event Sourcing, CQRS |
+| 10 | `10-model-driven-development.md` | Model Driven Development: meta-modelling, DSL, esempio guidato con Xtext (linguaggio "Sheduler") |
+| 11 | `11-multiplatform-programming.md` | Programmazione multi-piattaforma: Kotlin Multiplatform ("write once build anywhere") e JPype ("write first wrap elsewhere") |
+| 12 | `12-kubernetes.md` | Kubernetes: architettura, Pod/Deployment/Service, autoscaling pratico con Minikube |
+| 13 | `13-complementi-pratici.md` | Complementi: basi di Git, esempi pratici di QA, delivery targets, struttura ufficiale del corso |
 
 ## Mappa concettuale del corso
 
