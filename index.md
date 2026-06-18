@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-  name: "AthenaStudios S.R.L."
-  text: "AthenaPlay"
-  tagline: Project Management
+  name: "SPE-WEB-DISTRIBUTED"
+  text: "Summary of the courses"
+  tagline: Software Process Engineering (SPE) — Applicazioni e Servizi Web (WEB) — Sistemi Distribuiti (DISTRIBUTED)
 
   actions:
     - theme: brand
@@ -13,10 +13,11 @@ hero:
       link: spe/slides-summary/00-INDICE
 ---
 
-## AthenaStudios S.R.L.
+## SPE-WEB-DISTRIBUTED
 
-AthenaStudios S.R.L. è una neo-azienda nel settore dei videogiochi, fondata 
-da un team di professionisti con esperienza nel settore videoludico e 
-competenze specifiche in game design, programmazione, grafica e marketing. 
-Il progetto si propone di sviluppare un videogioco originale e coinvolgente, 
-con l'obiettivo di posizionarsi nel mercato videoludico e attrarre investitori.
+This repository contains a comprehensive summary of the courses
+**Software Process Engineering (SPE)**, **Applicazioni e Servizi Web (WEB)**,
+and **Sistemi Distribuiti (DISTRIBUTED)**.
+
+It also contains details and notes regarding the project to be completed for the exam,
+as well as the exam requirements.
