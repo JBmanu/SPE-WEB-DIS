@@ -117,7 +117,7 @@ jobs:
     steps:
       - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
       - name: Run a one-line script
-        run: echo Hello from a ${{ runner.os }} machine!
+        run: echo Hello from a \${{ runner.os }} machine!
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
@@ -129,7 +129,7 @@ jobs:
     if: always() # normalmente gli step dopo un fallimento non vengono eseguiti, a meno di always()
     steps:
       - name: Run something on powershell
-        run: echo By default, ${{ runner.os }} runners execute with powershell
+        run: echo By default, \${{ runner.os }} runners execute with powershell
       - name: Run something on bash
         shell: bash
         run: echo it is allowed to force the shell type
@@ -139,13 +139,13 @@ jobs:
 
 GitHub Actions permette di includere espressioni nei file di workflow con sintassi `${{ <espressione> }}` (regola speciale: i condizionali `if:` vengono valutati automaticamente come espressioni, quindi `if: <espressione>` funziona già senza `${{ }}`). Il linguaggio è piuttosto limitato e applica un'uguaglianza "loose": tipi uguali vengono confrontati direttamente, tipi diversi vengono coercizzati a interi nel confronto; quando è richiesta una stringa, qualsiasi tipo viene coercizzato a stringa (il confronto tra stringhe ignora il maiuscolo/minuscolo).
 
-| Tipo | Literal | Coercizione a numero | Coercizione a stringa |
-|---|---|---|---|
-| Null | `null` | 0 | `''` |
-| Boolean | `true`/`false` | true→1, false→0 | `'true'`/`'false'` |
-| String | `'...'` (apici singoli obbligatori) | parseInt di JS, eccetto `''`→0 | nessuna |
-| JSON Array | non disponibile come literal | NaN | errore |
-| JSON Object | non disponibile come literal | NaN | errore |
+| Tipo        | Literal                             | Coercizione a numero           | Coercizione a stringa |
+|-------------|-------------------------------------|--------------------------------|-----------------------|
+| Null        | `null`                              | 0                              | `''`                  |
+| Boolean     | `true`/`false`                      | true→1, false→0                | `'true'`/`'false'`    |
+| String      | `'...'` (apici singoli obbligatori) | parseInt di JS, eccetto `''`→0 | nessuna               |
+| JSON Array  | non disponibile come literal        | NaN                            | errore                |
+| JSON Object | non disponibile come literal        | NaN                            | errore                |
 
 Array e oggetti esistono e possono essere manipolati, ma non creati direttamente nelle espressioni. Operatori disponibili: raggruppamento `( )`, accesso ad array per indice `[ ]`, dereferenziazione di oggetti `.`, operatori logici (`!`, `&&`, `||`), operatori di confronto (`==`, `!=`, `<`, `<=`, `>`, `>=`).
 
