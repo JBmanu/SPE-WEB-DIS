@@ -47,7 +47,7 @@ I workflow sono configurati in file YAML posizionati nel branch di default del r
 flowchart TB
     W[Workflow] -->|reagisce a eventi| E[push, pull_request, schedule, workflow_dispatch...]
     W --> J1[Job 1]
-    W --> J2[Job 2 — parallelo a Job 1 salvo 'needs']
+    W --> J2[Job 2 - parallelo a Job 1 salvo 'needs']
     J1 --> S1[Step 1]
     S1 --> S2[Step 2]
     S2 --> S3[Step 3]
