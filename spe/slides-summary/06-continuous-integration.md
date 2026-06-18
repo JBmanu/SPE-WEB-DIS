@@ -76,7 +76,7 @@ jobs:
 
 ### DRY con YAML
 Le pipeline di automazione/integrazione sono parte del software, quindi soggette agli stessi (o anche più elevati) standard di qualità: si applicano tutti i buoni principi di ingegneria del software. YAML è spesso usato dai sistemi di CI come linguaggio di configurazione preferito perché abilita alcune forme di DRY tramite **anchor** (`&`/`*`) e **merge key** (`<<:`):
-```text
+```yaml
 hey: &ref
   look: at
   me: [ "I'm", 'dancing' ]
@@ -117,7 +117,7 @@ jobs:
     steps:
       - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
       - name: Run a one-line script
-        run: echo Hello from a ${{ runner.os }} machine!
+        run: echo Hello from a $&#123;{ runner.os }} machine!
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
@@ -129,7 +129,7 @@ jobs:
     if: always() # normalmente gli step dopo un fallimento non vengono eseguiti, a meno di always()
     steps:
       - name: Run something on powershell
-        run: echo By default, ${{ runner.os }} runners execute with powershell
+        run: echo By default, $&#123;{ runner.os }} runners execute with powershell
       - name: Run something on bash
         shell: bash
         run: echo it is allowed to force the shell type
@@ -137,7 +137,7 @@ jobs:
 
 ## Espressioni in GitHub Actions
 
-GitHub Actions permette di includere espressioni nei file di workflow con sintassi `${{ <espressione> }}` (regola speciale: i condizionali `if:` vengono valutati automaticamente come espressioni, quindi `if: <espressione>` funziona già senza `${{ }}`). Il linguaggio è piuttosto limitato e applica un'uguaglianza "loose": tipi uguali vengono confrontati direttamente, tipi diversi vengono coercizzati a interi nel confronto; quando è richiesta una stringa, qualsiasi tipo viene coercizzato a stringa (il confronto tra stringhe ignora il maiuscolo/minuscolo).
+GitHub Actions permette di includere espressioni nei file di workflow con sintassi `$&#123;{ <espressione> }}` (regola speciale: i condizionali `if:` vengono valutati automaticamente come espressioni, quindi `if: <espressione>` funziona già senza `$&#123;{ }}`). Il linguaggio è piuttosto limitato e applica un'uguaglianza "loose": tipi uguali vengono confrontati direttamente, tipi diversi vengono coercizzati a interi nel confronto; quando è richiesta una stringa, qualsiasi tipo viene coercizzato a stringa (il confronto tra stringhe ignora il maiuscolo/minuscolo).
 
 | Tipo        | Literal                             | Coercizione a numero           | Coercizione a stringa |
 |-------------|-------------------------------------|--------------------------------|-----------------------|
@@ -184,7 +184,7 @@ jobs:
     steps:
       - id: output-from-shell
         run: ruby -e 'puts "dice=#{rand(1..6)}"' >> $GITHUB_OUTPUT
-      - run: echo "The dice roll resulted in number ${{ steps.output-from-shell.outputs.dice }}"
+      - run: echo "The dice roll resulted in number $&#123;{ steps.output-from-shell.outputs.dice }}"
 ```
 
 ## Build matrix
@@ -198,12 +198,12 @@ jobs:
       matrix:
         os: [windows, macos, ubuntu]
         jvm_version: [8, 11, 15, 16]
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: $&#123;{ matrix.os }}-latest
     steps:
       - uses: actions/setup-java@v5
         with:
           distribution: 'adopt'
-          java-version: ${{ matrix.jvm_version }}
+          java-version: $&#123;{ matrix.jvm_version }}
 ```
 
 ## Dati privati e CI: i secret
@@ -227,8 +227,8 @@ if (System.getenv("CI") == true.toString()) {
 Le property vanno passate a Gradle via riga di comando (`-PsigningKey=...`) oppure tramite variabili d'ambiente con prefisso `ORG_GRADLE_PROJECT_` (Gradle le importa automaticamente):
 ```yaml
 env:
-  ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_KEY }}
-  ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
+  ORG_GRADLE_PROJECT_signingKey: $&#123;{ secrets.SIGNING_KEY }}
+  ORG_GRADLE_PROJECT_signingPassword: $&#123;{ secrets.SIGNING_PASSWORD }}
 ```
 
 ## DRY con GitHub Actions: actions e reusable workflow
@@ -273,7 +273,7 @@ runs:
       with:
         fetch-depth: 0
         submodules: recursive
-        token: ${{ inputs.token }}
+        token: $&#123;{ inputs.token }}
     - name: Checkout with default token
       uses: actions/checkout@v6.0.3
       if: inputs.token == ''
@@ -295,7 +295,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile' # oppure il nome di un'immagine esistente
   args:
-    - ${{ inputs.some-input-name }}
+    - $&#123;{ inputs.some-input-name }}
 ```
 
 ### JavaScript actions
@@ -342,7 +342,7 @@ jobs:
     with:
       deploy-command: ./deploy.sh
     secrets:
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+      github-token: $&#123;{ secrets.GITHUB_TOKEN }}
 ```
 
 ## Build "stale" (obsolete) e robustezza
