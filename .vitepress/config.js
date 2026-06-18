@@ -29,7 +29,7 @@ export default withMermaid(
                                 {text: '00-indice', link: `${courseSPE}/00-INDICE`},
                                 {text: '01-devops', link: `${courseSPE}/01-devops`},
                                 {text: '02-kotlin', link: `${courseSPE}/02-kotlin`},
-                                {text: '03-', link: `${courseSPE}/1-meeting`},
+                                // {text: '03-', link: `${courseSPE}/1-meeting`},
                                 {text: '04-build-automation-gradle', link: `${courseSPE}/04-build-automation-gradle`},
                                 {text: '05-versioning-e-licensing', link: `${courseSPE}/05-versioning-e-licensing`},
                                 {text: '06-continuous-integration', link: `${courseSPE}/06-continuous-integration`},
