@@ -46,23 +46,23 @@ export default withMermaid(
                             text: 'WEB',
                             collapsed: true,
                             items: [
-                                {text: '1-Meeting', link: `${courseWEB}/1-meeting`},
+                                // {text: '1-Meeting', link: `${courseWEB}/1-meeting`},
                             ]
                         },
                         {
                             text: 'DISTRIBUTED',
                             collapsed: true,
                             items: [
-                                {text: '1-Meeting', link: `${courseDistributed}/1-meeting`},
+                                // {text: '1-Meeting', link: `${courseDistributed}/1-meeting`},
                             ]
                         },
                         {
                             text: 'Exams-Requirements',
                             collapsed: true,
                             items: [
-                                {text: 'SPE', link: `${courseSPE}/requirements`},
-                                {text: 'WEB', link: `${courseWEB}/requirements`},
-                                {text: 'DISTRIBUTED', link: `${courseDistributed}/requirements`},
+                                // {text: 'SPE', link: `${courseSPE}/requirements`},
+                                // {text: 'WEB', link: `${courseWEB}/requirements`},
+                                // {text: 'DISTRIBUTED', link: `${courseDistributed}/requirements`},
                             ]
                         }
                     ]
@@ -74,20 +74,20 @@ export default withMermaid(
                             text: 'Scoping',
                             collapsed: true,
                             items: [
-                                {text: '1-Meeting', link: `${scopingPath}/1-meeting`},
-                                {text: '2-Meeting', link: `${scopingPath}/2-meeting`},
-                                {text: '3-Meeting', link: `${scopingPath}/3-meeting`},
+                                // {text: '1-Meeting', link: `${scopingPath}/1-meeting`},
+                                // {text: '2-Meeting', link: `${scopingPath}/2-meeting`},
+                                // {text: '3-Meeting', link: `${scopingPath}/3-meeting`},
                             ]
                         },
                         {
                             text: 'Planning',
                             collapsed: true,
                             items: [
-                                {text: 'WBS', link: `${planningPath}/WBS`},
-                                {text: 'PND', link: `${planningPath}/PND`},
-                                {text: 'Gantt', link: `${planningPath}/Gantt`},
-                                {text: 'RBS', link: `${planningPath}/RBS`},
-                                {text: 'Risk Management', link: `${planningPath}/Risk-Management-Plan`},
+                                // {text: 'WBS', link: `${planningPath}/WBS`},
+                                // {text: 'PND', link: `${planningPath}/PND`},
+                                // {text: 'Gantt', link: `${planningPath}/Gantt`},
+                                // {text: 'RBS', link: `${planningPath}/RBS`},
+                                // {text: 'Risk Management', link: `${planningPath}/Risk-Management-Plan`},
                             ]
                         }
                     ]
