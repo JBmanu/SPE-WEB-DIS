@@ -10,7 +10,7 @@ hero:
   actions:
     - theme: brand
       text: Report
-      link: spe/00-INDICE
+      link: spe/slides-summary/00-INDICE
 ---
 
 ## AthenaStudios S.R.L.

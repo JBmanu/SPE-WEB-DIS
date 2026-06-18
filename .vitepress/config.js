@@ -34,9 +34,9 @@ export default withMermaid(
                             text: 'SPE',
                             collapsed: true,
                             items: [
-                                {text: 'Exam-REQUIREMENTS', link: `${courseSPE}/requirements`},
+                                {text: 'Exam-requirements', link: `${courseSPE}/requirements`},
                                 {
-                                    text: 'Summaries',
+                                    text: 'Summary',
                                     collapsed: true,
                                     items: [
                                         {text: '00-indice', link: `${speSummaries}/00-INDICE`},
