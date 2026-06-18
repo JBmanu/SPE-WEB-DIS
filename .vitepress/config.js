@@ -2,9 +2,17 @@ import {defineConfig} from 'vitepress'
 import {withMermaid} from "vitepress-plugin-mermaid";
 
 // https://vitepress.dev/reference/site-config
+// -------- SPE --------
 let courseSPE = "/spe"
+let speSummaries = courseSPE + "/slides-summary"
+
+// -------- WEB --------
 let courseWEB = "/web"
+let webSummaries = courseWEB + "/slides-summary"
+
+// -------- DISTRIBUTED --------
 let courseDistributed = "/distributed"
+let distributedSummaries = courseDistributed + "/slides-summary"
 
 
 export default withMermaid(
@@ -26,20 +34,29 @@ export default withMermaid(
                             text: 'SPE',
                             collapsed: true,
                             items: [
-                                {text: '00-indice', link: `${courseSPE}/00-INDICE`},
-                                {text: '01-devops', link: `${courseSPE}/01-devops`},
-                                {text: '02-kotlin', link: `${courseSPE}/02-kotlin`},
-                                // {text: '03-', link: `${courseSPE}/1-meeting`},
-                                {text: '04-build-automation-gradle', link: `${courseSPE}/04-build-automation-gradle`},
-                                {text: '05-versioning-e-licensing', link: `${courseSPE}/05-versioning-e-licensing`},
-                                {text: '06-continuous-integration', link: `${courseSPE}/06-continuous-integration`},
-                                {text: '07-git-avanzato-e-workflow', link: `${courseSPE}/07-git-avanzato-e-workflow`},
-                                {text: '08-containerizzazione-docker', link: `${courseSPE}/08-containerizzazione-docker`},
-                                {text: '09-DDD-domain-driven-design', link: `${courseSPE}/09-domain-driven-design`},
-                                {text: '10-model-driven-development', link: `${courseSPE}/10-model-driven-development`},
-                                {text: '11-multiplatform-programming', link: `${courseSPE}/11-multiplatform-programming`},
-                                {text: '12-kubernetes', link: `${courseSPE}/12-kubernetes`},
-                                {text: '13-extra', link: `${courseSPE}/13-extra-complementi-pratici`},
+                                {text: 'Exam-REQUIREMENTS', link: `${courseSPE}/requirements`},
+                                {
+                                    text: 'Summaries',
+                                    collapsed: true,
+                                    items: [
+                                        {text: '00-indice', link: `${speSummaries}/00-INDICE`},
+                                        {text: '01-devops', link: `${speSummaries}/01-devops`},
+                                        {text: '02-kotlin', link: `${speSummaries}/02-kotlin`},
+                                        // {text: '03-', link: `${courseSPE}/1-meeting`},
+                                        {text: '04-build-automation-gradle', link: `${speSummaries}/04-build-automation-gradle`},
+                                        {text: '05-versioning-e-licensing', link: `${speSummaries}/05-versioning-e-licensing`},
+                                        {text: '06-continuous-integration', link: `${speSummaries}/06-continuous-integration`},
+                                        {text: '07-git-avanzato-e-workflow', link: `${speSummaries}/07-git-avanzato-e-workflow`},
+                                        {text: '08-containerizzazione-docker', link: `${speSummaries}/08-containerizzazione-docker`},
+                                        {text: '09-DDD-domain-driven-design', link: `${speSummaries}/09-domain-driven-design`},
+                                        {text: '10-model-driven-development', link: `${speSummaries}/10-model-driven-development`},
+                                        {text: '11-multiplatform-programming', link: `${speSummaries}/11-multiplatform-programming`},
+                                        {text: '12-kubernetes', link: `${speSummaries}/12-kubernetes`},
+                                        {text: '13-extra', link: `${speSummaries}/13-extra-complementi-pratici`},
+                                    ]
+
+                                },
+
                             ]
                         },
                         {
@@ -47,6 +64,11 @@ export default withMermaid(
                             collapsed: true,
                             items: [
                                 // {text: '1-Meeting', link: `${courseWEB}/1-meeting`},
+                                {
+                                    text: 'Summaries',
+                                    collapsed: true,
+                                    items: []
+                                }
                             ]
                         },
                         {
@@ -54,13 +76,18 @@ export default withMermaid(
                             collapsed: true,
                             items: [
                                 // {text: '1-Meeting', link: `${courseDistributed}/1-meeting`},
+                                {
+                                    text: 'Summaries',
+                                    collapsed: true,
+                                    items: []
+                                }
                             ]
                         },
                         {
                             text: 'Exams-Requirements',
                             collapsed: true,
                             items: [
-                                // {text: 'SPE', link: `${courseSPE}/requirements`},
+                                {text: 'SPE', link: `${courseSPE}/requirements`},
                                 // {text: 'WEB', link: `${courseWEB}/requirements`},
                                 // {text: 'DISTRIBUTED', link: `${courseDistributed}/requirements`},
                             ]
