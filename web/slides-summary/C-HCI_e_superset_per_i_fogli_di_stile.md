@@ -1,4 +1,4 @@
-# Modulo 1 — Blocco C: HCI e Superset per i Fogli di Stile
+# Blocco C — HCI e Superset per i Fogli di Stile
 
 > Corso: Applicazioni e Servizi Web (magistrale) — Prof.ssa Silvia Mirri
 > Riassunto da slide: *C - HCI e superset per i fogli di stile*

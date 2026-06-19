@@ -1,4 +1,4 @@
-# Modulo 1 — Blocco D: Seminari
+# Blocco D — Seminari
 
 > Corso: Applicazioni e Servizi Web (magistrale) — Prof.ssa Silvia Mirri
 > Riassunto da slide: *D - seminari*
@@ -731,6 +731,6 @@ docker compose up -d nodejsapp
 
 - **Seminario 1 (Sustainable Web)**: conoscere i 3 pilastri della sostenibilità, gli SDG (17, non vincolanti), il Sustainable Web Manifesto (6 principi), la struttura delle WSG (94 guideline, 4 categorie: UX/Web Dev/Hosting/Business), e soprattutto **alcuni esempi concreti di guideline** (es. dark pattern da evitare, mobile-first, lazy loading immagini) — molto probabile materiale spendibile sia in teoria sia nel progetto pratico.
 - **Seminario 2 (LLM/HRI)**: comprendere il paradigma zero-shot prompting applicato alla robotica, l'architettura a ciclo (goal -> snapshot -> LLM -> piano -> comando -> feedback), e i risultati chiave (successo ~22-26%, limiti di grounding spaziale).
-- **Seminario 3 (Ruby on Rails)**: utile soprattutto come **termine di paragone** con lo stack MEAN/MEVN visto nel corso — il concetto di HTML-First vs JavaScript-First Architecture è concettualmente molto vicino al confronto MVC server-side vs SPA client-side del Modulo 1/blocco A.
+- **Seminario 3 (Ruby on Rails)**: utile soprattutto come **termine di paragone** con lo stack MEAN/MEVN visto nel corso — il concetto di HTML-First vs JavaScript-First Architecture è concettualmente molto vicino al confronto MVC server-side vs SPA client-side del Blocco A.
 - **Seminario 4 (Sustainability IT)**: conoscere a memoria almeno alcuni numeri-shock (ICT 3,9% delle emissioni globali, Bitcoin = Grecia, email 17g CO2, e-waste 5% riciclato), i 6 principi del Green Software, e le metriche datacenter (PUE soprattutto).
 - **Seminario 5 (Docker)**: **è probabilmente il materiale più direttamente operativo per superare l'esame**, poiché fornisce un'applicazione di riferimento completa (Node+Express+MongoDB in Docker) molto vicina ai requisiti del progetto. Vale la pena padroneggiare: creazione reti virtuali Docker, gestione dei volumi MongoDB, scrittura di Dockerfile, e soprattutto **docker-compose.yml** completo con build/run/down, e la procedura di pacchettizzazione/consegna del progetto.

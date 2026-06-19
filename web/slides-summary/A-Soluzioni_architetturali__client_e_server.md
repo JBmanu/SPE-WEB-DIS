@@ -1,4 +1,4 @@
-# Modulo 1 — Blocco A: Evoluzioni e Soluzioni Architetturali per il Web
+# Blocco A — Evoluzioni e Soluzioni Architetturali per il Web
 
 > Corso: Applicazioni e Servizi Web (magistrale) — Prof.ssa Silvia Mirri
 > Riassunto da slide: *A - Soluzioni architetturali (client e server)*
