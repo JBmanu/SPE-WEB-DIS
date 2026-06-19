@@ -15,6 +15,11 @@ let courseDistributed = "/distributed"
 let distributedSummaryModule1 = courseDistributed + "/module-1-summary"
 let distributedSummaryModule2 = courseDistributed + "/module-2-summary"
 
+// -------- PROJECT --------
+let project = "/project"
+
+// -------- PROPOSTA --------
+let proposta = "/proposta"
 
 export default withMermaid(
     defineConfig({
@@ -202,26 +207,12 @@ export default withMermaid(
                             collapsed: true,
                             items: [
                                 {text: 'SPE', link: `${courseSPE}/requirements`},
-                                // {text: 'WEB', link: `${courseWEB}/requirements`},
-                                {
-                                    text: 'DISTRIBUTED',
-                                    collapsed: true,
-                                    items: [
-                                        {text: 'Module-1', link: `${courseDistributed}/01-requirements`},
-                                        {text: 'Module-2', link: `${courseDistributed}/02-requirements`},
-                                    ]
-                                }
+                                {text: 'WEB', link: `${courseWEB}/requirements`},
+                                {text: 'DISTRIBUTED-Module-1', link: `${courseDistributed}/01-requirements`},
+                                {text: 'DISTRIBUTED-Module-2', link: `${courseDistributed}/02-requirements`},
                             ]
                         },
-                        {
-                            text: 'Proposta',
-                            collapsed: true,
-                            items: [
-                                {text: 'SPE', link: `${courseSPE}/proposta`},
-                                {text: 'WEB', link: `${courseWEB}/proposta`},
-                                {text: 'DISTRIBUTES', link: `${courseDistributed}/proposta`},
-                            ]
-                        }
+                        {text: 'Proposte', link: `${proposta}/Proposte`}
                     ]
                 },
                 {
