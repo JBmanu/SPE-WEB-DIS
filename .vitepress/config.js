@@ -203,16 +203,14 @@ export default withMermaid(
                             ]
                         },
                         {
-                            text: 'Exams-Requirements',
+                            text: 'Exams',
                             collapsed: true,
                             items: [
-                                {text: 'SPE', link: `${courseSPE}/requirements`},
-                                {text: 'WEB', link: `${courseWEB}/requirements`},
-                                {text: 'DISTRIBUTED-Module-1', link: `${courseDistributed}/01-requirements`},
-                                {text: 'DISTRIBUTED-Module-2', link: `${courseDistributed}/02-requirements`},
+                                {text: 'Requirements', link: `${proposta}/All-requirements`},
+                                {text: 'Proposte', link: `${proposta}/Proposte`},
                             ]
                         },
-                        {text: 'Proposte', link: `${proposta}/Proposte`}
+                        // {text: 'Proposte', link: `${proposta}/Proposte`}
                     ]
                 },
                 {
