@@ -77,6 +77,7 @@ export default withMermaid(
                             collapsed: true,
                             items: [
                                 {text: 'Exam-module-1-requirements', link: `${courseDistributed}/01-requirements`},
+                                {text: 'Exam-module-2-requirements', link: `${courseDistributed}/02-requirements`},
                                 {
                                     text: 'Module-1-Summary',
                                     collapsed: true,
@@ -99,7 +100,13 @@ export default withMermaid(
                                 {
                                     text: 'Module-2-Summary',
                                     collapsed: true,
-                                    items: []
+                                    items: [
+                                        {text: '00-Indice_Modulo2', link: `${distributedSummaryModule1}/00-Indice_Modulo2`},
+                                        {text: '01-About_Course_Mod2', link: `${distributedSummaryModule1}/01-About_Course_Mod2`},
+                                        {text: '02-Preliminaries_DS_Engineering', link: `${distributedSummaryModule1}/02-Preliminaries_DS_Engineering`},
+                                        {text: '03-Communication_Mechanisms', link: `${distributedSummaryModule1}/03-Communication_Mechanisms`},
+                                        {text: '04-Distributed_Pong_Case_Study', link: `${distributedSummaryModule1}/04-Distributed_Pong_Case_Study`},
+                                    ]
                                 }
                             ]
                         },
