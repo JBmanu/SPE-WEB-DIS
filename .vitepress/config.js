@@ -68,7 +68,13 @@ export default withMermaid(
                                 {
                                     text: 'Summary',
                                     collapsed: true,
-                                    items: []
+                                    items: [
+                                        {text: '00-Indice', link: `${webSummaries}/00-Indice_e_Struttura`},
+                                        {text: 'A-Soluzioni architetturali, client e server', link: `${webSummaries}/A-Soluzioni architetturali, client e server`},
+                                        {text: 'B-Stack MEAN (e sue varianti)`', link: `${webSummaries}/B-Stack MEAN (e sue varianti)`},
+                                        {text: 'C-HCI e superset per i fogli di stile', link: `${webSummaries}/C-HCI e superset per i fogli di stile`},
+                                        {text: 'D-Seminari', link: `${webSummaries}/D-Seminari`},
+                                    ]
                                 }
                             ]
                         },
@@ -82,7 +88,7 @@ export default withMermaid(
                                     text: 'Module-1-Summary',
                                     collapsed: true,
                                     items: [
-                                        {text: '00-Indice_e_Struttura', link: `${distributedSummaryModule1}/00-Indice_e_Struttura`},
+                                        {text: '00-Indice', link: `${distributedSummaryModule1}/00-Indice_e_Struttura`},
                                         {text: '01-A0_Organizzazione_Corso', link: `${distributedSummaryModule1}/01-A0_Organizzazione_Corso`},
                                         {text: '02-Fondamenti_M0_M2_M4_M5', link: `${distributedSummaryModule1}/02-Fondamenti_M0_M2_M4_M5`},
                                         {text: '03-Dependability_M1', link: `${distributedSummaryModule1}/03-Dependability_M1`},
@@ -101,7 +107,7 @@ export default withMermaid(
                                     text: 'Module-2-Summary',
                                     collapsed: true,
                                     items: [
-                                        {text: '00-Indice_Modulo2', link: `${distributedSummaryModule1}/00-Indice_Modulo2`},
+                                        {text: '00-Indice', link: `${distributedSummaryModule1}/00-Indice_Modulo2`},
                                         {text: '01-About_Course_Mod2', link: `${distributedSummaryModule1}/01-About_Course_Mod2`},
                                         {text: '02-Preliminaries_DS_Engineering', link: `${distributedSummaryModule1}/02-Preliminaries_DS_Engineering`},
                                         {text: '03-Communication_Mechanisms', link: `${distributedSummaryModule1}/03-Communication_Mechanisms`},
@@ -116,7 +122,14 @@ export default withMermaid(
                             items: [
                                 {text: 'SPE', link: `${courseSPE}/requirements`},
                                 // {text: 'WEB', link: `${courseWEB}/requirements`},
-                                // {text: 'DISTRIBUTED', link: `${courseDistributed}/requirements`},
+                                {
+                                    text: 'DISTRIBUTED',
+                                    collapsed: true,
+                                    items: [
+                                        {text: 'Module-1', link: `${courseDistributed}/01-requirements`},
+                                        {text: 'Module-2', link: `${courseDistributed}/02-requirements`},
+                                    ]
+                                }
                             ]
                         }
                     ]
