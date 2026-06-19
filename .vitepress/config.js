@@ -207,6 +207,7 @@ export default withMermaid(
                             collapsed: true,
                             items: [
                                 {text: 'Requirements', link: `${proposta}/All-requirements`},
+                                {text: 'Tecnologie', link: `${proposta}/Teconologie`},
                                 {text: 'Proposte', link: `${proposta}/Proposte`},
                             ]
                         },
