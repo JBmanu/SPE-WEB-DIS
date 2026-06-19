@@ -292,7 +292,7 @@ createApp({
 ```
 ```html
 <div id="app">
-  <button @click="count++">Count is {{count}}</button>
+  <button @click="count++">Count is &#123;{count}}</button>
 </div>
 ```
 
@@ -357,9 +357,9 @@ Vue si focalizza sul **ViewModel layer** che connette View e Model tramite **two
 Vue usa template HTML con attributi speciali (**direttive**). Il framework compila il template in un **Virtual DOM**, che permette: reattività dei contenuti, modifiche alla pagina solo quando davvero necessarie (efficienza).
 
 ### Data-binding e interpolazione
-**Mustache syntax** (`{{...}}`) per l'interpolazione di testi:
+**Mustache syntax** (`&#123;{...}}`) per l'interpolazione di testi:
 ```html
-<div id="app"> {{ message }} </div>
+<div id="app"> &#123;{ message }} </div>
 ```
 ```javascript
 Vue.createApp({
@@ -425,7 +425,7 @@ Preferibile rispetto a codice JS inline nell'attributo.
 ### Form e input: v-model
 Binding bidirezionale di un campo form a un modello dati:
 ```html
-<input type="text" v-model="myText"> {{ myText }}
+<input type="text" v-model="myText"> &#123;{ myText }}
 ```
 Direttive correlate per checkbox/radio: `v-bind:true-value`, `v-bind:false-value`, `v-bind:value`.
 
@@ -649,12 +649,12 @@ I **Component** sono le unità base della UI: un'applicazione Angular è un **al
 
 ### Data Binding
 
-**Interpolation** (`{{ }}`): l'espressione viene valutata e convertita in stringa; vietate espressioni con side-effect.
+**Interpolation** (`&#123;{ }}`): l'espressione viene valutata e convertita in stringa; vietate espressioni con side-effect.
 
 **Property Binding** (`[ ]`): l'espressione viene valutata e assegnata a un attributo del DOM.
 ```html
 <!-- Interpolazione -->
-<img src="{{heroImageUrl}}">
+<img src="&#123;{heroImageUrl}}">
 <!-- Property binding equivalente -->
 <img [src]="heroImageUrl">
 
@@ -678,8 +678,8 @@ Angular traduce internamente le interpolazioni in property binding equivalenti p
 ### Pipes
 Trasformazioni di un valore scritte direttamente nel template:
 ```html
-<p>Testo {{ value | pipe }}</p>
-<p>Today is {{ curdate | date:"dd/MM/yy" }}</p>  <!-- parametrizzabile, concatenabile -->
+<p>Testo &#123;{ value | pipe }}</p>
+<p>Today is &#123;{ curdate | date:"dd/MM/yy" }}</p>  <!-- parametrizzabile, concatenabile -->
 ```
 **Pipe built-in**: `DatePipe`, `UpperCasePipe`, `CurrencyPipe`, `PercentPipe`. Pipe custom create con decoratore `@Pipe`.
 
@@ -696,7 +696,7 @@ Tre tipi:
 
 ```html
 <ul *ngFor="let city of cities; index as i; odd as isOdd">
-   <li [ngClass]="{odd: isOdd}">{{i}} - {{city}}</li>
+   <li [ngClass]="{odd: isOdd}">&#123;{i}} - &#123;{city}}</li>
 </ul>
 ```
 
