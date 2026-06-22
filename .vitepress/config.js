@@ -34,7 +34,7 @@ export default withMermaid(
 
             sidebar: [
                 {
-                    text: 'Report',
+                    text: 'Courses',
                     items: [
                         {
                             text: 'SPE',
@@ -215,8 +215,9 @@ export default withMermaid(
                     ]
                 },
                 {
-                    text: 'Allegati',
+                    text: 'Project',
                     items: [
+                        {text: 'Features', link: `${project}/Features`},
                         {
                             text: 'Scoping',
                             collapsed: true,
