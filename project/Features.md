@@ -47,11 +47,12 @@
     - [ ] spiegazione delle regole
     - [ ] meccaniche di gioco
     - [ ] spiegazione delle singole carte
-- [ ] visualizzare statistiche utenti (es. numero di partite giocate, numero di vittorie, ecc...)
-  - [ ] .... 
+- [ ] visualizzare statistiche utenti
+  - [ ] numero di partite giocate
+  - [ ] numero di vittorie
+  - [ ] numero di mazzi creati
 
 ---------------------------------
-
 - [ ] gioco vero e proprio
     - [ ] meccaniche
         - [ ] gioco a turno
