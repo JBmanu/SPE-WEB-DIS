@@ -218,6 +218,7 @@ export default withMermaid(
                     text: 'Project',
                     items: [
                         {text: 'Features', link: `${project}/Features`},
+                        {text: 'Features vs Requirements', link: `${project}/Feature vs Requirements Summary`},
                         {
                             text: 'Scoping',
                             collapsed: true,
