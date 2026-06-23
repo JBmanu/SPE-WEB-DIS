@@ -51,6 +51,11 @@
   - [ ] numero di partite giocate
   - [ ] numero di vittorie
   - [ ] numero di mazzi creati
+- [ ] Replay della partita
+- [ ] Spettatori
+- [ ] Achievements/badge
+- [ ] Animazione + suoni carte
+- [ ] Mobile first
 
 ---------------------------------
 - [ ] gioco vero e proprio
