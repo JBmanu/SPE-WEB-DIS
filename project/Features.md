@@ -1,5 +1,18 @@
 ## Features Client
 
+### Obbligatorie
+
+### Opzionali
+
+## Features Admin
+
+### Obbligatorie
+
+### Opzionali
+
+
+## Features Client
+
 - [ ] login + registrazione utente (possibilità email+codice otp)
     - [ ] possibilità di login con email/password + nickname
     - [ ] possibilità di registrazione con email/password + nickname
@@ -15,7 +28,7 @@
         - [ ] scegliere se la partita è pubblica o privata
             - [ ] partita pubblica: visibile a tutti, chiunque può partecipare
             - [ ] partita privata: visibile solo a chi ha il link d'invito/id+password della partita
-- [ ] pre-lobby+leave
+- [ ] lobby+leave
     - [ ] -master- decide quando iniziare la partita (dopo che sono arrivati i giocatori minimi, o dopo un certo tempo,
       ecc...)
     - [ ] -partecipante- non può far iniziare la partita (solo il master può farlo)
