@@ -206,8 +206,28 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | Friendship-Declined | Domain-Event   | richiesta rifiutata - consumato da quest-context                                   |
 
 
+#### Quest-Context
 
-
+| Term                     | Block-Type     | Motivation                                                                                                                                |
+|--------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| PlayerProgressFactory    | Factory        | logica di creazione per i progressi di un player                                                                                          |
+| PlayerProgressRepository | Repository     | recupera e salva i progressi di un palyer (achivements + badge)                                                                           |
+|                          |                |                                                                                                                                           |
+| PlayerProgress           | Aggregate-Root | controlla e gestisce il progresso è l'attivazione di un player è il suo livello e contterra una lista per ciascun elemento sotto          |
+| Level                    | Value-Object   | livello del player, viene modificato al completamento di achivements/badges                                                               |
+| CompletedAchievement     | Value-Object   | è un achivement completato da un player, ci salviamo anche la data di completamento                                                       |
+| ObtainedBadge            | Value-Object   | è un badge ottenuto da un player, ci salviamo anche la data di completamento                                                              |
+| AchivementInProgress     | Value Object   | è un achivement in corso da un player che ancora non è stato completato, verra modificato il contatore per capire quando verra completato |
+| BadgeInProgress          | Value Object   | è un badge in corso da un player che ancora non è stato completato, verra modificato il contatore per capire quando verra completato      |
+|                          |                |                                                                                                                                           |
+| AchivementFactory        | Factory        | logica di creazione degli achivements per il gioco                                                                                        |
+| BadgeFactory             | Factory        | logica di creazione dei badges per il gioco                                                                                               |
+| AchivementRepository     | Repository     | recupera e salva gli achivements del gioco                                                                                                |
+| BadgeRepository          | Repository     | recupera e salva i badges del gioco                                                                                                       |
+|                          |                |                                                                                                                                           |
+| Achivement               | Entity         | missione da raggiungere - rappresentato il nome, exp, descrizione, tipo, contatoreMassimo per il completamento                            |
+| Badge                    | Entity         | badge da raggiungere - rappresentato da nome, exp, descrizione, icona, contatoreMassimo per il completamento                              |
+|                          |                |                                                                                                                                           |
 
 
 
