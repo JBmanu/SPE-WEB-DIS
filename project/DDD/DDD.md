@@ -168,19 +168,19 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 ### Contexts
 
-| Person | Context                  | Responsibility                                                                                                                        |
-|--------|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| Client | player-identity-context  | gestisce le registrazioni del cliente e le relazioni(amicizie) tra di loro                                                            |
-| Client | quest-context            | gestisce le meccaniche di progresso del cliente nella piattaforma (missioni(achievements), trofei(badge) e livello)                   |
-| Client | scoreboard-context       | gestisce la raccolta delle statistiche delle partite fatte (vittorie, sconfitte, ...)                                                 |
-| Client | lobby-browser-context    | gestisce il processo di ricerca di una partita, scegliendo di partecipare o guardare                                                  |
-| Client | pregame-lobby-context    | gestisce il flusso dalla creazione della partita, raccogliendo i giocatori nel gruppo e permettendo al master di avviarla             |
-| Client | match-context            | gestisce tutte le meccaniche di gioco effettivo (turno, attivazione carte, ...)                                                       |
-| Client | match-replay-context     | gestisce la meccanica di riproduzione di una partita fatta in passato                                                                 |
-| Client | deck-workshop-context    | gestisce le meccaniche per creare nuovi mazzi personalizzati, con cui giocarci                                                        |
-| Admin  | card-forge-context       | gestisce il sistema per creare nuovi mazzi di default e nuove carte tramite espansioni, quindi contiene la documentazione delle carte |
-| Admin  | game-observatory-context | gestisce la raccolta delle statistiche del sistema di gioco (giocatori online, partite in corso, carte più giocate, ...)              |
-| Admin  | system-health-context    | gestice il monitoraggio dei servizi della piattaforma di gioco (disponibilità, traffico, richieste, ...)                              |
+| Person | Done | Context                  | Responsibility                                                                                                                        |
+|--------|------|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| Client | x    | player-identity-context  | gestisce le registrazioni del cliente e le relazioni(amicizie) tra di loro                                                            |
+| Client |      | quest-context            | gestisce le meccaniche di progresso del cliente nella piattaforma (missioni(achievements), trofei(badge) e livello)                   |
+| Client |      | scoreboard-context       | gestisce la raccolta delle statistiche delle partite fatte (vittorie, sconfitte, ...)                                                 |
+| Client |      | lobby-browser-context    | gestisce il processo di ricerca di una partita, scegliendo di partecipare o guardare                                                  |
+| Client |      | pregame-lobby-context    | gestisce il flusso dalla creazione della partita, raccogliendo i giocatori nel gruppo e permettendo al master di avviarla             |
+| Client |      | match-context            | gestisce tutte le meccaniche di gioco effettivo (turno, attivazione carte, ...)                                                       |
+| Client |      | match-replay-context     | gestisce la meccanica di riproduzione di una partita fatta in passato                                                                 |
+| Client |      | deck-workshop-context    | gestisce le meccaniche per creare nuovi mazzi personalizzati, con cui giocarci                                                        |
+| Admin  |      | card-forge-context       | gestisce il sistema per creare nuovi mazzi di default e nuove carte tramite espansioni, quindi contiene la documentazione delle carte |
+| Admin  |      | game-observatory-context | gestisce la raccolta delle statistiche del sistema di gioco (giocatori online, partite in corso, carte più giocate, ...)              |
+| Admin  |      | system-health-context    | gestice il monitoraggio dei servizi della piattaforma di gioco (disponibilità, traffico, richieste, ...)                              |
 
 
 #### Player-Identity-Context
@@ -199,12 +199,11 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 |                     |                |                                                                                    |
 | Player-Logged-In    | Domain-Event   | player online - consumato da game-observatory-context                              |
 | Player-Logged-Out   | Domain-Event   | player offline - consumato da game-observatory-context                             |
-| Player-Registered   | Domain-Event   | nuovo player - consumato da quest-context per missioni iniziali                    |
+| Player-Registered   | Domain-Event   | nuovo player - consumato da quest-context, game-observatory-context                |
 |                     |                |                                                                                    |
-| Friend-Removed      | Domain-Event   | amico rimosso - gestito internamente                                               |
-| Friend-Request-Sent | Domain-Event   | richiesta inviata - consumato dal player destinatario per notifica                 |
+| Friend-Removed      | Domain-Event   | amico rimosso - consumato da quest-context                                         |
 | Friendship-Accepted | Domain-Event   | richiesta confermata - consumato da quest-context                                  |
-| Friendship-Declined | Domain-Event   | richiesta rifiutata - gestito internamente                                         |
+| Friendship-Declined | Domain-Event   | richiesta rifiutata - consumato da quest-context                                   |
 
 
 
