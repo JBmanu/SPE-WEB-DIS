@@ -255,21 +255,18 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 #### Lobby-Browser-Context
 
-| Term | Block-Type | Motivation |
-|------|------------|------------|
-|      |            |            |
-|      |            |            |
-|      |            |            |
-|      |            |            |
-|      |            |            |
-|      |            |            |
-|      |            |            |
-|      |            |            |
-|      |            |            |
-|      |            |            |
-|      |            |            |
-
-
+| Term               | Block-Type     | Motivation                                                                                                                         |
+|--------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------|
+| LobbyView          | Value-Object   | proiezione read-only di una lobby disponibile — ricevuta da pregame-lobby-context                                                  |
+| GameView           | Value-Object   | proiezione read-only di una partita disponibile — ricevuta da match-context                                                        |
+|                    |                |                                                                                                                                    |
+| LobbyMatchmaker    | Domain-Service | logica di ricerca partita — trova casualmente una lobby compatibile, filtra per amici, filtra per partite pubbliche o da osservare |
+| LobbyViewAssembler | Domain-Service | traduce i dati grezzi di una lobby in LobbyView — isola il contesto dai cambiamenti del modello di pregame-lobby-context           |
+| GameViewAssembler  | Domain-Service | traduce i dati grezzi di una partita in GameView — isola il contesto dai cambiamenti del modello di match-context                  |
+|                    |                |                                                                                                                                    |
+| LobbyJoined        | Domain-Event   | prodotto quando il player sceglie una lobby — consumato da pregame-lobby-context per aggiungere il player                          |
+| LobbyWatched       | Domain-Event   | prodotto quando il player sceglie di osservare — consumato da match-context per aggiungere un watcher                              |
+|                    |                |                                                                                                                                    |
 
 
 
