@@ -13,22 +13,22 @@
 
 ## Features Client
 
-- [ ] login + registrazione utente (possibilità email+codice otp)
+- [x] login + registrazione utente (possibilità email+codice otp)
     - [ ] possibilità di login con email/password + nickname
     - [ ] possibilità di registrazione con email/password + nickname
     - [ ] possibilità recupero password dimenticata
-- [ ] creazione partita - room
+- [x] creazione partita - room
     - [ ] impostazioni di gioco
-        - [ ] numero di giocatori minimi-massimini (minimo 2)
-        - [ ] tempo per turno (es. 30 secondi, 1 minuto, ecc...)
-        - [ ] scegliere i mazzi (default+personali) da usare >= 1 in partita (es. mazzo "base", mazzo "fuoco", ecc...)
-        - [ ] scegliere il nome della partita
-        - [ ] scelta delle bombe da mettere (deafult una in meno al numero dei giocatori)
-        - [ ] scelta di mettere anche disinnesci in più dentro il mazzo (default 1 per giocatore)
-        - [ ] scegliere se la partita è pubblica o privata
-            - [ ] partita pubblica: visibile a tutti, chiunque può partecipare
-            - [ ] partita privata: visibile solo a chi ha il link d'invito/id+password della partita
-- [ ] lobby+leave
+        - [x] numero di giocatori minimi-massimini (minimo 2)
+        - [x] tempo per turno (es. 30 secondi, 1 minuto, ecc...)
+        - [x] scegliere i mazzi (default+personali) da usare >= 1 in partita (es. mazzo "base", mazzo "fuoco", ecc...)
+        - [x] scegliere il nome della partita
+        - [x] scelta delle bombe da mettere (deafult una in meno al numero dei giocatori)
+        - [x] scelta di mettere anche disinnesci in più dentro il mazzo (default 1 per giocatore)
+        - [x] scegliere se la partita è pubblica o privata
+            - [x] partita pubblica: visibile a tutti, chiunque può partecipare
+            - [x] partita privata: visibile solo a chi ha il link d'invito/id+password della partita
+- [x] lobby+leave
     - [ ] -master- decide quando iniziare la partita (dopo che sono arrivati i giocatori minimi, o dopo un certo tempo,
       ecc...)
     - [ ] -partecipante- non può far iniziare la partita (solo il master può farlo)
@@ -37,41 +37,37 @@
     - [ ] -all- visualizzazione dei giocatori presenti nella stanza
     - [ ] -forse- possibilità chat testuale
     - [ ] -all- possibilità di invitare amici (accesso automatico)
-- [ ] join alla pre-lobby
+- [x] join alla pre-lobby
     - [ ] elenco partite pubbliche
     - [ ] elenco partite private (con la password)
     - [ ] elenco partite con invito
-- [ ] possibilità avere amicizie tra utenti
+- [x] possibilità avere amicizie tra utenti
     - [ ] mandare richiesta amicizia
     - [ ] accettare richiesta amicizia
     - [ ] elenco amici
     - [ ] rimozione amici
-- [ ] possibilità di essere un guess-player (senza login)
-    - [ ] solo per partecipare a stanze pubbliche+private
-    - [ ] per creare la partita devi registrarti
-    - [ ] non puoi creare deck personali
-- [ ] deck building
+- [x] deck building
     - [ ] mazzi personalizzati (associati all'account)
     - [ ] possibilità di creare partendo dalle singole carte o da mazzi (default+personali)
     - [ ] possibilità di dare un nome
     - [ ] possibilità di scegliere la parte dietro
     - [ ] colonna per visualizzare la descrizione completa
-- [ ] help-page
+- [x] help-page
     - [ ] spiegazione delle regole
     - [ ] meccaniche di gioco
     - [ ] spiegazione delle singole carte
-- [ ] visualizzare statistiche utenti
+- [x] visualizzare statistiche utenti
   - [ ] numero di partite giocate
   - [ ] numero di vittorie
   - [ ] numero di mazzi creati
-- [ ] Replay della partita
-- [ ] Spettatori
-- [ ] Achievements/badge
-- [ ] Animazione + suoni carte
-- [ ] Mobile first
+- [x] Replay della partita
+- [x] Spettatori
+- [x] Achievements/badge
+- [~] Animazione + suoni carte
+- [~] Mobile first
 
 ---------------------------------
-- [ ] gioco vero e proprio
+- [x] gioco vero e proprio
     - [ ] meccaniche
         - [ ] gioco a turno
         - [ ] ogni turno si puo attivare la carta o passare (implica pescare la carta)
@@ -118,14 +114,12 @@
 
 ## Feature Admin
 
-- [ ] creazione dei mazzi
+- [x] creazione dei mazzi
     - [ ] possibilità di creare mazzi predefiniti (es. mazzo "base" con carte base, mazzo "fuoco" con carte a tema
       fuoco, ecc...)
-- [ ] creazione di nuove carte
+- [x] creazione di nuove carte
     - [ ] possibilità di creare carte con effetti personalizzati (es. "quando giochi questa carta, pesca 2 carte e
       scarta 1 carta")
-- [ ] gestione utenti
-    - [ ] bannare utenti (temporaneamente o permanentemente)
-- [ ] overview generale delle partite in corso
+- [x] overview generale delle partite in corso
     - [ ] monitoraggio in tempo reale statistiche di gioco (es. carte più usate, carte più forti, ecc...)
     - [ ] monitoraggio in tempo reale salute servizi (es. numero di partite in corso, numero di utenti online, ecc...)
