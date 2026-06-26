@@ -171,8 +171,8 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | Person | Done | Context                  | Responsibility                                                                                                                        |
 |--------|------|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
 | Client | x    | player-identity-context  | gestisce le registrazioni del cliente e le relazioni(amicizie) tra di loro                                                            |
-| Client |      | quest-context            | gestisce le meccaniche di progresso del cliente nella piattaforma (missioni(achievements), trofei(badge) e livello)                   |
-| Client |      | scoreboard-context       | gestisce la raccolta delle statistiche delle partite fatte (vittorie, sconfitte, ...)                                                 |
+| Client | x    | quest-context            | gestisce le meccaniche di progresso del cliente nella piattaforma (missioni(achievements), trofei(badge) e livello)                   |
+| Client | x    | scoreboard-context       | gestisce la raccolta delle statistiche delle partite fatte (vittorie, sconfitte, ...)                                                 |
 | Client |      | lobby-browser-context    | gestisce il processo di ricerca di una partita, scegliendo di partecipare o guardare                                                  |
 | Client |      | pregame-lobby-context    | gestisce il flusso dalla creazione della partita, raccogliendo i giocatori nel gruppo e permettendo al master di avviarla             |
 | Client |      | match-context            | gestisce tutte le meccaniche di gioco effettivo (turno, attivazione carte, ...)                                                       |
@@ -238,12 +238,36 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 |                          |                |                                                                                                                                           |
 
 
+#### Scoreboard-Context
 
+| Term                   | Block-Type     | Motivation                                                                                                                          |
+|------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| PlayerRecordFactory    | Factory        | crea PlayerRecord iniziale — inizializza GameRecord, LobbyRecord e DeckWorkshopRecord a zero                                        |
+| PlayerRecordRepository | Repository     | gestisce PlayerRecord, recuperato per player ID                                                                                     |
+|                        |                |                                                                                                                                     |
+| PlayerRecord           | Aggregate-Root | controlla GameRecord, LobbyRecord, DeckWorkshopRecord — garantisce coerenza dei contatori ad ogni aggiornamento                     |
+| GameRecord             | Value-Object   | contatori immutabili delle partite (vittorie, sconfitte, esplosioni, disinnesci) — sostituito intero ad ogni aggiornamento          |
+| LobbyRecord            | Value-Object   | contatori immutabili delle configurazioni di partita (deck usati, impostazioni scelte) — sostituito intero ad ogni aggiornamento    |
+| DeckWorkshopRecord     | Value-Object   | contatori immutabili sull'attività di creazione deck (deck creati, modificati, eliminati) — sostituito intero ad ogni aggiornamento |
+|                        |                |                                                                                                                                     |
+|                        |                | TODO: aggiungiamo altri eventi dopo l'analisi degli altri contesti perche i suoi eventi in uscita sono dovuti dagli altri           |
+|                        |                |                                                                                                                                     |
 
+#### Lobby-Browser-Context
 
-
-
-
+| Term | Block-Type | Motivation |
+|------|------------|------------|
+|      |            |            |
+|      |            |            |
+|      |            |            |
+|      |            |            |
+|      |            |            |
+|      |            |            |
+|      |            |            |
+|      |            |            |
+|      |            |            |
+|      |            |            |
+|      |            |            |
 
 
 
