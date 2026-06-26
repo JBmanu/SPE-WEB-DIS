@@ -17,6 +17,7 @@ let distributedSummaryModule2 = courseDistributed + "/module-2-summary"
 
 // -------- PROJECT --------
 let project = "/project"
+let projectDDD = "/DDD"
 
 // -------- PROPOSTA --------
 let proposta = "/proposta"
@@ -217,6 +218,13 @@ export default withMermaid(
                 {
                     text: 'Project',
                     items: [
+                        {
+                            text: 'DDD',
+                            collapsed: true,
+                            items: [
+                                {text: 'DDD', link: `${project}/${projectDDD}/DDD`},
+                            ]
+                        },
                         {text: 'Features', link: `${project}/Features`},
                         {text: 'Features vs Requirements', link: `${project}/Feature vs Requirements Summary`},
                         {
