@@ -185,25 +185,25 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 #### Player-Identity-Context
 
-| Term                | Block-Type     | Motivation                                                                         |
-|---------------------|----------------|------------------------------------------------------------------------------------|
-| Player              | Aggregate-Root | controlla email, password, nickname, friend-list e friend-request                  |
-| Email               | Value-Object   | immutabile, unica per ogni player                                                  |
-| Password            | Value Object   | immutabile, sostituita intera al cambio                                            |
-| Nickname            | ValueObject    | immutabile, unico per ogni player                                                  |
-| Friend              | Value-Object   | riferimento immutabile a un player amico                                           |
-| Friend-Request      | Entity         | ha stato che cambia nel tempo (pending → accepted / declined), ha identità propria |
-|                     |                |                                                                                    |
-| PlayerRepository    | Repository     | recupera e salva un Player per ID o email                                          |
-| PlayerFactory       | Facotory       | logica di creazione del Player (validazione, hashing password, assegnazione ID)    |
-|                     |                |                                                                                    |
-| Player-Logged-In    | Domain-Event   | player online - consumato da game-observatory-context                              |
-| Player-Logged-Out   | Domain-Event   | player offline - consumato da game-observatory-context                             |
-| Player-Registered   | Domain-Event   | nuovo player - consumato da quest-context, game-observatory-context                |
-|                     |                |                                                                                    |
-| Friend-Removed      | Domain-Event   | amico rimosso - consumato da quest-context                                         |
-| Friendship-Accepted | Domain-Event   | richiesta confermata - consumato da quest-context                                  |
-| Friendship-Declined | Domain-Event   | richiesta rifiutata - consumato da quest-context                                   |
+| Term               | Block-Type     | Motivation                                                                         |
+|--------------------|----------------|------------------------------------------------------------------------------------|
+| Player             | Aggregate-Root | controlla email, password, nickname, friend-list e friend-request                  |
+| Email              | Value-Object   | immutabile, unica per ogni player                                                  |
+| Password           | Value Object   | immutabile, sostituita intera al cambio                                            |
+| Nickname           | ValueObject    | immutabile, unico per ogni player                                                  |
+| Friend             | Value-Object   | riferimento immutabile a un player amico                                           |
+| FriendRequest      | Entity         | ha stato che cambia nel tempo (pending → accepted / declined), ha identità propria |
+|                    |                |                                                                                    |
+| PlayerRepository   | Repository     | recupera e salva un Player per ID o email                                          |
+| PlayerFactory      | Facotory       | logica di creazione del Player (validazione, hashing password, assegnazione ID)    |
+|                    |                |                                                                                    |
+| PlayerLoggedIn     | Domain-Event   | player online - consumato da quest-context, game-observatory-context               |
+| PlayerLoggedOut    | Domain-Event   | player offline - consumato da game-observatory-context                             |
+| PlayerRegistered   | Domain-Event   | nuovo player - consumato da quest-context, game-observatory-context                |
+|                    |                |                                                                                    |
+| FriendRemoved      | Domain-Event   | amico rimosso - consumato da quest-context                                         |
+| FriendshipAccepted | Domain-Event   | richiesta confermata - consumato da quest-context                                  |
+| FriendshipDeclined | Domain-Event   | richiesta rifiutata - consumato da quest-context                                   |
 
 
 #### Quest-Context
@@ -227,6 +227,14 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 |                          |                |                                                                                                                                           |
 | Achivement               | Entity         | missione da raggiungere - rappresentato il nome, exp, descrizione, tipo, contatoreMassimo per il completamento                            |
 | Badge                    | Entity         | badge da raggiungere - rappresentato da nome, exp, descrizione, icona, contatoreMassimo per il completamento                              |
+|                          |                |                                                                                                                                           |
+| Player-Registered        | Domain-Event   | player registrato - triggera la gestione degli achivement/badge da creare                                                                 |
+| PlayerLoggedIn           | Domain-Event   | player ha fatto l'accesso -  triggera la gestione dell'achivement/badge                                                                   |
+| Friend-Removed           | Domain-Event   | amico rimosso - triggera la gestione degli achivement/badge                                                                               |
+| Friendship-Accepted      | Domain-Event   | amicizia accettata - triggera la gestione degli achivement/badge                                                                          |
+| Friendship-Declined      | Domain-Event   | amicizia declinata - triggera la gestione degli achivement/badge                                                                          |
+|                          |                |                                                                                                                                           |
+|                          |                | TODO: aggiungiamo altri eventi dopo l'analisi degli altri contesti                                                                        |
 |                          |                |                                                                                                                                           |
 
 
