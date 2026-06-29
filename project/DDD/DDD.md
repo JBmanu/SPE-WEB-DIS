@@ -308,26 +308,26 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 #### Deck-Workshop-Context
 
-| Term                      | Block-Type     | Motivation                                                                                                                                   |
-|---------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| CustomDeckFactory         | Factory        | crea CustomDeck - logica include validazione nome univoco per player e presenza minima di carte                                              |
-| CustomDeckRepository      | Repository     | gestisce CustomDeck, recuperato per player ID o deck ID                                                                                      |
-|                           |                |                                                                                                                                              |
-| CustomDeck                | Aggregate-Root | controlla nome, descrizione e lista DeckSlot - garantisce che la composizione contenga almeno una carta e che il nome sia univoco per player |
-| DeckSlot                  | Value-Object   | riferimento immutabile a un elemento selezionato per la composizione (card ID o deck ID + quantità) - sostituito intero al cambio            |
-| CardView                  | Value-Object   | proiezione read-only delle carte esistenti creati dall'admin - ricevuta da card-forge-context                                                |
-| DeckView                  | Value-Object   | proiezione read-only dei deck di dafault creati dall'admin - ricevuta da card-forge-context                                                  |
-| CustomDeckView            | Value-Object   | proiezione read-only di un CustomDeck già creato dal player - usata per la lista e per la selezione prima dell'editing                       |
-|                           |                |                                                                                                                                              |
-| CardViewAssembler         | Domain-Service | traduce dati grezzi delle carte admin in CardView - isola il contesto dai cambiamenti di card-forge-context                                  |
-| DeckViewAssembler         | Domain-Service | traduce dati grezzi dei deck admin in DeckView - isola il contesto dai cambiamenti di card-forge-context                                     |
-|                           |                |                                                                                                                                              |
-| CustomDeckCreated         | Domain-Event   | nuovo CustomDeck salvato - consumato da quest-context per contare i CustomDeck creati                                                        |
-| CustomDeckRemoved         | Domain-Event   | nuovo CustomDeck eliminato - consumato da quest-context per contare i CustomDeck eliminati                                                   |
-|                           |                |                                                                                                                                              |
-| CardCreated/CardPublished | Domain-Event   | ricevuto da card-forge-context - aggiorna le CardView disponibili per la composizione                                                        |
-| DeckCreated/DeckPublished | Domain-Event   | ricevuto da card-forge-context - aggiorna le DeckView disponibili per la composizione                                                        |
-|                           |                |                                                                                                                                              |
+| Term                 | Block-Type     | Motivation                                                                                                                                   |
+|----------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| CustomDeckFactory    | Factory        | crea CustomDeck - logica include validazione nome univoco per player e presenza minima di carte                                              |
+| CustomDeckRepository | Repository     | gestisce CustomDeck, recuperato per player ID o deck ID                                                                                      |
+|                      |                |                                                                                                                                              |
+| CustomDeck           | Aggregate-Root | controlla nome, descrizione e lista DeckSlot - garantisce che la composizione contenga almeno una carta e che il nome sia univoco per player |
+| DeckSlot             | Value-Object   | riferimento immutabile a un elemento selezionato per la composizione (card ID o deck ID + quantità) - sostituito intero al cambio            |
+| CardView             | Value-Object   | proiezione read-only delle carte esistenti creati dall'admin - ricevuta da card-forge-context                                                |
+| DeckView             | Value-Object   | proiezione read-only dei deck di dafault creati dall'admin - ricevuta da card-forge-context                                                  |
+| CustomDeckView       | Value-Object   | proiezione read-only di un CustomDeck già creato dal player - usata per la lista e per la selezione prima dell'editing                       |
+|                      |                |                                                                                                                                              |
+| CardViewAssembler    | Domain-Service | traduce dati grezzi delle carte admin in CardView - isola il contesto dai cambiamenti di card-forge-context                                  |
+| DeckViewAssembler    | Domain-Service | traduce dati grezzi dei deck admin in DeckView - isola il contesto dai cambiamenti di card-forge-context                                     |
+|                      |                |                                                                                                                                              |
+| CustomDeckCreated    | Domain-Event   | nuovo CustomDeck salvato - consumato da quest-context per contare i CustomDeck creati                                                        |
+| CustomDeckRemoved    | Domain-Event   | nuovo CustomDeck eliminato - consumato da quest-context per contare i CustomDeck eliminati                                                   |
+|                      |                |                                                                                                                                              |
+| CardPublished        | Domain-Event   | ricevuto da card-forge-context - aggiorna le CardView disponibili per la composizione                                                        |
+| DeckPublished        | Domain-Event   | ricevuto da card-forge-context - aggiorna le DeckView disponibili per la composizione                                                        |
+|                      |                |                                                                                                                                              |
 
 
 #### Card-Forge-Context
@@ -344,7 +344,15 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 #### System-Health-Context
 
-| Term | Block-Type | Motivation |
-|------|------------|------------|
-|      |            |            |
+| Term      | Block-Type     | Motivation                            |
+|-----------|----------------|---------------------------------------|
+|           |                |                                       |
+|           |                |                                       |
+| Dashboard | Aggregate-Root |                                       |
+| Service   | Entity         | rappresenta il servizio da monitorare |
+|           |                |                                       |
+|           |                |                                       |
+|           |                |                                       |
+|           |                |                                       |
+|           |                |                                       |
 
