@@ -258,8 +258,8 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | GameView           | Value-Object   | proiezione read-only di una partita disponibile - ricevuta da match-context                                                                |
 |                    |                |                                                                                                                                            |
 | LobbyMatchmaker    | Domain-Service | logica di ricerca partita - trova casualmente una lobby compatibile, filtra per amici, filtra per partite pubbliche o da osservare         |
-| LobbyViewAssembler | Domain-Service | traduce i dati grezzi di una lobby in LobbyView - isola il contesto dai cambiamenti del modello di pregame-lobby-context                   |
-| GameViewAssembler  | Domain-Service | traduce i dati grezzi di una partita in GameView - isola il contesto dai cambiamenti del modello di match-context                          |
+| LobbyViewProjection | Domain-Service | traduce i dati grezzi di una lobby in LobbyView - isola il contesto dai cambiamenti del modello di pregame-lobby-context                   |
+| GameViewProjection  | Domain-Service | traduce i dati grezzi di una partita in GameView - isola il contesto dai cambiamenti del modello di match-context                          |
 |                    |                |                                                                                                                                            |
 | LobbyRequestSent   | Domain-Event   | ricevuto da pregame-lobby-context - contrassegna la lobby come "sei stato invitato" per il destinatario                                    |
 | LobbyOpened        | Domain-Event   | ricevuto da pregame-lobby-context - aggiunge la lobby alla lista pubblica disponibile                                                      |
@@ -283,7 +283,7 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | JoinedPlayer        | Value-Object   | riferimento immutabile a un player entrato nella lobby (player ID + nickname)                                                                                                                       |
 | FriendView          | Value-Object   | proiezione read-only degli amici che posso invitare - ricevuta da player-identity-context                                                                                                           |
 |                     |                |                                                                                                                                                                                                     |
-| FriendViewAssembler | Domain-Service | traduce dati grezzi degli amici in FriendView - isola il contesto dai cambiamenti di player-identity-context                                                                                        |
+| FriendViewProjection | Domain-Service | traduce dati grezzi degli amici in FriendView - isola il contesto dai cambiamenti di player-identity-context                                                                                        |
 |                     |                |                                                                                                                                                                                                     |
 | LobbyRequest        | Entity         | invito inviato a un amico - ha stato che cambia (pending → accepted / declined / expired), ha identità propria                                                                                      |
 |                     |                |                                                                                                                                                                                                     |
@@ -319,8 +319,8 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | DeckView             | Value-Object   | proiezione read-only dei deck di dafault creati dall'admin - ricevuta da card-forge-context                                                  |
 | CustomDeckView       | Value-Object   | proiezione read-only di un CustomDeck già creato dal player - usata per la lista e per la selezione prima dell'editing                       |
 |                      |                |                                                                                                                                              |
-| CardViewAssembler    | Domain-Service | traduce dati grezzi delle carte admin in CardView - isola il contesto dai cambiamenti di card-forge-context                                  |
-| DeckViewAssembler    | Domain-Service | traduce dati grezzi dei deck admin in DeckView - isola il contesto dai cambiamenti di card-forge-context                                     |
+| CardViewProjection   | Domain-Service | traduce dati grezzi delle carte admin in CardView - isola il contesto dai cambiamenti di card-forge-context                                  |
+| DeckViewProjection   | Domain-Service | traduce dati grezzi dei deck admin in DeckView - isola il contesto dai cambiamenti di card-forge-context                                     |
 |                      |                |                                                                                                                                              |
 | CustomDeckCreated    | Domain-Event   | nuovo CustomDeck salvato - consumato da quest-context per contare i CustomDeck creati                                                        |
 | CustomDeckRemoved    | Domain-Event   | nuovo CustomDeck eliminato - consumato da quest-context per contare i CustomDeck eliminati                                                   |
