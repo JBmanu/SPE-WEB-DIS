@@ -308,22 +308,27 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 #### Deck-Workshop-Context
 
-| Term                  | Block-Type     | Motivation                                                                                                      |
-|-----------------------|----------------|-----------------------------------------------------------------------------------------------------------------|
-| CustomDeckFactory     | Factory        | logiche per la creazione di nuovi del custom deck del player                                                    |
-| CustomDeckRepository  | Repository     | salva e recupera i CustomDeck del player                                                                        |
-|                       |                |                                                                                                                 |
-| DeckWorkshop          | Aggregate-Root | controlla i DeckView, CardView, CustomDeck e NewCustomDeck                                                      |
-| DeckView              | Value Object   | proiezione read-only dei deck di dafault creati dall'admin - ricevuta da card-forge-context                     |
-| CardView              | Value Object   | proiezione read-only delle carte esistenti creati dall'admin - ricevuta da card-forge-context                   |
-| NewCustomDeck         | Entity         | nuovo custom deck che il player vuole create - comprende (nome, numero carte, descrizione)                      |
-| CustomDeck            | Entity         | custom deck gia creato                                                                                          |
-|                       |                |                                                                                                                 |
-| DeckCardViewAssembler | Domain-Service | traduce dati grezzi dei deck e card creati dall'admin - isola il contesto dai cambiamenti di card-forge-context |
-| DeckViewAssembler     | Domain-Service | traduce dati grezzi dei deck e card creati dall'admin - isola il contesto dai cambiamenti di card-forge-context |
-|                       |                |                                                                                                                 |
-| CustomDeckCreate      | Domain-Event   | nuovo CustomDeck salvato - consumato da quest-context per contare i CustomDeck creati                           |
-| CustomDeckRemoved     | Domain-Event   | nuovo CustomDeck eliminato - consumato da quest-context per contare i CustomDeck eliminati                      |
+| Term                      | Block-Type     | Motivation                                                                                                                                   |
+|---------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| CustomDeckFactory         | Factory        | crea CustomDeck - logica include validazione nome univoco per player e presenza minima di carte                                              |
+| CustomDeckRepository      | Repository     | gestisce CustomDeck, recuperato per player ID o deck ID                                                                                      |
+|                           |                |                                                                                                                                              |
+| CustomDeck                | Aggregate-Root | controlla nome, descrizione e lista DeckSlot - garantisce che la composizione contenga almeno una carta e che il nome sia univoco per player |
+| DeckSlot                  | Value-Object   | riferimento immutabile a un elemento selezionato per la composizione (card ID o deck ID + quantità) - sostituito intero al cambio            |
+| CardView                  | Value-Object   | proiezione read-only delle carte esistenti creati dall'admin - ricevuta da card-forge-context                                                |
+| DeckView                  | Value-Object   | proiezione read-only dei deck di dafault creati dall'admin - ricevuta da card-forge-context                                                  |
+| CustomDeckView            | Value-Object   | proiezione read-only di un CustomDeck già creato dal player - usata per la lista e per la selezione prima dell'editing                       |
+|                           |                |                                                                                                                                              |
+| CardViewAssembler         | Domain-Service | traduce dati grezzi delle carte admin in CardView - isola il contesto dai cambiamenti di card-forge-context                                  |
+| DeckViewAssembler         | Domain-Service | traduce dati grezzi dei deck admin in DeckView - isola il contesto dai cambiamenti di card-forge-context                                     |
+|                           |                |                                                                                                                                              |
+| CustomDeckCreated         | Domain-Event   | nuovo CustomDeck salvato - consumato da quest-context per contare i CustomDeck creati                                                        |
+| CustomDeckRemoved         | Domain-Event   | nuovo CustomDeck eliminato - consumato da quest-context per contare i CustomDeck eliminati                                                   |
+|                           |                |                                                                                                                                              |
+| CardCreated/CardPublished | Domain-Event   | ricevuto da card-forge-context - aggiorna le CardView disponibili per la composizione                                                        |
+| DeckCreated/DeckPublished | Domain-Event   | ricevuto da card-forge-context - aggiorna le DeckView disponibili per la composizione                                                        |
+|                           |                |                                                                                                                                              |
+
 
 #### Card-Forge-Context
 
