@@ -337,10 +337,30 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | MatchReplayRepository    | Repository     |                                                                                                                        |
 | ReplayPlaybackRepository | Repository     |                                                                                                                        |
 |                          |                |                                                                                                                        |
-| ReplayChoosen            | Domain-Event   | choose-replay-game                                                                                                     |
-| ReplayStarted            | Domain-Event   |                                                                                                                        |
-| ReplayPaused             | Domain-Event   |                                                                                                                        |
-| ReplayStopped            | Domain-Event   |                                                                                                                        |
+  MatchReplayProjectionService                                                                                                                  |
+
+**Versione (esaustiva) corretta stando a DDD**
+| Term                     | DDD core       | CQRS / read-side role                   | Motivation                                                                                                                                                                        |
+|--------------------------|----------------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| MatchReplay              | —              | Read Model / Projection                 | Vista persistita del match concluso, costruita dagli eventi del match per supportare il replay; non è il punto in cui si prendono decisioni di business sul match. zankavtaskin+1 |
+| UsedDeckSet              | Value-Object   | Parte del read model                    | Insieme immutabile dei DeckId usati nel match. stackoverflow                                                                                                                      |
+| ReplayLog                | Value-Object   | Parte del read model                    | Timeline immutabile composta dagli step del replay. stackoverflow+1                                                                                                               |
+| MatchPlayers             | Value-Object   | Parte del read model                    | Insieme immutabile dei PlayerId coinvolti nel match. stackoverflow                                                                                                                |
+| WatcherPlayers           | Value-Object   | Parte del read model                    | Insieme immutabile dei PlayerId watcher del match. stackoverflow                                                                                                                  |
+| ReplayStep               | Value-Object   | Parte del read model                    | Singolo fatto storico del replay: indice/timestamp, azione, player, snapshot rilevante dello stato. oreilly                                                                       |
+|                          |                |                                         |                                                                                                                                                                                   |
+| ReplayPlayback           | Aggregate-Root | Write model                             | Governa la sessione di riproduzione per uno specifico utente e protegge le invarianti del playback. stackoverflow+1                                                               |
+| PlayerId                 | Value-Object   | Parte del write model                   | Identità del player proprietario della sessione di replay. stackoverflow                                                                                                          |
+| MatchReplayId            | Value-Object   | Reference dal write model al read model | Identità del replay che il playback sta visualizzando. stackoverflow+1                                                                                                            |
+| State                    | Value-Object   | Parte del write model                   | Stato di riproduzione: Playing, Paused, Stopped. stackoverflow                                                                                                                    |
+| Speed                    | Value-Object   | Parte del write model                   | Velocità di avanzamento del replay. stackoverflow                                                                                                                                 |
+| CurrentStep              | Value-Object   | Parte del write model                   | Posizione corrente nella timeline del replay, coerente con ReplayStep. stackoverflow                                                                                              |
+|                          |                |                                         |                                                                                                                                                                                   |
+| ReplayPlaybackRepository | Repository     | Write-side persistence                  | Repository dell’aggregate root ReplayPlayback; i repository appartengono agli aggregate root del write model. zankavtaskin+1                                                      |
+| MatchReplayProjector     | —              | Projector / Event Handler               | Sottoscrive gli eventi del match e costruisce o aggiorna il read model MatchReplay. stackoverflow+1                                                                               |
+| MatchReplayQueryService  | -       | Query Service                           | Recupera MatchReplay per la UI o il caso d’uso di replay, senza passare dal dominio write-side. zenn+1                                                                            |
+
+**NOTA:** Sì: in DDD Domain Service e Query Service sono due cose diverse. Il primo appartiene al dominio write-side e contiene logica di business che non sta bene in una singola Entity o Aggregate Root; il secondo appartiene al read-side/CQRS e serve a recuperare dati già pronti per la visualizzazione o la ricerca.
 
 #### Deck-Workshop-Context
 
