@@ -177,9 +177,9 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | Client | x    | pregame-lobby-context    | gestisce il flusso dalla creazione della partita, raccogliendo i giocatori nel gruppo e permettendo al master di avviarla             |
 | Client |      | match-context            | gestisce tutte le meccaniche di gioco effettivo (turno, attivazione carte, ...)                                                       |
 | Client |      | match-replay-context     | gestisce la meccanica di riproduzione di una partita fatta in passato                                                                 |
-| Client |      | deck-workshop-context    | gestisce le meccaniche per creare nuovi mazzi personalizzati, con cui giocarci                                                        |
+| Client | x    | deck-workshop-context    | gestisce le meccaniche per creare nuovi mazzi personalizzati, con cui giocarci                                                        |
 | Admin  | x    | card-forge-context       | gestisce il sistema per creare nuovi mazzi di default e nuove carte tramite espansioni, quindi contiene la documentazione delle carte |
-| Admin  | x    | game-observatory-context | gestisce la raccolta delle statistiche del sistema di gioco (giocatori online, partite in corso, carte più giocate, ...)              |
+| Admin  | ~    | game-observatory-context | gestisce la raccolta delle statistiche del sistema di gioco (giocatori online, partite in corso, carte più giocate, ...)              |
 | Admin  |      | system-health-context    | gestice il monitoraggio dei servizi della piattaforma di gioco (disponibilità, traffico, richieste, ...)                              |
 
 #### Player-Identity-Context
@@ -252,47 +252,62 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 #### Lobby-Browser-Context
 
-| Term               | Block-Type     | Motivation                                                                                                                                 |
-|--------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| LobbyView          | Value-Object   | proiezione read-only di una lobby disponibile - ricevuta da pregame-lobby-context                                                          |
-| GameView           | Value-Object   | proiezione read-only di una partita disponibile - ricevuta da match-context                                                                |
-|                    |                |                                                                                                                                            |
-| LobbyMatchmaker    | Domain-Service | logica di ricerca partita - trova casualmente una lobby compatibile, filtra per amici, filtra per partite pubbliche o da osservare         |
+| Term                | Block-Type     | Motivation                                                                                                                                 |
+|---------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| LobbyView           | Value-Object   | proiezione read-only di una lobby disponibile - ricevuta da pregame-lobby-context                                                          |
+| GameView            | Value-Object   | proiezione read-only di una partita disponibile - ricevuta da match-context                                                                |
+|                     |                |                                                                                                                                            |
+| LobbyMatchmaker     | Domain-Service | logica di ricerca partita - trova casualmente una lobby compatibile, filtra per amici, filtra per partite pubbliche o da osservare         |
 | LobbyViewProjection | Domain-Service | traduce i dati grezzi di una lobby in LobbyView - isola il contesto dai cambiamenti del modello di pregame-lobby-context                   |
 | GameViewProjection  | Domain-Service | traduce i dati grezzi di una partita in GameView - isola il contesto dai cambiamenti del modello di match-context                          |
-|                    |                |                                                                                                                                            |
-| LobbyRequestSent   | Domain-Event   | ricevuto da pregame-lobby-context - contrassegna la lobby come "sei stato invitato" per il destinatario                                    |
-| LobbyOpened        | Domain-Event   | ricevuto da pregame-lobby-context - aggiunge la lobby alla lista pubblica disponibile                                                      |
-| LobbyClosed        | Domain-Event   | ricevuto da pregame-lobby-context - rimuove la lobby dalla lista pubblica disponibile                                                      |
-| MatchStarted       | Domain-Event   | ricevuto da pregame-lobby-context - rimuove la lobby dalla lista pubblica disponibile                                                      |
-|                    |                |                                                                                                                                            |
-| LobbyJoined        | Domain-Event   | prodotto quando il player entra in una lobby (accesso diretto, ricerca casuale o accettazione invito) — consumato da pregame-lobby-context |
-| GameWatched        | Domain-Event   | prodotto quando il player entra in partita come osservatore - consumato da match-context                                                   |
+|                     |                |                                                                                                                                            |
+| LobbyJoined         | Domain-Event   | prodotto quando il player entra in una lobby (accesso diretto, ricerca casuale o accettazione invito) — consumato da pregame-lobby-context |
+| GameWatched         | Domain-Event   | prodotto quando il player entra in partita come osservatore - consumato da match-context                                                   |
+|                     |                |                                                                                                                                            |
+| LobbyRequestSent    | Domain-Event   | ricevuto da pregame-lobby-context - contrassegna la lobby come "sei stato invitato" per il destinatario                                    |
+| LobbyOpened         | Domain-Event   | ricevuto da pregame-lobby-context - aggiunge la lobby alla lista pubblica disponibile                                                      |
+| LobbyClosed         | Domain-Event   | ricevuto da pregame-lobby-context - rimuove la lobby dalla lista pubblica disponibile                                                      |
+| MatchStarted        | Domain-Event   | ricevuto da pregame-lobby-context - rimuove la lobby dalla lista pubblica disponibile                                                      |
+|                     |                |                                                                                                                                            |
 
 #### Pregame-Lobby-Context
 
-| Term                | Block-Type     | Motivation                                                                                                                                                                                          |
-|---------------------|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| LobbyFactory        | Factory        | crea Lobby - logica include inizializzazione GameSettings, assegnazione LobbyMaster, generazione ID                                                                                                 |
-| LobbyRepository     | Repository     | gestisce Lobby, recuperata per ID                                                                                                                                                                   |
-|                     |                |                                                                                                                                                                                                     |
-| Lobby               | Aggregate-Root | controlla GameSettings, LobbyMaster, lista JoinedPlayer, lista LobbyRequest — garantisce che i JoinedPlayer non superino il limite e che la partita non inizi senza il numero minimo                |
-| GameSettings        | Value Object   | configurazione immutabile della partita (bomb-setting, defuse-setting, turn-time, limit-players, nome, filtro accesso, Deck)                                                                        |
-| Deck                | Value-Object   | composizione immutabile di uno o più deck selezionati per la partita - garantisce che almeno un deck sia presente                                                                                   |
-| LobbyMaster         | Value-Object   | riferimento immutabile al master della lobby (player ID + nickname) — sostituito intero se il master lascia e viene eletto un nuovo master                                                          |
-| JoinedPlayer        | Value-Object   | riferimento immutabile a un player entrato nella lobby (player ID + nickname)                                                                                                                       |
-| FriendView          | Value-Object   | proiezione read-only degli amici che posso invitare - ricevuta da player-identity-context                                                                                                           |
-|                     |                |                                                                                                                                                                                                     |
-| FriendViewProjection | Domain-Service | traduce dati grezzi degli amici in FriendView - isola il contesto dai cambiamenti di player-identity-context                                                                                        |
-|                     |                |                                                                                                                                                                                                     |
-| LobbyRequest        | Entity         | invito inviato a un amico - ha stato che cambia (pending → accepted / declined / expired), ha identità propria                                                                                      |
-|                     |                |                                                                                                                                                                                                     |
-| LobbyRequestSent    | Domain-Event   | prodotto quando il master invia un invito a un amico - consumato da lobby-browser-context per notificare il destinatario                                                                            |
-| LobbyJoined         | Domain-Event   | ricevuto da lobby-browser-context - aggiunge il player come JoinedPlayer                                                                                                                            |
-|                     |                |                                                                                                                                                                                                     |
-| LobbyOpened         | Domain-Event   | prodotto quando il master apre la lobby al pubblico - consumato da lobby-browser-context per aggiungere la lobby alla lista pubblica                                                                |
-| LobbyClosed         | Domain-Event   | prodotto quando il master chiude la lobby oovero (torna nelle impostazioni oppure la lobby è al completo) - consumato da lobby-browser-context per rimuovere la lobby dalla lista pubblica          |
-| MatchStarted        | Domain-Event   | prodotto quando il master avvia la partita - consumato da match-context portando GameSettings e lista JoinedPlayer e consumato da lobby-browser-context per rimuovere la lobby dalla lista pubblica |
+| Term                     | Block-Type     | Motivation                                                                                                                                                                                          |
+|--------------------------|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| LobbyFactory             | Factory        | crea Lobby - logica include inizializzazione GameSettings, assegnazione LobbyMaster, generazione ID                                                                                                 |
+| LobbyRepository          | Repository     | gestisce Lobby, recuperata per ID                                                                                                                                                                   |
+|                          |                |                                                                                                                                                                                                     |
+| Lobby                    | Aggregate-Root | controlla GameSettings, LobbyMaster, lista JoinedPlayer, lista LobbyRequest — garantisce che i JoinedPlayer non superino il limite e che la partita non inizi senza il numero minimo                |
+| GameSettings             | Value Object   | configurazione immutabile della partita (bomb-setting, defuse-setting, turn-time, limit-players, nome, filtro accesso, Deck)                                                                        |
+| Deck                     | Value-Object   | composizione immutabile di uno o più deck selezionati per la partita - garantisce che almeno un deck sia presente                                                                                   |
+| DeckView                 | Value-Object   | proiezione read-only di un deck di default dell'admin disponibile per la selezione - ricevuta da card-forge-context                                                                                 |
+| CustomDeckView           | Value-Object   | proiezione read-only di un CustomDeck del player disponibile per la selezione - ricevuta da deck-workshop-context                                                                                   |
+| LobbyMaster              | Value-Object   | riferimento immutabile al master della lobby (player ID + nickname) - sostituito intero se il master lascia e viene eletto un nuovo master                                                          |
+| JoinedPlayer             | Value-Object   | riferimento immutabile a un player entrato nella lobby (player ID + nickname)                                                                                                                       |
+| FriendView               | Value-Object   | proiezione read-only degli amici che posso invitare - ricevuta da player-identity-context                                                                                                           |
+| LobbyRequest             | Entity         | invito inviato a un amico - ha stato che cambia (pending → accepted / declined / expired), ha identità propria                                                                                      |
+|                          |                |                                                                                                                                                                                                     |
+| DeckViewProjection       | Domain-Service | traduce dati grezzi dei deck di default in DeckView - isola il contesto dai cambiamenti di card-forge-context                                                                                       |
+| CustomDeckViewProjection | Domain-Service | traduce dati grezzi dei custom deck in CustomDeckView - isola il contesto dai cambiamenti di deck-workshop-context                                                                                  |
+| FriendViewProjection     | Domain-Service | traduce dati grezzi degli amici in FriendView - isola il contesto dai cambiamenti di player-identity-context                                                                                        |
+|                          |                |                                                                                                                                                                                                     |
+| LobbyRequestSent         | Domain-Event   | prodotto quando il master invia un invito a un amico - consumato da lobby-browser-context per notificare il destinatario                                                                            |
+| LobbyJoined              | Domain-Event   | ricevuto da lobby-browser-context - aggiunge il player come JoinedPlayer                                                                                                                            |
+|                          |                |                                                                                                                                                                                                     |
+| LobbyOpened              | Domain-Event   | prodotto quando il master apre la lobby al pubblico - consumato da lobby-browser-context per aggiungere la lobby alla lista pubblica                                                                |
+| LobbyClosed              | Domain-Event   | prodotto quando il master chiude la lobby ovvero (torna nelle impostazioni oppure la lobby è al completo) - consumato da lobby-browser-context per rimuovere la lobby dalla lista pubblica          |
+| MatchStarted             | Domain-Event   | prodotto quando il master avvia la partita - consumato da match-context portando GameSettings e lista JoinedPlayer e consumato da lobby-browser-context per rimuovere la lobby dalla lista pubblica |
+|                          |                |                                                                                                                                                                                                     |
+| CardEdited               | Domain-Event   | ricevuto da card-forge-context - aggiorna carta nella preview dei DeckView disponibili                                                                                                              |
+| CardRemoved              | Domain-Event   | ricevuto da card-forge-context - rimuove carta dalla preview dei DeckView disponibili                                                                                                               |
+|                          |                |                                                                                                                                                                                                     |
+| DeckPublished            | Domain-Event   | ricevuto da card-forge-context - aggiunge DeckView disponibile per la selezione                                                                                                                     |
+| DeckEdited               | Domain-Event   | ricevuto da card-forge-context - aggiorna DeckView disponibile per la selezione                                                                                                                     |
+| DeckRemoved              | Domain-Event   | ricevuto da card-forge-context - rimuove DeckView dalla lista disponibile                                                                                                                           |
+|                          |                |                                                                                                                                                                                                     |
+| CustomDeckUpdated        | Domain-Event   | ricevuto da deck-workshop-context - aggiorna CustomDeckView nella lista disponibile                                                                                                                 |
+| CustomDeckRemoved        | Domain-Event   | ricevuto da deck-workshop-context — rimuove CustomDeckView dalla lista disponibile                                                                                                                  |
+|                          |                |                                                                                                                                                                                                     |
 
 #### Match-Context
 
@@ -322,11 +337,17 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | CardViewProjection   | Domain-Service | traduce dati grezzi delle carte admin in CardView - isola il contesto dai cambiamenti di card-forge-context                                  |
 | DeckViewProjection   | Domain-Service | traduce dati grezzi dei deck admin in DeckView - isola il contesto dai cambiamenti di card-forge-context                                     |
 |                      |                |                                                                                                                                              |
-| CustomDeckCreated    | Domain-Event   | nuovo CustomDeck salvato - consumato da quest-context per contare i CustomDeck creati                                                        |
-| CustomDeckRemoved    | Domain-Event   | nuovo CustomDeck eliminato - consumato da quest-context per contare i CustomDeck eliminati                                                   |
+| CustomDeckCreated    | Domain-Event   | prodotto quando un CustomDeck viene salvato per la prima volta - consumato da quest-context e pregame-lobby-context                          |
+| CustomDeckUpdated    | Domain-Event   | prodotto quando un CustomDeck esistente viene modificato - consumato da pregame-lobby-context                                                |
+| CustomDeckRemoved    | Domain-Event   | prodotto quando un CustomDeck viene eliminato - consumato da quest-context e pregame-lobby-context                                           |
 |                      |                |                                                                                                                                              |
-| CardPublished        | Domain-Event   | ricevuto da card-forge-context - aggiorna le CardView disponibili per la composizione                                                        |
-| DeckPublished        | Domain-Event   | ricevuto da card-forge-context - aggiorna le DeckView disponibili per la composizione                                                        |
+| CardPublished        | Domain-Event   | ricevuto da card-forge-context - aggiunge CardView disponibile per la composizione                                                           |
+| CardEdited           | Domain-Event   | ricevuto da card-forge-context - aggiorna CardView disponibile per la composizione                                                           |
+| CardRemoved          | Domain-Event   | ricevuto da card-forge-context - rimuove CardView dalla composizione disponibile                                                             |
+|                      |                |                                                                                                                                              |
+| DeckPublished        | Domain-Event   | ricevuto da card-forge-context - aggiunge DeckView disponibile per la composizione                                                           |
+| DeckEdited           | Domain-Event   | ricevuto da card-forge-context - aggiorna DeckView disponibile per la composizione                                                           |
+| DeckRemoved          | Domain-Event   | ricevuto da card-forge-context - rimuove DeckView dalla composizione disponibile                                                             |
 |                      |                |                                                                                                                                              |
 
 
@@ -366,7 +387,7 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 | Term                       | Block-Type     | Motivation                                                                                                                                                         |
 |----------------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| PlatformSnapshot           | Aggregate Root | Rappresenta una fotografia delle statistiche della piattaforma in un preciso istante o bucket temporale, con timestamp e valori consolidati.                       |
+| PlatformSnapshot           | Aggregate-Root | Rappresenta una fotografia delle statistiche della piattaforma in un preciso istante o bucket temporale, con timestamp e valori consolidati.                       |
 | StatisticsWindow           | Value-Object   | Identifica l’intervallo temporale di aggregazione, ad esempio ora, giorno, settimana o mese.                                                                       |
 | PlayerIdentityRecord       | Value-Object   | Rappresenta il numero di giocatori online, offline, registrati,...                                                                                                 |
 | PlayerMatchRecord          | Value-Object   | Rappresenta l’elenco con Top5Deck, Top5Card (classifica con tutti i dati della partita)                                                                            |
@@ -386,15 +407,17 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 #### System-Health-Context
 
-| Term      | Block-Type     | Motivation                            |
-|-----------|----------------|---------------------------------------|
-|           |                |                                       |
-|           |                |                                       |
-| Dashboard | Aggregate-Root |                                       |
-| Service   | Entity         | rappresenta il servizio da monitorare |
-|           |                |                                       |
-|           |                |                                       |
-|           |                |                                       |
-|           |                |                                       |
-|           |                |                                       |
+| Term                     | Block-Type     | Motivation                                                                                                                |
+|--------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------|
+| ServiceMonitorRepository | Factory        | gestisce ServiceMonitor, recuperato per ID di piattaforma                                                                 |
+| ServiceMonitorRepository | Repository     | gestisce ServiceMonitor, recuperato per ID di piattaforma                                                                 |
+|                          |                |                                                                                                                           |
+| ServiceMonitor           | Aggregate-Root | controlla la lista di Service monitorati — garantisce che ogni servizio sia tracciato e aggiornato correttamente          |
+| Service                  | Entity         | rappresenta un servizio della piattaforma — ha stato che cambia (availability, traffic, requestCount), ha identità propri |
+| Availability             | Value-Object   | indica se il servizio è online o offline — sostituito intero ad ogni aggiornamento                                        |
+| Traffic                  | Object-Value   | rappresenta il traffico del servizio                                                                                      |
+| CounterRequest           | Object-Value   | rappresenta il numero di richieste                                                                                        |
+|                          |                |                                                                                                                           |
+|                          |                |                                                                                                                           |
+|                          |                |                                                                                                                           |
 
