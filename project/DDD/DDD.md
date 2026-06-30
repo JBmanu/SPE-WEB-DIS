@@ -177,9 +177,9 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | Client | x    | pregame-lobby-context    | gestisce il flusso dalla creazione della partita, raccogliendo i giocatori nel gruppo e permettendo al master di avviarla             |
 | Client |      | match-context            | gestisce tutte le meccaniche di gioco effettivo (turno, attivazione carte, ...)                                                       |
 | Client |      | match-replay-context     | gestisce la meccanica di riproduzione di una partita fatta in passato                                                                 |
-| Client |      | deck-workshop-context    | gestisce le meccaniche per creare nuovi mazzi personalizzati, con cui giocarci                                                        |
-| Admin  |      | card-forge-context       | gestisce il sistema per creare nuovi mazzi di default e nuove carte tramite espansioni, quindi contiene la documentazione delle carte |
-| Admin  |      | game-observatory-context | gestisce la raccolta delle statistiche del sistema di gioco (giocatori online, partite in corso, carte più giocate, ...)              |
+| Client | x    | deck-workshop-context    | gestisce le meccaniche per creare nuovi mazzi personalizzati, con cui giocarci                                                        |
+| Admin  | x    | card-forge-context       | gestisce il sistema per creare nuovi mazzi di default e nuove carte tramite espansioni, quindi contiene la documentazione delle carte |
+| Admin  | ~    | game-observatory-context | gestisce la raccolta delle statistiche del sistema di gioco (giocatori online, partite in corso, carte più giocate, ...)              |
 | Admin  |      | system-health-context    | gestice il monitoraggio dei servizi della piattaforma di gioco (disponibilità, traffico, richieste, ...)                              |
 
 #### Player-Identity-Context
@@ -305,7 +305,6 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | DeckEdited               | Domain-Event   | ricevuto da card-forge-context - aggiorna DeckView disponibile per la selezione                                                                                                                     |
 | DeckRemoved              | Domain-Event   | ricevuto da card-forge-context - rimuove DeckView dalla lista disponibile                                                                                                                           |
 |                          |                |                                                                                                                                                                                                     |
-| CustomDeckCreated        | Domain-Event   | ricevuto da deck-workshop-context - aggiunge CustomDeckView disponibile per la selezione                                                                                                            |
 | CustomDeckUpdated        | Domain-Event   | ricevuto da deck-workshop-context - aggiorna CustomDeckView nella lista disponibile                                                                                                                 |
 | CustomDeckRemoved        | Domain-Event   | ricevuto da deck-workshop-context — rimuove CustomDeckView dalla lista disponibile                                                                                                                  |
 |                          |                |                                                                                                                                                                                                     |
@@ -406,15 +405,17 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 #### System-Health-Context
 
-| Term      | Block-Type     | Motivation                            |
-|-----------|----------------|---------------------------------------|
-|           |                |                                       |
-|           |                |                                       |
-| Dashboard | Aggregate-Root |                                       |
-| Service   | Entity         | rappresenta il servizio da monitorare |
-|           |                |                                       |
-|           |                |                                       |
-|           |                |                                       |
-|           |                |                                       |
-|           |                |                                       |
+| Term                     | Block-Type     | Motivation                                                                                                                |
+|--------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------|
+| ServiceMonitorRepository | Factory        | gestisce ServiceMonitor, recuperato per ID di piattaforma                                                                 |
+| ServiceMonitorRepository | Repository     | gestisce ServiceMonitor, recuperato per ID di piattaforma                                                                 |
+|                          |                |                                                                                                                           |
+| ServiceMonitor           | Aggregate-Root | controlla la lista di Service monitorati — garantisce che ogni servizio sia tracciato e aggiornato correttamente          |
+| Service                  | Entity         | rappresenta un servizio della piattaforma — ha stato che cambia (availability, traffic, requestCount), ha identità propri |
+| Availability             | Value-Object   | indica se il servizio è online o offline — sostituito intero ad ogni aggiornamento                                        |
+| Traffic                  | Object-Value   | rappresenta il traffico del servizio                                                                                      |
+| CounterRequest           | Object-Value   | rappresenta il numero di richieste                                                                                        |
+|                          |                |                                                                                                                           |
+|                          |                |                                                                                                                           |
+|                          |                |                                                                                                                           |
 
