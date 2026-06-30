@@ -90,8 +90,8 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | **partita**                       |                                                                                                               |
 | player-hand-cards                 | carte che un giocatore possiede in mano                                                                       |
 | discard-pile                      | mazzo di carte giocate dai player ad ogni turno (mazzo degli scarti)                                          |
-| draw-deck                         | mazzo di carte della partitia da cui pescare                                                                  |                                                                
-| pass-turn                         | passa il turno quindi peschi                                                                                  |
+| draw-deck                         | mazzo di carte della partitia da cui pescare                                                                  |
+| draw-card                         | pesca carta                                                                                                   |
 | select-card-from-hand             | seleziona una carta nella tua mano (la carta scelta diventa selected-card)                                    |
 | selected-card                     | carta selezionata da giocare                                                                                  |
 | use-card                          | gioca la carta selezionata                                                                                    |
@@ -112,7 +112,7 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | passive-action                    | carta attiva dal momento ui cui la peschi, non devi attivarla (es. mutanda)                                   |
 | permanent-action                  | effetto permanente della carta finche non si verifica una condizione (es. marchia)                            |
 | trigger-action                    | effetto triggerato secondo una condizione di gioco (es. quella la pesco io)                                   |
-| double-action                     | doppio effetto (es. imploding)                                                                                |   
+| double-action                     | doppio effetto (es. imploding)                                                                                |
 | combo-action                      | l'attivazione richiede una combinazione di carte (es. carte gatto)                                            |
 
 ### Tabella azione Admin
@@ -141,7 +141,7 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | sign-up                 |                     | created-deck-count | loose                   |                      |                       | friend                | delete                |                        |                          |                       |             
 | logout                  |                     |                    | player                  |                      |                       | game-request          | description           |                        |                          |                       |             
 | forgot-password         |                     |                    | turn                    |                      |                       |                       |                       |                        |                          |                       |             
-|                         |                     |                    | pass-turn               |                      |                       |                       |                       |                        |                          |                       |             
+|                         |                     |                    | draw-card               |                      |                       |                       |                       |                        |                          |                       |             
 |                         |                     |                    | card                    |                      |                       |                       |                       |                        |                          |                       |             
 |                         |                     |                    | turn-time               |                      |                       |                       |                       |                        |                          |                       |             
 |                         |                     |                    | player-hand-cards       |                      |                       |                       |                       |                        |                          |                       |             
@@ -317,9 +317,30 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 #### Match-Replay-Context
 
-| Term | Block-Type | Motivation |
-|------|------------|------------|
-|      |            |            |
+| Term                     | Block-Type     | Motivation                                                                                                             |
+|--------------------------|----------------|------------------------------------------------------------------------------------------------------------------------|
+| MatchReplay              | Aggregate-Root | Aggregato con info sul match concluso, deck usato, log di tutti i turni, player coinvolti                              |
+| UsedDeckSet              | Value-Object   | Deck ID usati nel match                                                                                                |
+| ReplayLog                | Value-Object   | Log immutabile dei ReplayStep del match                                                                                |
+| MatchPlayers             | Value-Object   | Elenco immutabile dei player (ID) del match (friend e non)                                                             |
+| WatcherPlayers           | Value-Object   | Elenco immutabile dei player watcher (ID) del match                                                                    |
+|                          |                |                                                                                                                        |
+| ReplayStep               | Value-Object   | [rif. MatchLog] timestamp/indice step, azione (pesca, gioca carta, favore, ...), player, player-hand-cards, DrawnCards |
+|                          |                |                                                                                                                        |
+| ReplayPlayback           | Aggregate-Root | Gestisce la sessione di riproduzione del replay per un utente: stato, velocità, posizione corrente                     |
+| PlayerId                 | Value-Object   | Identità del player proprietario della sessione                                                                        |
+| MatchReplayId            | Value_Object   | Identità del replay visualizzato                                                                                       |
+| State                    | Value-Object   | Stato corrente di riproduzione (Playing, Stopped, Paused)                                                              |
+| Speed                    | Value-Object   | (turn-time ?) Velocita di "scorrimento" del log => velocita riproduzione replay                                        |
+| CurrentStep              | Value-Object   | Turno corrente in cui si trova il replay rispetto al log di turni del match                                            |
+|                          |                |                                                                                                                        |
+| MatchReplayRepository    | Repository     |                                                                                                                        |
+| ReplayPlaybackRepository | Repository     |                                                                                                                        |
+|                          |                |                                                                                                                        |
+| ReplayChoosen            | Domain-Event   | choose-replay-game                                                                                                     |
+| ReplayStarted            | Domain-Event   |                                                                                                                        |
+| ReplayPaused             | Domain-Event   |                                                                                                                        |
+| ReplayStopped            | Domain-Event   |                                                                                                                        |
 
 #### Deck-Workshop-Context
 
@@ -352,7 +373,6 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 
 #### Card-Forge-Context
-
 
 | Term                  | Block-Type     | Motivation                                                                                                                                                                                                                               |
 |-----------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
