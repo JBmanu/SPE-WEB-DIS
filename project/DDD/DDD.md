@@ -306,6 +306,7 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | DeckRemoved              | Domain-Event   | ricevuto da card-forge-context - rimuove DeckView dalla lista disponibile                                                                                                                           |
 |                          |                |                                                                                                                                                                                                     |
 | CustomDeckUpdated        | Domain-Event   | ricevuto da deck-workshop-context - aggiorna CustomDeckView nella lista disponibile                                                                                                                 |
+| CustomDeckRemoved        | Domain-Event   | ricevuto da deck-workshop-context — rimuove CustomDeckView dalla lista disponibile                                                                                                                  |
 |                          |                |                                                                                                                                                                                                     |
 
 #### Match-Context
@@ -349,32 +350,36 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | DeckRemoved          | Domain-Event   | ricevuto da card-forge-context - rimuove DeckView dalla composizione disponibile                                                             |
 |                      |                |                                                                                                                                              |
 
+
 #### Card-Forge-Context
 
-| Term                  | Block-Type     | Motivation                                                                                                           |
-|-----------------------|----------------|----------------------------------------------------------------------------------------------------------------------|
-| CardDefinitionFactory | Factory        | crea CardDefinition - logica include validazione unicità nome, compatibilità delle azioni e coerenza degli attributi |
-| DeckDefinitionFactory | Factory        | crea DeckDefinition - logica include validazione unicità nome e coerenza della composizione                          |
-|                       |                |                                                                                                                      |
-| CardRepository        | Repository     | gestisce CardDefinition, recuperata per ID o tipo                                                                    |
-| DeckRepository        | Repository     | gestisce DeckDefinition, recuperata per ID                                                                           |
-|                       |                |                                                                                                                      |
-| CardDefinition        | Aggregate-Root | controlla nome, descrizione, Action e Attribute - garantisce che le azioni siano valide e compatibili tra loro       |
-| Action                | Value-Object   | modella una singola azione della carta con parametri e vincoli (ecc...) - sostituita intera al cambio                |
-| Attribute             | Value-Object   | raccoglie caratteristiche della carta (AttackType, CardType, ecc...) - sostituito intero al cambio                   |
-|                       |                |                                                                                                                      |
-| DeckDefinition        | Aggregate-Root | controlla nome, lista CardEntry e lista DeckEntry - garantisce coerenza di composizione e quantità                   |
-| CardEntry             | Value-Object   | riferimento immutabile a una CardDefinition nel deck (CardDefinition ID + quantity)                                  |
-| DeckEntry             | Value-Object   | riferimento immutabile a un altro deck incluso (DeckDefinition ID + quantity)                                        |
-|                       |                |                                                                                                                      |
-| CardPublished         | Domain-Event   | prodotto quando una CardDefinition viene creata - consumato da deck-workshop-context                                 |
-| CardEdited            | Domain-Event   | prodotto quando una CardDefinition viene modificata - consumato da deck-workshop-context e pregame-lobby-context     |
-| CardRemoved           | Domain-Event   | prodotto quando una CardDefinition viene eliminata - consumato da deck-workshop-context e pregame-lobby-context      |
-|                       |                |                                                                                                                      |
-| DeckPublished         | Domain-Event   | prodotto quando una DeckDefinition viene creata - consumato da deck-workshop-context e pregame-lobby-context         |
-| DeckEdited            | Domain-Event   | prodotto quando una DeckDefinition viene modificata - consumato da deck-workshop-context e pregame-lobby-context     |
-| DeckRemoved           | Domain-Event   | prodotto quando una DeckDefinition viene eliminata - consumato da deck-workshop-context e pregame-lobby-context      |
-|                       |                |                                                                                                                      |
+
+| Term                  | Block-Type     | Motivation                                                                                                                                                                                                                               |
+|-----------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CardDefinition        | Aggregate-Root | Governa la definizione coerente di una carta, validando i dati e le regole necessarie alla creazione e pubblicazione. Possibilit Attributi: ID, nome, descrizione, insieme di azioni (valide e compatibili fra loro), tipologia di carta |
+| Action                | Value-Object   | Modella una singola azione della carta, con parametri e vincoli propri.                                                                                                                                                                  |
+| Attribute             | Value-Object   | Raccogli attributi/caratteristiche della carta come AttackType, CardType, ecc...                                                                                                                                                         |
+| PublicationStatus     | Value-Object   | Stato di pubblicazione della carta: `Draft` oppure `Published`.                                                                                                                                                                          |
+|                       |                |                                                                                                                                                                                                                                          |
+| DeckDefinition        | Aggregate-Root | Governa la definizione di un deck, garantendo coerenza di composizione, quantità delle carte e vincoli di formato. Attributi: ID, nome, elenco di altri deck inseriti, insieme di CardDefinition inserite                                |
+| DeckEntry             | Value-Object   | Rappresenta una riga del deck: DeckDefinitionId + qunatity  (possibile inserire piu volte lo stesso deck)                                                                                                                                |
+| CardEntry             | Value-Object   | Rappresenta l'insieme dell CardDefinition inserite nel nuovo deck: CardDefinitionId + quantity                                                                                                                                           |
+|                       |                |                                                                                                                                                                                                                                          |
+| ExpansionDefinition   | Aggregate-Root | Governa la definizione di una espansione, garantendo coerenza di composizione, quantità delle carte e vincoli di formato. Attributi: ID, nome, insieme di CardDefinition inserite (se sono `Draft` passano a `Published`)                |
+| CardEntry             | Value-Object   | Rappresenta l'insieme dell CardDefinition inserite nel nuovo deck: CardDefinitionId + quantity                                                                                                                                           |
+|                       |                |                                                                                                                                                                                                                                          |
+| CardDefinitionFactory | Factory        | Crea CardDefinition factory                                                                                                                                                                                                              |
+| DeckDefinitionFactory | Factory        | Crea DeckDefinition factory                                                                                                                                                                                                              |
+|                       |                |                                                                                                                                                                                                                                          |
+| CardRepository        | Repository     | Recupera e salva le *CardDefinition* create nel gioco (sia Draft che Published)                                                                                                                                                          |
+| DeckRepository        | Repository     | Recupera e salva le *DeckDefinition* pubblicati dall'admin                                                                                                                                                                               |
+| ExpansionRepository   | Repository     | Recupera e salva le *ExpansionDefinition* pubblicate nel gioco                                                                                                                                                                           |
+|                       |                |                                                                                                                                                                                                                                          |
+| CardPublished         | Domain-Event   | Una nuova *Card* è stata creata (salvata)                                                                                                                                                                                                |
+| DeckPublished         | Domain-Event   | Un nuovo *Deck* è stato creato (salvata)                                                                                                                                                                                                 |
+| ExpansionPublished    | Domain-Event   | Una nuova espansione è stata pubblicata                                                                                                                                                                                                  |
+| CardEdited            | Domain-Event   | La CardDefinition è stata modificata                                                                                                                                                                                                     |
+| DeckEdited            | Domain-Event   | Un Deckdefinition è sttao modificato/aggiornato                                                                                                                                                                                          |
 
 #### Game-Observatory-Context
 
