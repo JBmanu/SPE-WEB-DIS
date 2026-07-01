@@ -335,34 +335,26 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 #### Match-Replay-Context
 
-// chiedere se il fatto che arrivano i dati dal domain-event di matchEnd debba reare una factory per 
-// salvare lo storico del match oppure mi serve un domain-service per poter tradurre i dati come voglio? 
 
-allora ho fatto una prima bozza di match-replay-context dimmmi se ci sono raffinamenti o modifiche
-da fare. Inoltre ho un dubbio per il fatto che serva la factory per MatchReplay perche se i dati
-arrivano dall'evento di MatchEnded allora i dati che arrivano che servono per il replay devo 
-crearli tramite la factory oppure tramite un domainService che ti traduce/mappa i dati 
-per come mi servono a me nel contesto del replay?
-
-
-| Term                  | Block-Type     | Motivation                                                                                                                           |
-|-----------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| MatchReplayRepository | Repository     | sarva e repura di dati di un match fatto da un giocatore                                                                             |
-|                       |                |                                                                                                                                      |
-| MatchReplay           | Aggregate-Root | Aggregato con info sul match concluso, deck usato, log di tutti i turni, player coinvolti                                            |
-| ReplayLog             | Value-Object   | Log immutabile dei ReplayStep del match                                                                                              |
-| UsedDeckSet           | Value-Object   | Deck ID usato nel match, deck di partenza per poter riprodurre la partita                                                            |
-| ReplayStep            | Value-Object   | [rif. MatchLog] timestamp/indice step, info evento match fatto da player                                                             |
-| MatchPlayers          | Value-Object   | Elenco immutabile dei player (ID) del match (friend e non)                                                                           |
-|                       |                |                                                                                                                                      |
-| ReplayPlayback        | Aggregate-Root | Gestisce il controllo di un replay, controlla il fatto di non andare oltre una certa velocità, di poter metter play solo se in pause |
-| MatchReplayId         | Value_Object   | Identità del replay visualizzato                                                                                                     |
-| State                 | Value-Object   | stato della riproduzione                                                                                                             |
-| SpeedStep             | Value-Object   | velocità di riproduzione del singolo step di gioco                                                                                   |
-| CurrentStep           | Value-Object   | step corrente di riproduzione                                                                                                        |
-|                       |                |                                                                                                                                      |
-| MatchEnded            | Domain-Event   | prende tutti i dati di una partita a cui hai partecipato e hai concluso fino alla fine (da match)                                    |
-|                       |                |                                                                                                                                      |
+| Term                  | Block-Type     | Motivation                                                                                                                                                                                                                                                                 |
+|-----------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| MatchReplayRepository | Repository     | gestisce MatchReplay, recuperato per match ID o player ID                                                                                                                                                                                                                  |
+|                       |                |                                                                                                                                                                                                                                                                            |
+| MatchReplay           | Aggregate-Root | contiene InitialMatchSetup, ReplayLog, lista ReplayParticipant - immutabile dopo la creazione, costruito da MatchResult alla ricezione di MatchEnded                                                                                                                       |
+| InitialMatchSetup     | Value-Object   | configurazione della partita al momento zero - contiene deck selezionati, distribuzione iniziale delle Hand, ordine iniziale del DrawPile dopo shuffle, numero bombe e defuse, TurnTimer; necessario per ricostruire lo stato iniziale prima di riprodurre il ReplayLog    |
+| ReplayLog             | Value-Object   | sequenza ordinata di ReplayStep - costruita dal GameLog di MatchResult, adattata per la riproduzione visiva                                                                                                                                                                |
+| ReplayStep            | Value-Object   | singolo step riproducibile - contiene timestamp logico, tipo evento, player coinvolto e parametri visualizzabili; immutabile                                                                                                                                               |
+| ReplayParticipant     | Value-Object   | singolo player coinvolto nel match (player ID + nickname + ordine iniziale di gioco) - MatchReplay ne contiene una lista                                                                                                                                                   |
+|                       |                |                                                                                                                                                                                                                                                                            |
+| ReplayPlayback        | Entity         | sessione di riproduzione di un MatchReplay - controlla PlaybackState, SpeedStep e CurrentStep; non persistita, vive in memoria; garantisce che play sia possibile solo da pause, che la velocità rispetti i limiti e che CurrentStep non superi la lunghezza del ReplayLog |
+| PlaybackState         | Value-Object   | stato della riproduzione (playing/paused) - sostituito intero ad ogni cambio                                                                                                                                                                                               |
+| SpeedStep             | Value-Object   | velocità di riproduzione - definita entro limiti minimi e massimi; sostituita intera al cambio                                                                                                                                                                             |
+| CurrentStep           | Value-Object   | indice dello step corrente nel ReplayLog - sostituito intero ad ogni avanzamento                                                                                                                                                                                           |
+|                       |                |                                                                                                                                                                                                                                                                            |
+| MatchReplayProjection | Domain-Service | riceve MatchResult da MatchResultRepository e GameSettings dalla partita - traduce GameLog in ReplayLog, costruisce InitialMatchSetup e lista ReplayParticipant, persiste MatchReplay                                                                                      |
+|                       |                |                                                                                                                                                                                                                                                                            |
+| MatchEnded            | Domain-Event   | ricevuto da match-context - triggera MatchReplayProjection per costruire e persistere MatchReplay                                                                                                                                                                          |
+|                       |                |                                                                                                                                                                                                                                                                            |
 
 
 #### Deck-Workshop-Context (~lato player, rendiamo il nome più esplito)
