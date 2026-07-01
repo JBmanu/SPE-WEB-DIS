@@ -21,7 +21,7 @@
 |                    |                               |                                                   |
 | CustomDeckCreated  | deck-workshop (\*)            | quest, pregame-lobby                              |
 | CustomDeckUpdated  | deck-workshop (\*)            | pregame-lobby                                     |
-| CustomDeckRemoved  | deck-workshop (\*)            | quest, pregame-lobby                              |
+| CustomDeckRemoved  | deck-workshop (\*)            | pregame-lobby                                     |
 |                    |                               |                                                   |
 | CardPublished      | card-forge (\*)               | deck-workshop, pregame-lobby                      |
 | DeckPublished      | card-forge (\*)               | deck-workshop, pregame-lobby                      |
