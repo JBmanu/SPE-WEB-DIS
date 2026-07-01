@@ -262,7 +262,7 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | GameViewProjection  | Domain-Service | traduce i dati grezzi di una partita in GameView - isola il contesto dai cambiamenti del modello di match-context                          |
 |                     |                |                                                                                                                                            |
 | LobbyJoined         | Domain-Event   | prodotto quando il player entra in una lobby (accesso diretto, ricerca casuale o accettazione invito) — consumato da pregame-lobby-context |
-| GameWatched         | Domain-Event   | prodotto quando il player entra in partita come osservatore - consumato da match-context                                                   |
+| WatcherJoined       | Domain-Event   | prodotto quando il player entra in partita come osservatore - consumato da match-context                                                   |
 |                     |                |                                                                                                                                            |
 | LobbyRequestSent    | Domain-Event   | ricevuto da pregame-lobby-context - contrassegna la lobby come "sei stato invitato" per il destinatario                                    |
 | LobbyOpened         | Domain-Event   | ricevuto da pregame-lobby-context - aggiunge la lobby alla lista pubblica disponibile                                                      |
@@ -335,52 +335,27 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 #### Match-Replay-Context
 
-| Term                         | Block-Type     | Motivation                                                                                                             |
-|------------------------------|----------------|------------------------------------------------------------------------------------------------------------------------|
-| MatchReplay                  | Aggregate-Root | Aggregato con info sul match concluso, deck usato, log di tutti i turni, player coinvolti                              |
-| UsedDeckSet                  | Value-Object   | Deck ID usati nel match                                                                                                |
-| ReplayLog                    | Value-Object   | Log immutabile dei ReplayStep del match                                                                                |
-| MatchPlayers                 | Value-Object   | Elenco immutabile dei player (ID) del match (friend e non)                                                             |
-| WatcherPlayers               | Value-Object   | Elenco immutabile dei player watcher (ID) del match                                                                    |
-|                              |                |                                                                                                                        |
-| ReplayStep                   | Value-Object   | [rif. MatchLog] timestamp/indice step, azione (pesca, gioca carta, favore, ...), player, player-hand-cards, DrawnCards |
-|                              |                |                                                                                                                        |
-| ReplayPlayback               | Aggregate-Root | Gestisce la sessione di riproduzione del replay per un utente: stato, velocità, posizione corrente                     |
-| PlayerId                     | Value-Object   | Identità del player proprietario della sessione                                                                        |
-| MatchReplayId                | Value_Object   | Identità del replay visualizzato                                                                                       |
-| State                        | Value-Object   | Stato corrente di riproduzione (Playing, Stopped, Paused)                                                              |
-| Speed                        | Value-Object   | (turn-time ?) Velocita di "scorrimento" del log => velocita riproduzione replay                                        |
-| CurrentStep                  | Value-Object   | Turno corrente in cui si trova il replay rispetto al log di turni del match                                            |
-|                              |                |                                                                                                                        |
-| MatchReplayRepository        | Repository     |                                                                                                                        |
-| ReplayPlaybackRepository     | Repository     |                                                                                                                        |
-|                              |                |                                                                                                                        |
-| MatchReplayProjectionService |                |                                                                                                                        |
+| Term                     | Block-Type     | Motivation                                                                                         |
+|--------------------------|----------------|----------------------------------------------------------------------------------------------------|
+| MatchReplay              | Aggregate-Root | Aggregato con info sul match concluso, deck usato, log di tutti i turni, player coinvolti          |
+| UsedDeckSet              | Value-Object   | Deck ID usati nel match                                                                            |
+| ReplayLog                | Value-Object   | Log immutabile dei ReplayStep del match                                                            |
+| MatchPlayers             | Value-Object   | Elenco immutabile dei player (ID) del match (friend e non)                                         |
+|                          |                |                                                                                                    |
+| ReplayStep               | Value-Object   | [rif. MatchLog] timestamp/indice step, info evento match fatto da player                           |
+|                          |                |                                                                                                    |
+| ReplayPlayback           | Aggregate-Root | Gestisce la sessione di riproduzione del replay per un utente: stato, velocità, posizione corrente |
+| PlayerId                 | Value-Object   | Identità del player proprietario della sessione                                                    |
+| MatchReplayId            | Value_Object   | Identità del replay visualizzato                                                                   |
+| State                    | Value-Object   | Stato corrente di riproduzione (Playing, Stopped, Paused)                                          |
+| Speed                    | Value-Object   | (turn-time ?) Velocita di "scorrimento" del log => velocita riproduzione replay                    |
+| CurrentStep              | Value-Object   | Turno corrente in cui si trova il replay rispetto al log di turni del match                        |
+|                          |                |                                                                                                    |
+| MatchReplayRepository    | Repository     |                                                                                                    |
+| ReplayPlaybackRepository | Repository     |                                                                                                    |
+|                          |                |                                                                                                    |
 
-**Versione (esaustiva) corretta stando a DDD**
-| Term                     | DDD core       | CQRS / read-side role                   | Motivation                                                                                                                                                                        |
-|--------------------------|----------------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| MatchReplay              | —              | Read Model / Projection                 | Vista persistita del match concluso, costruita dagli eventi del match per supportare il replay; non è il punto in cui si prendono decisioni di business sul match. zankavtaskin+1 |
-| UsedDeckSet              | Value-Object   | Parte del read model                    | Insieme immutabile dei DeckId usati nel match. stackoverflow                                                                                                                      |
-| ReplayLog                | Value-Object   | Parte del read model                    | Timeline immutabile composta dagli step del replay. stackoverflow+1                                                                                                               |
-| MatchPlayers             | Value-Object   | Parte del read model                    | Insieme immutabile dei PlayerId coinvolti nel match. stackoverflow                                                                                                                |
-| WatcherPlayers           | Value-Object   | Parte del read model                    | Insieme immutabile dei PlayerId watcher del match. stackoverflow                                                                                                                  |
-| ReplayStep               | Value-Object   | Parte del read model                    | Singolo fatto storico del replay: indice/timestamp, azione, player, snapshot rilevante dello stato. oreilly                                                                       |
-|                          |                |                                         |                                                                                                                                                                                   |
-| ReplayPlayback           | Aggregate-Root | Write model                             | Governa la sessione di riproduzione per uno specifico utente e protegge le invarianti del playback. stackoverflow+1                                                               |
-| PlayerId                 | Value-Object   | Parte del write model                   | Identità del player proprietario della sessione di replay. stackoverflow                                                                                                          |
-| MatchReplayId            | Value-Object   | Reference dal write model al read model | Identità del replay che il playback sta visualizzando. stackoverflow+1                                                                                                            |
-| State                    | Value-Object   | Parte del write model                   | Stato di riproduzione: Playing, Paused, Stopped. stackoverflow                                                                                                                    |
-| Speed                    | Value-Object   | Parte del write model                   | Velocità di avanzamento del replay. stackoverflow                                                                                                                                 |
-| CurrentStep              | Value-Object   | Parte del write model                   | Posizione corrente nella timeline del replay, coerente con ReplayStep. stackoverflow                                                                                              |
-|                          |                |                                         |                                                                                                                                                                                   |
-| ReplayPlaybackRepository | Repository     | Write-side persistence                  | Repository dell’aggregate root ReplayPlayback; i repository appartengono agli aggregate root del write model. zankavtaskin+1                                                      |
-| MatchReplayProjector     | —              | Projector / Event Handler               | Sottoscrive gli eventi del match e costruisce o aggiorna il read model MatchReplay. stackoverflow+1                                                                               |
-| MatchReplayQueryService  | -       | Query Service                           | Recupera MatchReplay per la UI o il caso d’uso di replay, senza passare dal dominio write-side. zenn+1                                                                            |
-
-**NOTA:** Sì: in DDD Domain Service e Query Service sono due cose diverse. Il primo appartiene al dominio write-side e contiene logica di business che non sta bene in una singola Entity o Aggregate Root; il secondo appartiene al read-side/CQRS e serve a recuperare dati già pronti per la visualizzazione o la ricerca.
-
-#### Deck-Workshop-Context
+#### Deck-Workshop-Context (~lato player, rendiamo il nome più esplito)
 
 | Term                    | Block-Type     | Motivation                                                                                                                                   |
 |-------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -407,7 +382,7 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | ExpansionPublished      | Domain-Event   | ricevuto da card-forge-context - aggiunge ExpansionView disponibile per la composizione                                                      |
 |                         |                |                                                                                                                                              |
 
-#### Card-Forge-Context
+#### Card-Forge-Context (~lato admin, rendiamo il nome più esplito)
 
 | Term                       | Block-Type     | Motivation                                                                                                                                                                                                                                     |
 |----------------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
