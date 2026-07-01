@@ -359,7 +359,7 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 |                          |                |                                                                                                    |
 
 #### Deck-Workshop-Context
-
+(lato player)
 | Term                    | Block-Type     | Motivation                                                                                                                                   |
 |-------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | CustomDeckFactory       | Factory        | crea CustomDeck - logica include validazione nome univoco per player e presenza minima di carte                                              |
