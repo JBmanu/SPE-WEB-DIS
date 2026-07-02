@@ -223,6 +223,7 @@ export default withMermaid(
                             collapsed: true,
                             items: [
                                 {text: 'DDD', link: `${project}/${projectDDD}/DDD`},
+                                {text: 'Cross-Context', link: `${project}/${projectDDD}/Cross-Context-Events`},
                             ]
                         },
                         {text: 'Features', link: `${project}/Features`},
