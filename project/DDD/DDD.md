@@ -171,7 +171,7 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | Person | Done | Context                  | Responsibility                                                                                                                        |
 |--------|------|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
 | Client | x    | player-identity-context  | gestisce le registrazioni del cliente e le relazioni(amicizie) tra di loro                                                            |
-| Client | x    | player-progress-context  |                                                                                                                                       |
+| Client | x    | player-progress-context  | gestisce il progresso del cliente nella piattaforma - statistiche delle partite, missioni (achievement), badge e livello              |
 | Client | x    | lobby-browser-context    | gestisce il processo di ricerca di una partita, scegliendo di partecipare o guardare                                                  |
 | Client | x    | pregame-lobby-context    | gestisce il flusso dalla creazione della partita, raccogliendo i giocatori nel gruppo e permettendo al master di avviarla             |
 | Client | x    | match-context            | gestisce tutte le meccaniche di gioco effettivo (turno, attivazione carte, ...)                                                       |
