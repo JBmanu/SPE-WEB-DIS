@@ -15,28 +15,28 @@
 |      |                         |                         |               |                       |                       |                       |                    |                          |                       |
 
 ## player-identity-context
-| Term                                     | BuildingBlock-DDD | Definizione | 
-|------------------------------------------|-------------------|-------------|
-| Player                                   |                   |             | 
-| Email                                    |                   |             | 
-| Password                                 |                   |             | 
-| Nickname                                 |                   |             | 
-| Friend                                   |                   |             | 
-| FriendRequest                            |                   |             | 
-|                                          |                   |             | 
-| PlayerLoggedIn                           |                   |             | 
-| PlayerLoggedOut                          |                   |             | 
-| PlayerRegistered                         |                   |             | 
-|                                          |                   |             | 
-| FriendshipAccepted                       |                   |             | 
-|                                          |                   |             | 
-| TODO: ci vanno altri termini del dominio |                   |             | 
-|                                          |                   |             | 
-|                                          |                   |             | 
-|                                          |                   |             | 
-|                                          |                   |             | 
-|                                          |                   |             | 
-|                                          |                   |             | 
+| Term                            | BuildingBlock-DDD | Definizione                                                                                   | 
+|---------------------------------|-------------------|-----------------------------------------------------------------------------------------------|
+| Player                          | Aggregate-Root    | client che si registrerà sulla piattaforma di gioco e si loggera                              | 
+| Email                           | Value-Object      | email validata dell'utente che userà il player per registrarsi e successivamente per loggarsi | 
+| Password                        | Value-Object      | codice usato dal player per registrarsi alla piattaforma e successivamente per loggarsi       | 
+| Nickname                        | Value-Object      | soprannome usato dal player per riconoscersi dagli altri player sulla piattaforma             | 
+| Friend                          | Value-Object      | specifico player che è diventato amico di un altro player, dopo che ha accettato l'amicizia   | 
+| FriendRequest                   | Entity            | dati utili per il messaggio da mandare per la richiesta di amizia tra i player                | 
+|                                 |                   |                                                                                               | 
+| PlayerLoggedIn                  | Domain-Event      | evento del player che ha già effettuato l'accesso alla piattaforma                            | 
+| PlayerLoggedOut                 | Domain-Event      | evento del player che ha già effettuato l'uscita alla piattaforma                             | 
+| PlayerRegistered                | Domain-Event      | evento del player che si è registrato alla piattaforma                                        | 
+|                                 |                   |                                                                                               | 
+| FriendshipAccepted              | Domain-Event      | evento del player che ha accettato la rihiesta di amicizia di un altro player                 | 
+|                                 |                   |                                                                                               | 
+| TODO: altri termini del dominio |                   |                                                                                               | 
+|                                 |                   |                                                                                               | 
+|                                 |                   |                                                                                               | 
+|                                 |                   |                                                                                               | 
+|                                 |                   |                                                                                               | 
+|                                 |                   |                                                                                               | 
+|                                 |                   |                                                                                               | 
 
 ## player-progress-context
 | Term | BuildingBlock-DDD | Definizione | 
