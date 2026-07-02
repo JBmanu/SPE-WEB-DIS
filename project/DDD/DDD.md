@@ -190,15 +190,15 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 | Term               | Block-Type     | Motivation                                                                         |
 |--------------------|----------------|------------------------------------------------------------------------------------|
+| PlayerRepository   | Repository     | recupera e salva un Player per ID o email                                          |
+| PlayerFactory      | Factory        | logica di creazione del Player (validazione, hashing password, assegnazione ID)    |
+|                    |                |                                                                                    |
 | Player             | Aggregate-Root | controlla email, password, nickname, friend-list e friend-request                  |
 | Email              | Value-Object   | immutabile, unica per ogni player                                                  |
-| Password           | Value Object   | immutabile, sostituita intera al cambio                                            |
-| Nickname           | ValueObject    | immutabile, unico per ogni player                                                  |
+| Password           | Value-Object   | immutabile, sostituita intera al cambio                                            |
+| Nickname           | Value-Object   | immutabile, unico per ogni player                                                  |
 | Friend             | Value-Object   | riferimento immutabile a un player amico                                           |
 | FriendRequest      | Entity         | ha stato che cambia nel tempo (pending → accepted / declined), ha identità propria |
-|                    |                |                                                                                    |
-| PlayerRepository   | Repository     | recupera e salva un Player per ID o email                                          |
-| PlayerFactory      | Facotory       | logica di creazione del Player (validazione, hashing password, assegnazione ID)    |
 |                    |                |                                                                                    |
 | PlayerLoggedIn     | Domain-Event   | player online - consumato da player-progress-context e game-observatory-context    |
 | PlayerLoggedOut    | Domain-Event   | player offline - consumato da game-observatory-context                             |
