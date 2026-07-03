@@ -333,7 +333,7 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | MatchEnded            | Domain-Event   | prodotto quando rimane un solo ActivePlayer - porta match ID e player vincitore; consumato da player-progress-context e game-observatory-context che recuperano i dettagli da MatchResultRepository                                                                                                  |
 |                       |                |                                                                                                                                                                                                                                                                                                      |
 
-#### Deck-Workshop-Context (~lato player, rendiamo il nome più esplito)
+#### Deck-Workshop-Context
 
 | Term                    | Block-Type     | Motivation                                                                                                                                   |
 |-------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -360,7 +360,7 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | ExpansionPublished      | Domain-Event   | ricevuto da card-forge-context - aggiunge ExpansionView disponibile per la composizione                                                      |
 |                         |                |                                                                                                                                              |
 
-#### Card-Forge-Context (~lato admin, rendiamo il nome più esplito)
+#### Card-Forge-Context
 
 | Term                       | Block-Type     | Motivation                                                                                                                                                                                                                                     |
 |----------------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
