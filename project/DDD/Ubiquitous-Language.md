@@ -59,20 +59,29 @@
 |                           |                   |                                                                                                                                                      | 
 
 ## player-progress-context
-| Term | BuildingBlock-DDD | Definizione | 
-|------|-------------------|-------------|
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
+| Term                        | BuildingBlock-DDD     | Definizione                                                                                                                                                                                                          |
+|-----------------------------|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| PlayerProgress              | Aggregate-Root        | Rappresenta il livello di progresso del Player nel gioco. Si basa sul livello raggiunto, gli Achievement sbloccati e badge ottenuti oltre a dipendere dai risultati delle diverse partite giocate.                   |
+| Level                       | Value-Object          | Valore numerico che riassume l'avanzamento del Player nell'ottenimento di badge e completamento di Achievements.                                                                                                     |
+| Badge                       | Entity                | Stemma digitale che dimostra il raggiungimento di determinati Achievement secondo determinate condizioni, è definito nel CatalogoBadge e può essere ottenuto da più Player.                                          |
+| Achievement                 | Entity                | Obiettivo di gioco con condizioni di completamento definite (es. vincere X match, usare Y carte), descritte dalla AchievementCompletionPolicy.                                                                       |
+| MatchRecord                 | Value-Object          | Statistiche aggregate delle partite giocate (vittorie, sconfitte, esplosioni, defuse, carte/deck più usati).                                                                                                         |
+| DeckWorkshopRecord          | Value-Object          | Statistiche aggregate che riguardano le attività svolte dal Player in DeckWorkshop (es. creazione CustomDeck).                                                                                                       |
+| AchievementInProgress       | Value-Object          | Achievement le cui condizioni di risoluzione non sono ancora state soddisfatte.                                                                                                                                      |
+| CompletedAchievement        | Value-Object          | Achievement che è stato soddisfatto dal Player in una determinata data secondo la AchievementCompletionPolicy.                                                                                                       |
+| ObtainedBadge               | Value-Object          | Badge ottenuto in una determinata data dal Player secondo la BadgeUnlockPolicy.                                                                                                                                      |
+| BadgeInProgress             | Value-Object          | Badge le cui condizioni di sblocco/ottenimento non sono ancora soddisfatte.                                                                                                                                          |
+| BadgeUnlockPolicy           | Policy/Domain-Service | Criteri e condizioni di sblocco di un Badge.                                                                                                                                                                         |
+| AchievementCompletionPolicy | Policy/Domain-Service | Condizioni di completamente di un Achievement.                                                                                                                                                                       |
+| MatchWon                    | Value-Object          | Conteggio dei match vinti dal Player.                                                                                                                                                                                |
+| MatchLost                   | Value-Object          | Conteggio dei match persi dal Player.                                                                                                                                                                                |
+| ExplosionCount              | Value-Object          | Conteggio di esplosioni subite dal Player.                                                                                                                                                                           |
+| DefuseCount                 | Value-Object          | Conteggio di disinnesci fatti dal Player.                                                                                                                                                                            |
+| MostUsedCard                | Value-Object          | Carta molto utilizzata dal Player durante i Match.                                                                                                                                                                   |
+| MostUsedDeck                | Value-Object          | Deck scelto spesso dal Player da usare nei Match.                                                                                                                                                                    |
+| BadgeCatalog                | Entity                | Catalogo contenente tutti i Badge sbloccabili dai Player.                                                                                                                                                            |
+| BadgeUnlocked               | Domain-Event          | Evento generato quando un Badge è stato ottenuto dal Player secondo la BadgeUnlockPolicy. Comporta l'aggiornamento del PlayerProgress (Level, ObtainedBadge e BadgeInProgress).                                      |
+| AchievementCompleted        | Domain-Event          | Evento generato quando un Achievement è stato completato dal Player secondo la AchievementCompletionPolicy. Viene aggiornato PlayerProgress e l'Achievement passa da AchievementInProgress a CompletedAchievement. |
 
 
 ## lobby-browser-context
