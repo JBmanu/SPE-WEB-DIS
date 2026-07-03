@@ -25,5 +25,3 @@
 | DeckPublished      | card-forge (\*)               | deck-workshop, pregame-lobby           |
 | ExpansionPublished | card-forge (\*)               | deck-workshop, pregame-lobby           |
 |                    |                               |                                        |
-
-(\*)**Card-Forge-Context e Deck-Workshop-Context** DA CAMBAIRE I NOMI CHE UNO è PER L’ADMIN E L’ALTRO LATO PLAYER
