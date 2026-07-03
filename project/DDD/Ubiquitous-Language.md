@@ -32,30 +32,29 @@
 |                           |                   |                                                                                                                                                      | 
 | Temini fuori dal DDD      | Tipologia         | //                                                                                                                                                   | 
 |                           |                   |                                                                                                                                                      |
-| UniqueEmail               | regola            | ogni Player deve avere un'Email non già presente in piattaforma — verificata alla Registration                                                       |
-| UniqueNickname            | regola            | ogni Player deve avere un Nickname non già usato da altri Player sulla piattaforma                                                                   |
-| PasswordPolicy            | regola            | la Password deve rispettare requisiti minimi di lunghezza e complessità per essere accettata                                                         |
+| UniqueEmail               | Policy            | ogni Player deve avere un'Email non già presente in piattaforma — verificata alla Registration                                                       |
+| PasswordPolicy            | Policy            | la Password deve rispettare requisiti minimi di lunghezza e complessità per essere accettata                                                         |
 |                           |                   |                                                                                                                                                      |
-| FriendList                | concetto          | insieme dei Friend attuali di un Player, aggiornata quando una FriendRequest viene accettata o quando un Friend viene rimosso                        |
-| FriendRequestNotification | concetto          | avviso ricevuto da un Player quando un altro Player gli invia una FriendRequest — permette di rispondere con FriendshipAccept o FriendshipDecline    |
-| OTP                       | concetto          | codice monouso inviato via email durante RecoverPassword per verificare l'identità del Player prima di permettere il cambio Password                 |
+| FriendList                | Concept           | insieme dei Friend attuali di un Player, aggiornata quando una FriendRequest viene accettata o quando un Friend viene rimosso                        |
+| FriendRequestNotification | Concept           | avviso ricevuto da un Player quando un altro Player gli invia una FriendRequest — permette di rispondere con FriendshipAccept o FriendshipDecline    |
+| OTP                       | Concept           | codice monouso inviato via email durante RecoverPassword per verificare l'identità del Player prima di permettere il cambio Password                 |
 |                           |                   |                                                                                                                                                      |
-| PendingRequest            | stato             | stato di una FriendRequest dopo l'invio, prima che il destinatario risponda con FriendshipAccepted o FriendshipDeclined                              |
+| PendingFriendRequest      | State             | stato di una FriendRequest dopo l'invio, prima che il destinatario risponda con FriendshipAccepted o FriendshipDeclined                              |
 |                           |                   |                                                                                                                                                      |
-| Login                     | azione            | azione per accedere alla piattaforma, inserendo email e password                                                                                     | 
-| Logout                    | azione            | azione per uscre dalla piattaforma                                                                                                                   | 
-| Registration              | azione            | azione per registrasi sulla piattaforma, inserendo email valida, passowrd e nickname                                                                 | 
-| RecoverPassword           | azione            | azione per iniare il processo di recupero password                                                                                                   | 
-| PlayerSearch              | azione            | azione di ricerca di un player (tramite nickname/email) per mandare una richiesta di amizia                                                          |
-| PlayerSelect              | azione            | selezione di uno specifico Player dai risultati di PlayerSearch per avviare l'invio di una FriendRequest                                             |
-| FriendRequestSend         | azione            | invio di una FriendRequest al Player selezionato tramite PlayerSelect                                                                                |
-| FriendRemove              | azione            | azione di eliminazione di un amico                                                                                                                   |
-| FriendshipDecline         | azione            | azione di declinare una richiesta di amicizia da parte di un player                                                                                  |
-| FriendshipAccept          | azione            | azione di accettazione di una FriendRequest ricevuta da un altro Player — produce FriendshipAccepted e aggiorna la FriendList di entrambi i Player   |
+| Login                     | Action            | azione per accedere alla piattaforma, inserendo email e password                                                                                     | 
+| Logout                    | Action            | azione per uscre dalla piattaforma                                                                                                                   | 
+| Registration              | Action            | azione per registrasi sulla piattaforma, inserendo email valida, passowrd e nickname                                                                 | 
+| RecoverPassword           | Action            | azione per iniare il processo di recupero password                                                                                                   | 
+| PlayerSearch              | Action            | azione di ricerca di un player (tramite nickname/email) per mandare una richiesta di amizia                                                          |
+| PlayerSelect              | Action            | selezione di uno specifico Player dai risultati di PlayerSearch per avviare l'invio di una FriendRequest                                             |
+| FriendRequestSend         | Action            | invio di una FriendRequest al Player selezionato tramite PlayerSelect                                                                                |
+| FriendRemove              | Action            | azione di eliminazione di un amico                                                                                                                   |
+| FriendshipDecline         | Action            | azione di declinare una richiesta di amicizia da parte di un player                                                                                  |
+| FriendshipAccept          | Action            | azione di accettazione di una FriendRequest ricevuta da un altro Player — produce FriendshipAccepted e aggiorna la FriendList di entrambi i Player   |
 |                           |                   |                                                                                                                                                      |
-| FriendshipDeclined        | evento            | fatto che il destinatario ha rifiutato una FriendRequest ricevuta                                                                                    | 
-| FriendRemoved             | evento            | rimozione di un amico avvenuta con successo                                                                                                          |
-| PasswordRecovered         | evento            | processo di recupero password avvenuta con successo                                                                                                  | 
+| FriendshipDeclined        | Event             | fatto che il destinatario ha rifiutato una FriendRequest ricevuta                                                                                    | 
+| FriendRemoved             | Event             | rimozione di un amico avvenuta con successo                                                                                                          |
+| PasswordRecovered         | Event             | processo di recupero password avvenuta con successo                                                                                                  | 
 |                           |                   |                                                                                                                                                      | 
 
 ## player-progress-context
@@ -103,7 +102,8 @@
 |      |                   |             | 
 |      |                   |             | 
 |      |                   |             | 
-|      |                   |             | 
+|      |                   |             |
+
 ## pregame-lobby-context
 | Term | BuildingBlock-DDD | Definizione | 
 |------|-------------------|-------------|
@@ -120,6 +120,7 @@
 |      |                   |             | 
 |      |                   |             | 
 |      |                   |             | 
+
 ## match-context
 | Term | BuildingBlock-DDD | Definizione | 
 |------|-------------------|-------------|
@@ -138,21 +139,37 @@
 |      |                   |             | 
 
 ## deck-workshop-context
-| Term | BuildingBlock-DDD | Definizione | 
-|------|-------------------|-------------|
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
+| Term                 | BuildingBlock-DDD | Definizione                                                                                                | 
+|----------------------|-------------------|------------------------------------------------------------------------------------------------------------|
+| CustomDeck           | Aggregate-Root    | mazzo personalizzato del player, creato partendo dalle carte/deck/espansioni del gioco                     | 
+| DeckSlot             | Value-Object      | singolo slot per la singola carta per la creazione di un nuovo mazzo personalizzato                        | 
+| CardView             | Value-Object      | carta disponibile per aggiungerla dentro un mazzo personalizzato del player                                | 
+| DeckView             | Value-Object      | deck disponibile per aggiungerlo dentro un mazzo personalizzato del player                                 | 
+| ExpansionView        | Value-Object      | espansione disponibile per aggiungerlo dentro un mazzo personalizzato del player                           | 
+| CustomDeckView       | Value-Object      | mazzi personalizzati disponibile per aggiungerlo dentro un mazzo personalizzato del player                 | 
+|                      |                   |                                                                                                            | 
+| CustomDeckCreated    | Domain-Event      | salvataggio di un mazzo personalizzato avvenuto con successo                                               | 
+| CustomDeckUpdated    | Domain-Event      | aggiornamento di un mazzo personalizzato avvenuto con successo                                             | 
+| CustomDeckRemoved    | Domain-Event      | eliminazione di un mazzo personalizzato avvenuto con successo                                              | 
+|                      |                   |                                                                                                            | 
+| Temini fuori dal DDD | Tipologia         | //                                                                                                         | 
+|                      |                   |                                                                                                            | 
+| CardSelect           | action            | azione per selezionare una carta da mettere dentro il mazzo personalizzato                                 |
+| CardAdd              | action            | azione per aggiungere una carta da mettere dentro il mazzo personalizzato                                  | 
+| CardRemove           | action            | azione per rimuovere una carta dal mazzo personalizzato                                                    |
+| DeckSelect           | action            | azione per selezionare tutte le carte di un deck da mettere dentro il mazzo personalizzato                 |
+| DeckAdd              | action            | azione per aggiungere le carte di un deck dentro il mazzo personalizzato                                   |
+| ExpansionSelect      | action            | azione per selezionare tutte le carte di una espanzione da mettere dentro il mazzo personalizzato          | 
+| ExpansionAdd         | action            | azione per aggiungere le carte di un espansione dentro il mazzo personalizzato                             | 
+| CustomDeckSelect     | action            | azione per selezionare tutte le carte di un mazzo personalizzato da mettere dentro il mazzo personalizzato | 
+| CustomDeckAdd        | action            | azione per aggiungere tutte le carte di un mazzo personalizzato dentro il mazzo personalizzato             | 
+|                      |                   |                                                                                                            | 
+| CustomDeckOpen       | action            | azione per aprire un mazzo personalizzato gia esistente                                                    | 
+| CustomDeckSave       | action            | azione per savare un mazzo personalizzato editato o nuovo                                                  | 
+|                      |                   |                                                                                                            | 
+|                      |                   |                                                                                                            | 
+|                      |                   |                                                                                                            | 
+|                      |                   |                                                                                                            | 
 
 ## card-forge-context
 | Term | BuildingBlock-DDD | Definizione | 
