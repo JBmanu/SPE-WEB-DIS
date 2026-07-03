@@ -1,4 +1,4 @@
-# Ubiquitous Language — Bamboom
+# Ubiquitous Language - Bamboom
 
 ## Glossario globale
 (termini che attraversano più contesti con disambiguazione)
@@ -30,13 +30,13 @@
 |                           |                   |                                                                                                                                                    | 
 | FriendshipAccepted        | Domain-Event      | evento del player che ha accettato la rihiesta di amicizia di un altro player                                                                      | 
 |                           |                   |                                                                                                                                                    | 
-| Temini fuori dal DDD      | Tipologia         | //                                                                                                                                                 | 
+| - Term -                  | - Tipology -      | //                                                                                                                                                 | 
 |                           |                   |                                                                                                                                                    |
-| UniqueEmail               | Policy            | ogni Player deve avere un'Email non già presente in piattaforma — verificata alla Registration                                                     |
+| UniqueEmail               | Policy            | ogni Player deve avere un'Email non già presente in piattaforma - verificata alla Registration                                                     |
 | PasswordPolicy            | Policy            | la Password deve rispettare requisiti minimi di lunghezza e complessità per essere accettata                                                       |
 |                           |                   |                                                                                                                                                    |
 | FriendList                | Concept           | insieme dei Friend attuali di un Player, aggiornata quando una FriendRequest viene accettata o quando un Friend viene rimosso                      |
-| FriendRequestNotification | Concept           | avviso ricevuto da un Player quando un altro Player gli invia una FriendRequest — permette di rispondere con FriendshipAccept o FriendshipDecline  |
+| FriendRequestNotification | Concept           | avviso ricevuto da un Player quando un altro Player gli invia una FriendRequest - permette di rispondere con FriendshipAccept o FriendshipDecline  |
 | OTP                       | Concept           | codice monouso inviato via email durante RecoverPassword per verificare l'identità del Player prima di permettere il cambio Password               |
 |                           |                   |                                                                                                                                                    |
 | PendingFriendRequest      | State             | stato di una FriendRequest dopo l'invio, prima che il destinatario risponda con FriendshipAccepted o FriendshipDeclined                            |
@@ -50,7 +50,7 @@
 | FriendRequestSend         | Action            | invio di una FriendRequest al Player selezionato tramite PlayerSelect                                                                              |
 | FriendRemove              | Action            | azione di eliminazione di un amico                                                                                                                 |
 | FriendshipDecline         | Action            | azione di declinare una richiesta di amicizia da parte di un player                                                                                |
-| FriendshipAccept          | Action            | azione di accettazione di una FriendRequest ricevuta da un altro Player — produce FriendshipAccepted e aggiorna la FriendList di entrambi i Player |
+| FriendshipAccept          | Action            | azione di accettazione di una FriendRequest ricevuta da un altro Player - produce FriendshipAccepted e aggiorna la FriendList di entrambi i Player |
 |                           |                   |                                                                                                                                                    |
 | FriendshipDeclined        | Event             | fatto che il destinatario ha rifiutato una FriendRequest ricevuta                                                                                  | 
 | FriendRemoved             | Event             | rimozione di un amico avvenuta con successo                                                                                                        |
@@ -143,37 +143,45 @@
 |      |                   |             | 
 
 ## deck-workshop-context
-| Term                 | BuildingBlock-DDD | Definizione                                                                                                | 
-|----------------------|-------------------|------------------------------------------------------------------------------------------------------------|
-| CustomDeck           | Aggregate-Root    | mazzo personalizzato del player, creato partendo dalle carte/deck/espansioni del gioco                     | 
-| DeckSlot             | Value-Object      | singolo slot per la singola carta per la creazione di un nuovo mazzo personalizzato                        | 
-| CardView             | Value-Object      | carta disponibile per aggiungerla dentro un mazzo personalizzato del player                                | 
-| DeckView             | Value-Object      | deck disponibile per aggiungerlo dentro un mazzo personalizzato del player                                 | 
-| ExpansionView        | Value-Object      | espansione disponibile per aggiungerlo dentro un mazzo personalizzato del player                           | 
-| CustomDeckView       | Value-Object      | mazzi personalizzati disponibile per aggiungerlo dentro un mazzo personalizzato del player                 | 
-|                      |                   |                                                                                                            | 
-| CustomDeckCreated    | Domain-Event      | salvataggio di un mazzo personalizzato avvenuto con successo                                               | 
-| CustomDeckUpdated    | Domain-Event      | aggiornamento di un mazzo personalizzato avvenuto con successo                                             | 
-| CustomDeckRemoved    | Domain-Event      | eliminazione di un mazzo personalizzato avvenuto con successo                                              | 
-|                      |                   |                                                                                                            | 
-| Temini fuori dal DDD | Tipologia         | //                                                                                                         | 
-|                      |                   |                                                                                                            | 
-| CardSelect           | action            | azione per selezionare una carta da mettere dentro il mazzo personalizzato                                 |
-| CardAdd              | action            | azione per aggiungere una carta da mettere dentro il mazzo personalizzato                                  | 
-| CardRemove           | action            | azione per rimuovere una carta dal mazzo personalizzato                                                    |
-| DeckSelect           | action            | azione per selezionare tutte le carte di un deck da mettere dentro il mazzo personalizzato                 |
-| DeckAdd              | action            | azione per aggiungere le carte di un deck dentro il mazzo personalizzato                                   |
-| ExpansionSelect      | action            | azione per selezionare tutte le carte di una espanzione da mettere dentro il mazzo personalizzato          | 
-| ExpansionAdd         | action            | azione per aggiungere le carte di un espansione dentro il mazzo personalizzato                             | 
-| CustomDeckSelect     | action            | azione per selezionare tutte le carte di un mazzo personalizzato da mettere dentro il mazzo personalizzato | 
-| CustomDeckAdd        | action            | azione per aggiungere tutte le carte di un mazzo personalizzato dentro il mazzo personalizzato             | 
-|                      |                   |                                                                                                            | 
-| CustomDeckOpen       | action            | azione per aprire un mazzo personalizzato gia esistente                                                    | 
-| CustomDeckSave       | action            | azione per savare un mazzo personalizzato editato o nuovo                                                  | 
-|                      |                   |                                                                                                            | 
-|                      |                   |                                                                                                            | 
-|                      |                   |                                                                                                            | 
-|                      |                   |                                                                                                            | 
+| Term                  | BuildingBlock-DDD | Definizione                                                                                                                                                                                                                                         | 
+|-----------------------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CustomDeck            | Aggregate-Root    | mazzo di gioco personalizzato creato dal Player, identificato da un nome univoco e composto da una lista di CardSlot - può essere costruito selezionando carte singole, deck di default, espansioni o altri CustomDeck disponibili nella piattaform | 
+| CardSlot              | Value-Object      | riferimento a una singola carta all'interno della composizione del CustomDeck, identificata dal suo ID e dalla quantità inserita                                                                                                                    | 
+| CardView              | Value-Object      | carta disponibile per aggiungerla dentro un mazzo personalizzato del player                                                                                                                                                                         | 
+| DeckView              | Value-Object      | deck disponibile per aggiungerlo dentro un mazzo personalizzato del player                                                                                                                                                                          | 
+| ExpansionView         | Value-Object      | espansione disponibile per aggiungerlo dentro un mazzo personalizzato del player                                                                                                                                                                    | 
+| CustomDeckView        | Value-Object      | visualizzazione di un CustomDeck già creato dal Player - mostra nome e composizione del mazzo, usata per scegliere quale mazzo aprire o modificare                                                                                                  | 
+|                       |                   |                                                                                                                                                                                                                                                     | 
+| CustomDeckCreated     | Domain-Event      | salvataggio di un mazzo personalizzato avvenuto con successo                                                                                                                                                                                        | 
+| CustomDeckUpdated     | Domain-Event      | aggiornamento di un mazzo personalizzato avvenuto con successo                                                                                                                                                                                      | 
+| CustomDeckDeleted     | Domain-Event      | eliminazione di un mazzo personalizzato avvenuto con successo                                                                                                                                                                                       | 
+|                       |                   |                                                                                                                                                                                                                                                     | 
+| - Term -              | - Tipology -      | //                                                                                                                                                                                                                                                  | 
+|                       |                   |                                                                                                                                                                                                                                                     |
+| UniqueCustomDeckName  | Policy            | il nome assegnato a un CustomDeck deve essere univoco tra tutti i mazzi dello stesso Player - due mazzi dello stesso Player non possono avere lo stesso nome                                                                                        |
+| MinimumCardPolicy     | Policy            | un CustomDeck deve contenere almeno una carta per poter essere salvato - impedisce il salvataggio di mazzi vuoti                                                                                                                                    |
+|                       |                   |                                                                                                                                                                                                                                                     |
+| DeckBack              | Concept           | grafica personalizzabile applicata al retro di tutte le carte del CustomDeck - scelta dal Player durante la creazione o la modifica del mazzo, contribuisce all'identità visiva del mazzo                                                           |
+| CustomDeckComposition | Concept           | insieme delle carte che compongono il CustomDeck - deve contenere almeno una carta per poter essere salvato"                                                                                                                                        |
+|                       |                   |                                                                                                                                                                                                                                                     |
+| DeckBackSelect        | Action            | selezione della grafica da applicare al retro delle carte del CustomDeck tra quelle disponibili nella piattaforma                                                                                                                                   |
+| CustomDeckRename      | Action            | rinomina del nome di un mazzo personalizzato                                                                                                                                                                                                        | 
+| CardSelect            | Action            | azione per selezionare una carta da mettere dentro il mazzo personalizzato                                                                                                                                                                          |
+| CardAdd               | Action            | aggiunta di una carta selezionata alla composizione del CustomDeck                                                                                                                                                                                  | 
+| CardRemove            | Action            | azione per rimuovere una carta dal mazzo personalizzato                                                                                                                                                                                             |
+| DeckSelect            | Action            | azione per selezionare tutte le carte di un deck da mettere dentro il mazzo personalizzato                                                                                                                                                          |
+| DeckAdd               | Action            | aggiunta di tutte le carte di un deck di default selezionato alla composizione del CustomDeck                                                                                                                                                       |
+| ExpansionSelect       | Action            | selezione di un'espansione dalla lista disponibile per aggiungere tutte le sue carte al CustomDeck                                                                                                                                                  | 
+| ExpansionAdd          | Action            | aggiunta di tutte le carte di un'espansione selezionata alla composizione del CustomDeck                                                                                                                                                            | 
+| CustomDeckSelect      | Action            | azione per selezionare tutte le carte di un mazzo personalizzato da mettere dentro il mazzo personalizzato                                                                                                                                          | 
+| CustomDeckAdd         | Action            | aggiunta di tutte le carte di un altro CustomDeck selezionato alla composizione del CustomDeck corrente                                                                                                                                             | 
+| CustomDeckClear       | Action            | svuotamento completo della composizione del CustomDeck senza eliminare il mazzo                                                                                                                                                                     |
+| CustomDeckCreate      | Action            | azione per creare un nuovo mazzo personalizzato                                                                                                                                                                                                     |
+| CustomDeckDelete      | Action            | eliminazione permanente di un CustomDeck esistente dalla lista dei mazzi del Player - non recuperabile dopo la conferma                                                                                                                             |
+| CustomDeckOpen        | Action            | apertura di un CustomDeck esistente per visualizzarlo o modificarlo                                                                                                                                                                                 | 
+| CustomDeckSave        | Action            | salvataggio delle modifiche apportate a un CustomDeck esistente, sovrascrivendo la versione precedente con la composizione corrente                                                                                                                 | 
+| CustomDeckSaveAs      | Action            | salvataggio del lavoro corrente come nuovo CustomDeck assegnandogli un nome specifico - non modifica il CustomDeck originale da cui si è partiti                                                                                                    | 
+|                       |                   |                                                                                                                                                                                                                                                     | 
 
 ## card-forge-context
 | Term | BuildingBlock-DDD | Definizione | 
