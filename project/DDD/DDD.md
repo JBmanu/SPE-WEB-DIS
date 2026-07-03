@@ -77,8 +77,8 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 |                                   |                                                                                                               |
 | **cerca la partita (join-game)**  |                                                                                                               |
 | find-random-game                  | cerchi casualmente una partita (entri nella lobby in attesa dei player)                                       |
-| choose-game-to-join               | scegli tra le partite disponibili ed entra nella lobby                                                        |
-| choose-game-to-watch              | scegli tra le partite disponibili ed entra nella lobby                                                        |
+| choose-match-to-join               | scegli tra le partite disponibili ed entra nella lobby                                                        |
+| choose-match-to-watch              | scegli tra le partite disponibili ed entra nella lobby                                                        |
 | view-friend-game                  | elenco delle partite attivate dagli amici, a cui puoi accedere e a cui sei stato invitato (sei stato escluso) |
 |                                   |                                                                                                               |
 | **replay partita**                |                                                                                                               |
@@ -133,8 +133,8 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | player-identity-context | player-progress-context | match-context           | lobby-browser-context | pregame-lobby-context | deck-workshop-context | card-forge-context     | game-observatory-context | system-health-context |
 |-------------------------|-------------------------|-------------------------|-----------------------|-----------------------|-----------------------|------------------------|--------------------------|-----------------------|
 | email                   | achievements            | exploded-watcher-player | find-random-game      | turn-time             | deck                  | create-default-deck    | game-statistics          | services-status       |             
-| password                | badges                  | watcher-player          | choose-game-to-join   | deck                  | custom deck           | create-expansion-cards |                          |                       |             
-| friends                 | level                   | use-card                | choose-game-to-watch  | limit-player          | card                  | create-card            |                          |                       |             
+| password                | badges                  | watcher-player          | choose-match-to-join   | deck                  | custom deck           | create-expansion-cards |                          |                       |             
+| friends                 | level                   | use-card                | choose-match-to-watch  | limit-player          | card                  | create-card            |                          |                       |             
 | friend-request          | explosion-threshold     | bomb-exploded           |                       | bomb-setting          | save-as               | card-documentation     |                          |                       |             
 | remove friend           | defuse-threshold        | defuse-bomb             |                       | defuse-setting        | save                  |                        |                          |                       |             
 | login                   | most-used-deck          | winner                  |                       | game-name             | edit                  |                        |                          |                       |             
