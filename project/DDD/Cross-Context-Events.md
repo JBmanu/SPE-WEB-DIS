@@ -17,11 +17,11 @@
 |                    |                               |                                        |
 | MatchEnded         | match                         | player-progress, game-observatory      |
 |                    |                               |                                        |
-| CustomDeckCreated  | deck-workshop (\*)            | player-progress, pregame-lobby         |
-| CustomDeckUpdated  | deck-workshop (\*)            | pregame-lobby                          |
-| CustomDeckRemoved  | deck-workshop (\*)            | pregame-lobby                          |
+| CustomDeckCreated  | deck-workshop                 | player-progress, pregame-lobby         |
+| CustomDeckUpdated  | deck-workshop                 | pregame-lobby                          |
+| CustomDeckDeleted  | deck-workshop                 | pregame-lobby                          |
 |                    |                               |                                        |
-| CardPublished      | card-forge (\*)               | deck-workshop, pregame-lobby           |
-| DeckPublished      | card-forge (\*)               | deck-workshop, pregame-lobby           |
-| ExpansionPublished | card-forge (\*)               | deck-workshop, pregame-lobby           |
+| CardPublished      | card-forge                    | deck-workshop, pregame-lobby           |
+| DeckPublished      | card-forge                    | deck-workshop, pregame-lobby           |
+| ExpansionPublished | card-forge                    | deck-workshop, pregame-lobby           |
 |                    |                               |                                        |
