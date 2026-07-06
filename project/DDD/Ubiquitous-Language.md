@@ -126,21 +126,56 @@
 |      |                   |             | 
 
 ## match-context
-| Term | BuildingBlock-DDD | Definizione | 
-|------|-------------------|-------------|
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
+| Term               | BuildingBlock-DDD | Definizione                                                                                                                                                                                               | 
+|--------------------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Match              | Aggregate-Root    | partita di Bamboom in corso tra più Player - gestisce turni, mani, mazzo e registra tutti gli eventi nel GameLog per il replay futuro                                                                     | 
+| DrawPile           | Value-Object      | mazzo ordinato di carte da cui gli ActivePlayer pescano durante il proprio Turn - contiene le Bomb e le carte azione mescolate secondo l'InitialMatchSetup                                                |  
+| DiscardPile        | Value-Object      | mazzo delle carte già giocate durante la partita - visibile a tutti i Player                                                                                                                              | 
+| SequenceTurn       | Value-Object      | ordine circolare degli ActivePlayer che determina chi gioca il prossimo Turn - aggiornato quando una carta modifica l'ordine di gioco come Skip o Attack                                                  | 
+| Hand               | Value-Object      | insieme delle carte attualmente in possesso di un ActivePlayer durante la partita - non visibile agli altri Player                                                                                        | 
+| PlayerCard         | Value-Object      | istanza univoca di una carta durante la partita - distingue due copie della stessa carta nella stessa Hand o nel DrawPile                                                                                 | 
+| WatcherPlayer      | Value-Object      | osservatore di una partita in corso - può inviare Reaction se è un ExplodedPlayer, non può farlo se è un osservatore esterno entrato dalla lobby                                                          | 
+| TurnTimer          | Value-Object      | durata massima di un turno in secondi, derivata dalle GameSettings configurate in lobby - allo scadere il sistema esegue automaticamente un CardDraw                                                      | 
+| Reaction           | Value-Object      | rezione da inviare durante la partita da un ActivePlayer o ExplodedPlayer per esprimere una reazione - visibile a tutti i partecipanti per pochi secondi                                                  | 
+| ActivePlayer       | Entity            | Player attivo in una partita con una Hand di carte - può diventare ExplodedPlayer se pesca una Bomb senza poterla disinnescare con un Defuse                                                              | 
+| Turn               | Entity            | turno di gioco assegnato a un ActivePlayer - ha una durata massima definita dal TurnTimer; se scade senza azioni il sistema esegue automaticamente un CardDraw                                            | 
+|                    |                   |                                                                                                                                                                                                           | 
+| MatchResult        | Aggregate-Root    | resoconto completo e immutabile di una partita conclusa — include lo storico degli eventi, la configurazione iniziale e le statistiche di ogni Player                                                     | 
+| GameLog            | Value-Object      | registro cronologico immutabile di tutto ciò che è accaduto durante una partita — dalla prima carta giocata all'esplosione finale                                                                         | 
+| GameEvent          | Value-Object      | singolo evento accaduto durante la partita (carta giocata, carta pescata, esplosione) - immutabile, registrato nel GameLog con timestamp logico                                                           | 
+| PlayerMatchSummary | Value-Object      | riepilogo delle performance di un singolo Player al termine della partita — registra i suoi risultati durante l'intera durata del match                                                                   | 
+| InitialMatchSetup  | Value-Object      | configurazione della partita al momento zero - contiene la distribuzione iniziale delle Hand, l'ordine del DrawPile e le GameSettings; necessario per riprodurre il replay dal punto di partenza corretto | 
+| ReplayParticipant  | Value-Object      | singolo player coinvolto nel match, oridne iniziale di gioco, matchResult ne contiene una lista                                                                                                           | 
+|                    |                   |                                                                                                                                                                                                           | 
+| ReplayPlayback     | Entity            | sessione di riproduzione di una partita passata - permette di navigare il GameLog step per step con controlli di play, pause e velocità                                                                   | 
+| PlaybackState      | Value-Object      | stato di riproduzione di una partita (play/pause/stop)                                                                                                                                                    | 
+| SpeedStep          | Value-Object      | velocita di riproduzione entro un range di minimo e massimo                                                                                                                                               | 
+| CurrentStep        | Value-Object      | indice dello step corrente nel gamelog                                                                                                                                                                    | 
+|                    |                   |                                                                                                                                                                                                           |
+| MatchEnded         | Domain-Event      | fatto che segnala la conclusione di una partita — si verifica quando rimane un solo ActivePlayer in gioco e determina il calcolo delle statistiche finali di tutti i Player                               |
+|                    |                   |                                                                                                                                                                                                           |
+| - Term -           | - Tipology -      |                                                                                                                                                                                                           |
+| TurnTimerPolicy    | Policy            | regola del tempo del turno disponibile per poter attivare le carte, alla fine si pesca obbligatoriamente                                                                                                  |
+|                    |                   |                                                                                                                                                                                                           |
+| GameSettings       | Concept           | configurazione della partita impostata in lobby (numero bombe, defuse, TurnTimer, deck selezionati) - ricevuta da pregame-lobby-context all'avvio della partita                                           |
+| MatchHistory       | Concept           | storico delle ultime 10 partite giocate da un Player - accessibile per rivedere le partite tramite ReplayPlayback                                                                                         |
+| Bomb               | Concept           | carta speciale che elimina il Player che la pesca dal DrawPile se non possiede un Defuse - elemento centrale del gameplay di Bamboom                                                                      |
+| Defuse             | Concept           | carta che permette a un Player di disinnescare una Bomb appena pescata - il Player rimette la Bomb nel DrawPile nella posizione desiderata                                                                |
+| ExplodedPlayer     | Concept           | Player che ha pescato una Bomb senza possedere un Defuse - non partecipa più al gioco attivo ma rimane come WatcherPlayer con possibilità di inviare Reaction                                             |
+| Victory            | Concept           | condizione finale della partita - si verifica quando rimane un solo ActivePlayer in gioco, che viene dichiarato vincitore e il Match termina producendo MatchEnded                                        |
+|                    |                   |                                                                                                                                                                                                           |
+| CardDraw           | Action            | azione da parte di un ActivePlayer di pesca                                                                                                                                                               |
+| CardSelect         | Action            | azione di selezione di una carta in mano da parte di un ActivePlayer                                                                                                                                      |
+| CardActive         | Action            | azione di giocare una carta dalla propria Hand durante il proprio Turn - attiva l'effetto della carta e può modificare lo stato della partita                                                             |
+| CardDiscard        | Action            | azione di mettere una carta che è stata attivata nella pila degli scarti                                                                                                                                  |
+|                    |                   |                                                                                                                                                                                                           |
+| ReactionOpen       | Action            | azione di apertura della finestra delle mossibili reazioni da mandare                                                                                                                                     |
+| ReactionSelect     | Action            | azione di selezione di una specifica reazione da inviare                                                                                                                                                  |
+| ReactionSend       | Action            | azione di invio della reazione selezionata visibile a tutti i partecipanti della partita (ActivePlayer, WatcherPlayer)                                                                                    |
+|                    |                   |                                                                                                                                                                                                           |
+| CardActivated      | Event             | evento della fine dell'attivazione di una carta che avvisa a tutti i giocatore la fine dell'attivazione della carta                                                                                       |
+| ReactionSent       | Event             | evento della fine notifica della reazione inviata agli altri giocatori                                                                                                                                    |
+|                    |                   |                                                                                                                                                                                                           |
 
 ## deck-workshop-context
 | Term                  | BuildingBlock-DDD | Definizione                                                                                                                                                                                                                                         | 
