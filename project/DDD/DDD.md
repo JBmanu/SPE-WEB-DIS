@@ -244,7 +244,7 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 | Term                | Block-Type     | Motivation                                                                                                                                 |
 |---------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | LobbyView           | Value-Object   | proiezione read-only di una lobby disponibile - ricevuta da pregame-lobby-context                                                          |
-| GameView            | Value-Object   | proiezione read-only di una partita disponibile - ricevuta da match-context                                                                |
+| MatchView           | Value-Object   | proiezione read-only di una partita disponibile - ricevuta da match-context                                                                |
 |                     |                |                                                                                                                                            |
 | LobbyMatchmaker     | Domain-Service | logica di ricerca partita - trova casualmente una lobby compatibile, filtra per amici, filtra per partite pubbliche o da osservare         |
 | LobbyViewProjection | Domain-Service | traduce i dati grezzi di una lobby in LobbyView - isola il contesto dai cambiamenti del modello di pregame-lobby-context                   |
