@@ -57,73 +57,77 @@
 |                           |                   |                                                                                                                                                    | 
 
 ## player-progress-context
-| Term                        | BuildingBlock-DDD | Definizione                                                                                                                                                                                                        |
-|-----------------------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| PlayerProgress              | Aggregate-Root    | Rappresenta il livello di progresso del Player nel gioco. Si basa sul livello raggiunto, gli Achievement sbloccati e badge ottenuti oltre a dipendere dai risultati delle diverse partite giocate.                 |
-| Level                       | Value-Object      | Valore numerico che riassume l'avanzamento del Player nell'ottenimento di badge e completamento di Achievements.                                                                                                   |
-| MatchRecord                 | Value-Object      | Statistiche aggregate delle partite giocate (vittorie, sconfitte, esplosioni, defuse, carte/deck più usati).                                                                                                       |
-| DeckWorkshopRecord          | Value-Object      | Statistiche aggregate che riguardano le attività svolte dal Player in DeckWorkshop (es. creazione CustomDeck).                                                                                                     |
-| AchievementInProgress       | Value-Object      | Achievement le cui condizioni di risoluzione non sono ancora state soddisfatte.                                                                                                                                    |
-| CompletedAchievement        | Value-Object      | Achievement che è stato soddisfatto dal Player in una determinata data secondo la AchievementCompletionPolicy.                                                                                                     |
-| ObtainedBadge               | Value-Object      | Badge ottenuto in una determinata data dal Player secondo la BadgeUnlockPolicy.                                                                                                                                    |
-| BadgeInProgress             | Value-Object      | Badge le cui condizioni di sblocco/ottenimento non sono ancora soddisfatte.                                                                                                                                        |
-| Badge                       | Entity            | Stemma digitale che dimostra il raggiungimento di determinati Achievement secondo determinate condizioni, è definito nel CatalogoBadge e può essere ottenuto da più Player.                                        |
-| Achievement                 | Entity            | Obiettivo di gioco con condizioni di completamento definite (es. vincere X match, usare Y carte), descritte dalla AchievementCompletionPolicy.                                                                     |
-|                             |                   |                                                                                                                                                                                                                    |
-| - Term -                    | - Tipology -      |                                                                                                                                                                                                                    |
-| BadgeUnlockPolicy           | Policy            | Criteri e condizioni di sblocco di un Badge.                                                                                                                                                                       |
-| AchievementCompletionPolicy | Policy            | Condizioni di completamente di un Achievement.                                                                                                                                                                     |
-| BadgeCatalog                | Concept           | Catalogo contenente tutti i Badge sbloccabili dai Player.                                                                                                                                                          |
-| MatchWon                    | Concept           | Conteggio dei match vinti dal Player.                                                                                                                                                                              |
-| MatchLost                   | Concept           | Conteggio dei match persi dal Player.                                                                                                                                                                              |
-| ExplosionCount              | Concept           | Conteggio di esplosioni subite dal Player.                                                                                                                                                                         |
-| DefuseCount                 | Concept           | Conteggio di disinnesci fatti dal Player.                                                                                                                                                                          |
-| MostUsedCard                | Concept           | Carta molto utilizzata dal Player durante i Match.                                                                                                                                                                 |
-| MostUsedDeck                | Concept           | Deck scelto spesso dal Player da usare nei Match.                                                                                                                                                                  |
-|                             |                   |                                                                                                                                                                                                                    |
-| ProgressTrigger             | Event             | Evento che innesca l'aggiornamento dei PlayerProgress con conseguenza di sblocco di Achievements, Badge e aumento di Level.                                                                                        |
-| BadgeUnlocked               | Event             | Evento generato quando un Badge è stato ottenuto dal Player secondo la BadgeUnlockPolicy. Comporta l'aggiornamento del PlayerProgress (Level, ObtainedBadge e BadgeInProgress).                                    |
-| AchievementCompleted        | Event             | Evento generato quando un Achievement è stato completato dal Player secondo la AchievementCompletionPolicy. Viene aggiornato PlayerProgress e l'Achievement passa da AchievementInProgress a CompletedAchievement. |
-|                             |                   |                                                                                                                                                                                                                    |
+| Term                    | BuildingBlock-DDD | Definizione                                                                                                                                                                                                    |
+|-------------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| PlayerProgress          | Aggregate-Root    | Rappresenta il livello di progresso del Player nel gioco. Si basa sul livello raggiunto, gli Achievement completati e badge ottenuti oltre a dipendere dai risultati delle diverse partite giocate.            |
+| Level                   | Value-Object      | Valore numerico che riassume l'avanzamento del Player nell'ottenimento di badge e completamento di Achievements.                                                                                               |
+| MatchRecord             | Value-Object      | Statistiche aggregate delle partite giocate (vittorie, sconfitte, esplosioni, defuse, carte/deck più usati).                                                                                                   |
+| DeckWorkshopRecord      | Value-Object      | Statistiche aggregate che riguardano le attività svolte dal Player in DeckWorkshop (es. creazione CustomDeck).                                                                                                 |
+| AchievementInProgress   | Value-Object      | Achievement le cui condizioni di risoluzione non sono ancora state soddisfatte.                                                                                                                                |
+| CompletedAchievement    | Value-Object      | Achievement che è stato soddisfatto dal Player in una determinata data secondo la AchievementObtainPolicy.                                                                                                     |
+| ObtainedBadge           | Value-Object      | Badge ottenuto in una determinata data dal Player secondo la BadgeObtainPolicy.                                                                                                                                |
+| BadgeInProgress         | Value-Object      | Badge le cui condizioni di sblocco/ottenimento non sono ancora soddisfatte.                                                                                                                                    |
+| Badge                   | Entity            | Stemma digitale che dimostra il raggiungimento di determinati Achievement secondo determinate condizioni descritte da BadgeObtainPolicy. Un Badge può essere ottenuto da più Player.                           |
+| Achievement             | Entity            | Obiettivo di gioco con condizioni di completamento definite (es. vincere X match, usare Y carte), descritte dalla AchievementObtainPolicy.                                                                     |
+|                         |                   |                                                                                                                                                                                                                |
+| - Term -                | - Tipology -      |                                                                                                                                                                                                                |
+| BadgeObtainPolicy       | Policy            | Logica di ottenimento di un Badge.                                                                                                                                                                             |
+| AchievementObtainPolicy | Policy            | Condizioni di completamente di un Achievement.                                                                                                                                                                 |
+| CompletionThreshold     | Concept           | Valore numerico che il contatore di AchievementInProgress o BadgeInProgress deve raggiungere per completare l'obiettivo                                                                                        |
+| Mission                 | Concept           | Obiettivo da raggiungere attraverso il completamento degli Achievement.                                                                                                                                        |
+| BadgeCatalog            | Concept           | Insieme di tutti i Badge ottenibili dai Player.                                                                                                                                                                |
+| AchievementCatalog      | Concept           | insieme di tutti gli Achievement disponibili nella piattaforma, consultabile dal Player.                                                                                                                       |
+| MatchWon                | Concept           | Conteggio dei match vinti dal Player.                                                                                                                                                                          |
+| MatchLost               | Concept           | Conteggio dei match persi dal Player.                                                                                                                                                                          |
+| ExplosionCount          | Concept           | Conteggio di esplosioni subite dal Player.                                                                                                                                                                     |
+| DefuseCount             | Concept           | Conteggio di disinnesci fatti dal Player.                                                                                                                                                                      |
+| MostUsedCard            | Concept           | Carta molto utilizzata dal Player durante i Match.                                                                                                                                                             |
+| MostUsedDeck            | Concept           | Deck scelto spesso dal Player da usare nei Match.                                                                                                                                                              |
+| ExperiencePoint         | Concept           | Il valore di esperienza guadagnato completando un Achievement che contribuisce all'aumento del Level.                                                                                                          |
+|                         |                   |                                                                                                                                                                                                                |
+| ProgressTriggered       | Event             | Evento che innesca l'aggiornamento dei PlayerProgress con conseguenza di ottenimento di Achievements, Badge e aumento di Level.                                                                                |
+| BadgeObtained           | Event             | Evento generato quando un Badge è stato ottenuto dal Player secondo la BadgeObtainPolicy. Comporta l'aggiornamento del PlayerProgress (Level, ObtainedBadge e BadgeInProgress).                                |
+| AchievementCompleted    | Event             | Evento generato quando un Achievement è stato completato dal Player secondo la AchievementObtainPolicy. Viene aggiornato PlayerProgress e l'Achievement passa da AchievementInProgress a CompletedAchievement. |
+| LevelUp                 | Event             | Evento che provoca l'aumento del Level al raggiungimento di una certa quantità di ExperiencePoint.                                                                                                             |
 
 ## lobby-browser-context
-| Term                  | BuildingBlock-DDD | Definizione                                                                                                                                                   |
-|-----------------------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Lobby/LobbyView       | Value-Object      | Rappresentzione lista d'accesso ad un Match specifico che deve ancora iniziare. Puo contenere un numero masismo di Player (LobbyCapacity) sia Friend che non. |
-| Match/GameView        | Value-Object      | Rappresentazione di un Match in corso alla quale è possibile fare Join come Watcher                                                                           |
-| ActiveMatch           | Value-Object      | Match attualmente in corso alla quale si può fare join in veste di Watcher                                                                                    |
-|                       |                   |                                                                                                                                                               |
-| - Term -              | - Tipology -      |                                                                                                                                                               |
-| JoinLobbyRequest      | Evento            | Invito alla lobby da parte del LobbyOwner.                                                                                                                    |
-| OpenLobby             | Concept           | Stato della Lobby che indica la presenza di posti liberi nella Lobby. Il Player può fare join.                                                                |
-| ClosedLobby           | Concept           | Stato della Lobby quando non è pubblica a tutti i Player ma solo agli amici invitati. Lobby nella fase di configurazione del Match da parte del LobbyOwner.   |
-| LobbyCapacity         | Concept           | Capacità massima di Player contenibili dalla Lobby. In caso di OpenLobby al raggiungimento di tale capacità il Match avrà inzio con MatchStarted.             |
-| LobbyOwner            | Concept           | Player che detiene la proprietà della Lobby, ha la facolta di poter avviare in anticipo il Match, chiudere la Lobby (LobbyClosed).                            |
-| LobbyClosed           | Event             | Evento generato al raggiungimento della capienza massima della Lobby oppure in caso di ritorno                                                                |
-| MatchStarted          | Event             | Evento generato da Pregame-lobby-context quando il Match ha inizio. Non è più possibile fare Join alla Lobby.                                                 |
-| choose-match-to-join  | Azione            | Azione di Join ad una Lobby come Player                                                                                                                       |
-| choose-match-to-watch | Azione            | Azione di Join ad un ActiveMatch come Watcher                                                                                                                 |
-| JoinLobby             | Azione            | Intezione del player di aggiungersi alla Lobby in attesa dell'inizio del Match (dovuto a raggiungimento capacità o avvio anticipato dal LobbyOwner).          |
-| SearchLobby           | Azione/Query      | Azione di ricerca anche con filtri semplici (es. join come Watcher o Player) per trovare Match in corso a cui assistere oppure Lobby a cui aggiungersi.       |
-|                       |                   |                                                                                                                                                               |
+| Term                               | BuildingBlock-DDD | Definizione                                                                                                                                                                                                          |
+|------------------------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Lobby/LobbyView                    | Value-Object      | Rappresentzione di una lobby alla quale i Player possono fare Join salvo raggiungimento del un numero masismo di Player (LobbyCapacity) sia Friend che non. Raggiunta la capacità massima diventa un Match/GameView. |
+| Match/GameView                     | Value-Object      | Rappresentazione di un Match in corso alla quale è possibile fare Join solo come Watcher.                                                                                                                            |
+|                                    |                   |                                                                                                                                                                                                                      |
+| LobbyJoined                        | Event             | Evento generato quando un Player effettua il Join ad una Lobby.                                                                                                                                                      |
+| WatcherJoined                      | Event             | Evento generato quando un Player effettua il Join ad un Match.                                                                                                                                                       |
+|                                    |                   |                                                                                                                                                                                                                      |
+| - Term -                           | - Tipology -      |                                                                                                                                                                                                                      |
+| JoinLobbyRequest                   | Concept           | Invito alla lobby da parte di un Friend.                                                                                                                                                                             |
+| LobbyCapacity                      | Concept           | Capacità massima di Player contenibili dalla Lobby.                                                                   |
+| LobbyOwner                         | Concept           | Nome/Nickname del Player che detiene la proprietà della Lobby.                                                                                                                                                       |
+| LobbyName                          | Concept           | Nome della Lobby.                                                                                                                                                                                                     |
+| JoinMark                           | Concept           | Elemento che indica ad un Player che è stato invitato alla Lobby da un Friend.                                                                                                                                        |
+|                                    |                   |                                                                                                                                                                                                                      |
+| WatchMatch (choose-match-to-watch) | Azione            | Azione di Join ad un ActiveMatch come Watcher                                                                                                                                                                        |
+| JoinLobby (choose-match-to-join)   | Azione            | Azione di Join ad una Lobby come Player in attesa dell'inizio del Match.                                                                                                                                             |
+| SearchLobby                        | Azione/Query      | Azione di ricerca anche con filtri semplici (es. join come Watcher o Player) per trovare Match in corso a cui assistere oppure Lobby a cui aggiungersi.                                                              |
+|                                    |                   |                                                                                                                                                                                                                      |
 
 
 ## pregame-lobby-context
-| Term | BuildingBlock-DDD | Definizione | 
+| Term | BuildingBlock-DDD | Definizione |
 |------|-------------------|-------------|
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
+|      |                   |             |
+|      |                   |             |
+|      |                   |             |
+|      |                   |             |
+|      |                   |             |
+|      |                   |             |
+|      |                   |             |
+|      |                   |             |
+|      |                   |             |
+|      |                   |             |
+|      |                   |             |
+|      |                   |             |
+|      |                   |             |
 
 ## match-context
 | Term | BuildingBlock-DDD | Definizione | 
