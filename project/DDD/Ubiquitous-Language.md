@@ -297,19 +297,19 @@
 | TopRanking             | Value-Object      | classifica dei deck e delle carte più utilizzati dai Player nelle partite - aggiornata continuamente e conservata in ogni PlatformSnapshot                                                               | 
 |                        |                   |                                                                                                                                                                                                          | 
 | PlatformSnapshot       | Aggregate-Root    | fotografia dello stato della piattaforma in un preciso momento - creata automaticamente a intervalli regolari o su richiesta dell'admin; una volta creata non cambia più                                 | 
-| PlayerActivityRecord   | Value-Object      | copia congelata dei dati dei player della piattaforma                                                                                                                                                    | 
-| MatchActivityRecord    | Value-Object      | copia congelata dei dati delle partite della piattaforma                                                                                                                                                 | 
-| LobbyActivityRecord    | Value-Object      | copia congelata dei dati delle lobby della piattaforma                                                                                                                                                   | 
+| PlayerActivityRecord   | Value-Object      | copia delle informazioni sui Player salvata nel momento in cui è stato creato il PlatformSnapshot - non cambia mai dopo la sua creazione                                                                 | 
+| LobbyActivityRecord    | Value-Object      | copia del contatore delle Lobby salvata nel momento in cui è stato creato il PlatformSnapshot - non cambia mai dopo la sua creazione                                                                     |
+| MatchActivityRecord    | Value-Object      | copia dei dati sulle partite e del TopRanking salvata nel momento in cui è stato creato il PlatformSnapshot - non cambia mai dopo la sua creazione                                                       | 
 |                        |                   |                                                                                                                                                                                                          | 
 | SnapshotPolicy         | Aggregate-Root    | impostazione che determina ogni quanto viene creato automaticamente un PlatformSnapshot - configurabile dall'admin                                                                                       |
 |                        |                   |                                                                                                                                                                                                          |
 | - Term -               | - Tipology -      | - // -                                                                                                                                                                                                   |
-|                        |                   |                                                                                                                                                                                                          |
 | MonitoringPolicy       | Policy            | regola che controlla il tempo minimo per emettere l'evento ServiceTimeOut                                                                                                                                |
 |                        |                   |                                                                                                                                                                                                          |
 | PlatformOverview       | Concept           | vista generale dello stato attuale della piattaforma - mostra in un colpo solo quanti Player sono online, quante partite sono in corso e quante Lobby sono aperte                                        |
 | MonitoringDashboard    | Concept           | pagina dedicata all'admin per monitorare la piattaforma - mostra la PlatformOverview in tempo reale e permette di consultare lo SnapshotHistory                                                          |
 | SnapshotHistory        | Concept           | raccolta dei PlatformSnapshot creati nel tempo - permette all'admin di confrontare lo stato della piattaforma in momenti diversi                                                                         |
+| StatisticsWindow       | Concept           | intervallo di tempo scelto dall'admin per analizzare i dati storici nello SnapshotHistory - ad esempio ultima settimana o ultimo mese                                                                    |
 |                        |                   |                                                                                                                                                                                                          |
 | PlayerOnlineCount      | Concept           | conteggio dei player online della piattaforma, che hanno fatto il login                                                                                                                                  |
 | PlayerOfflineCount     | Concept           | conteggio dei player offline della piattaforma, che hanno fatto logout                                                                                                                                   |
@@ -323,21 +323,24 @@
 | MatchClosedCount       | Concept           | conteggio dei match chiusi per policy, chiusura anticipata del match                                                                                                                                     | 
 | TopDeckRanking         | Concept           | classifica dei deck più usati nella piattaforma, centra solo per i deck creati dall'admin                                                                                                                | 
 | TopCardRanking         | Concept           | classifica delle card più usate nella piattaforma                                                                                                                                                        | 
-|                        |                   |                                                                                                                                                                                                          | 
+|                        |                   |                                                                                                                                                                                                          |
+| SnapshotRequest        | Action            | richiesta esplicita dell'admin di creare immediatamente un PlatformSnapshot senza aspettare il prossimo ciclo automatico                                                                                 |
+|                        |                   |                                                                                                                                                                                                          |
 
 ## system-health-context
-| Term | BuildingBlock-DDD | Definizione | 
-|------|-------------------|-------------|
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
+| Term             | BuildingBlock-DDD | Definizione | 
+|------------------|-------------------|-------------|
+| Service          | Aggregate-Root    |             | 
+| Availability     | Value-Object      |             | 
+| Traffic          | Value-Object      |             | 
+| RequestCount     | Value-Object      |             | 
+| MonitoringPolicy | Value-Object      |             | 
+|                  |                   |             | 
+| ServiceTimedOut  | Domain-Event      |             |
+| - Term -         | - Tipology -      | - // -      |
+|                  |                   |             | 
+|                  |                   |             | 
+|                  |                   |             | 
+|                  |                   |             | 
+|                  |                   |             | 
+|                  |                   |             | 
