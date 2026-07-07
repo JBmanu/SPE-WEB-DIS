@@ -90,6 +90,7 @@
 | BadgeObtained               | Event             | Evento generato quando un Badge è stato ottenuto dal Player secondo la BadgeObtainPolicy. Comporta l'aggiornamento del PlayerProgress (Level, ObtainedBadge e BadgeInProgress).                                    |
 | AchievementCompleted        | Event             | Evento generato quando un Achievement è stato completato dal Player secondo la AchievementCompletionPolicy. Viene aggiornato PlayerProgress e l'Achievement passa da AchievementInProgress a CompletedAchievement. |
 | LevelUp                     | Event             | Evento che provoca l'aumento del Level al raggiungimento di una certa quantità di ExperiencePoint.                                                                                                                 |
+|                             |                   |                                                                                                                                                                                                                    |
 
 ## lobby-browser-context
 | Term          | BuildingBlock-DDD | Definizione                                                                                                                                                                                                          |
