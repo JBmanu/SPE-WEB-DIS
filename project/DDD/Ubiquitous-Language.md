@@ -328,19 +328,20 @@
 |                        |                   |                                                                                                                                                                                                          |
 
 ## system-health-context
-| Term             | BuildingBlock-DDD | Definizione | 
-|------------------|-------------------|-------------|
-| Service          | Aggregate-Root    |             | 
-| Availability     | Value-Object      |             | 
-| Traffic          | Value-Object      |             | 
-| RequestCount     | Value-Object      |             | 
-| MonitoringPolicy | Value-Object      |             | 
-|                  |                   |             | 
-| ServiceTimedOut  | Domain-Event      |             |
-| - Term -         | - Tipology -      | - // -      |
-|                  |                   |             | 
-|                  |                   |             | 
-|                  |                   |             | 
-|                  |                   |             | 
-|                  |                   |             | 
-|                  |                   |             | 
+| Term             | BuildingBlock-DDD | Definizione                                                                                                                                                                    | 
+|------------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Service          | Aggregate-Root    | componente della piattaforma monitorato dall'admin - tiene traccia della sua disponibilità, del traffico e del numero di richieste ricevute                                    | 
+| Availability     | Value-Object      | stato attuale di un Service che indica se è raggiungibile, non raggiungibile o non risponde entro il tempo previsto dalla MonitoringPolicy                                     | 
+| Traffic          | Value-Object      | misura del flusso di dati che attraversa un Service in un dato momento - indica quanto è carico il servizio                                                                    | 
+| RequestCount     | Value-Object      | contatore delle richieste ricevute da un Service nell'intervallo corrente di monitoraggio                                                                                      | 
+| MonitoringPolicy | Value-Object      | configurazione che stabilisce ogni quanto un Service deve segnalare il proprio stato e quanto tempo può passare senza risposta prima di essere considerato non disponibile     | 
+|                  |                   |                                                                                                                                                                                | 
+| ServiceTimedOut  | Domain-Event      | fatto che un Service non ha risposto entro il tempo stabilito dalla sua MonitoringPolicy - indica che il servizio potrebbe essere in errore o non raggiungibile                |
+|                  |                   |                                                                                                                                                                                |
+| - Term -         | - Tipology -      | - // -                                                                                                                                                                         |
+| ServiceDashboard | Concept           | la pagina dell'admin dedicata al monitoraggio dello stato di tutti i Service della piattaforma.                                                                                |
+| ServiceStatus    | Concept           | lo stato complessivo di un Service in un dato momento, combinazione di Availability, Traffic e RequestCount - quello che l'admin vede a colpo d'occhio nella ServiceDashboard. |
+| Heartbeat        | Concept           | segnale periodico inviato da un Service per comunicare il proprio stato attuale - contiene disponibilità, traffico e numero di richieste                                       | 
+|                  |                   |                                                                                                                                                                                | 
+| HeartbeatRequest | Action            | azione con cui l'admin richiede manualmente lo stato aggiornato di tutti i Service senza aspettare il prossimo Heartbeat automatico                                            | 
+|                  |                   |                                                                                                                                                                                | 
