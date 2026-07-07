@@ -162,6 +162,7 @@
 |                    |                   |                                                                                                                                                                                                           |
 | - Term -           | - Tipology -      |                                                                                                                                                                                                           |
 | TurnTimerPolicy    | Policy            | regola del tempo del turno disponibile per poter attivare le carte, alla fine si pesca obbligatoriamente                                                                                                  |
+| MatchPolicy        | Policy            | regola del match che controlla se la partita può proseguire o meno, controlla disponibilita e se i player possono giocare                                                                                 |
 |                    |                   |                                                                                                                                                                                                           |
 | GameSettings       | Concept           | configurazione della partita impostata in lobby (numero bombe, defuse, TurnTimer, deck selezionati) - ricevuta da pregame-lobby-context all'avvio della partita                                           |
 | MatchHistory       | Concept           | storico delle ultime 10 partite giocate da un Player - accessibile per rivedere le partite tramite ReplayPlayback                                                                                         |
@@ -237,7 +238,7 @@
 | DeckPublished        | Domain-Event      | pubblicazione del deck e di tutte le carte che contiene, se ancora non sono state pubblicate                                                                                                                                | 
 | ExpansionPublished   | Domain-Event      | pubblicazione dell'espansione e di tutte le carte che contiene, se ancora non sono state pubblicate                                                                                                                         | 
 |                      |                   |                                                                                                                                                                                                                             | 
-| - Term -             | - Tipology -      | //                                                                                                                                                                                                                          |
+| - Term -             | - Tipology -      | - // -                                                                                                                                                                                                                      |
 | PublicationPolicy    | Policy            | politica di pubblicazione una volta che una card/deck/expansion è stata pubblicata non può tornare indietro                                                                                                                 |
 | UniqueNamePolicy     | Policy            | regola per cui il nome di una CardDefinition, DeckDefinition e ExpansionDefinition deve essere univoco nella piattaforma                                                                                                    |
 | CardDefinitionPolicy | Policy            | insieme delle regole che una CardDefinition deve rispettare per essere pubblicata - deve avere nome univoco (UniqueCardName), descrizione, immagine, almeno un Action e gli Attribute coerenti con il tipo di carta         |
@@ -286,21 +287,41 @@
 |                      |                   |                                                                                                                                                                                                                             | 
 
 ## game-observatory-context
-| Term | BuildingBlock-DDD | Definizione | 
-|------|-------------------|-------------|
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
-|      |                   |             | 
+| Term                   | BuildingBlock-DDD | Definizione                                                                                                                 | 
+|------------------------|-------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| PlayerActivitySnapshot | Aggregate-Root    | contiene le informazioni generale dei player della piattaforma, contatori online/offline/registrati                         | 
+|                        |                   |                                                                                                                             |
+| LobbyActivitySnapshot  | Aggregate-Root    | contine le informazioni generali delle partite, contatori lobbyPubblicCount, lobbyPrivateCount                              | 
+|                        |                   |                                                                                                                             |
+| MatchActivitySnapshot  | Aggregate-Root    | contiene le informazioni generali delle partite, contatori MatchActiveCount/MatchEndedCount/MatchClosedCount/TopRanking/... | 
+| TopRanking             | Value-Object      | classifica dei deck/card più usati nel gioco                                                                                | 
+|                        |                   |                                                                                                                             | 
+| PlatformSnapshot       | Aggregate-Root    | contiene una copia congelata dei dati di PlayerActivityRecord, MatchActivityRecord, LobbyActivityRecord                     | 
+| PlayerActivityRecord   | Value-Object      | copia congelata dei dati dei player della piattaforma                                                                       | 
+| MatchActivityRecord    | Value-Object      | copia congelata dei dati delle partite della piattaforma                                                                    | 
+| LobbyActivityRecord    | Value-Object      | copia congelata dei dati delle lobby della piattaforma                                                                      | 
+|                        |                   |                                                                                                                             | 
+| SnapshotPolicy         | Aggregate-Root    | controlla la configurazione valida per la frequenza di aggiornamento automatico di PlatformSnapshot                         |
+|                        |                   |                                                                                                                             |
+| - Term -               | - Tipology -      | - // -                                                                                                                      |
+|                        |                   |                                                                                                                             |
+| MonitoringPolicy       | Policy            | regola che controlla il tempo minimo per emettere l'evento ServiceTimeOut                                                   |
+|                        |                   |                                                                                                                             |
+| SnapshotHistory        | Concept           | collezione di tutti informazioni delle PlatformSnapshot prese nel tempo                                                     |
+|                        |                   |                                                                                                                             |
+| PlayerOnlineCount      | Concept           | conteggio dei player online della piattaforma, che hanno fatto il login                                                     |
+| PlayerOfflineCount     | Concept           | conteggio dei player offline della piattaforma, che hanno fatto logout                                                      |
+| PlayerRegisteredCount  | Concept           | conteggio dei player registrati alla piattaforma                                                                            | 
+|                        |                   |                                                                                                                             | 
+| LobbyPubblicCount      | Concept           | conteggio delle lobby create pubbliche nella piattaforma                                                                    | 
+| LobbyPrivateCount      | Concept           | conteggio delle lobby create ma non pubbliche nella piattaforma                                                             | 
+|                        |                   |                                                                                                                             | 
+| MatchActiveCount       | Concept           | conteggio dei match attivi nella piattaforma                                                                                | 
+| MatchEnededCount       | Concept           | conteggio dei match conclusi nella piattaforma                                                                              | 
+| MatchClosedCount       | Concept           | conteggio dei match chiusi per policy, chiusura anticipata del match                                                        | 
+| TopDeckRanking         | Concept           | classifica dei deck più usati nella piattaforma, centra solo per i deck creati dall'admin                                   | 
+| TopCardRanking         | Concept           | classifica delle card più usate nella piattaforma                                                                           | 
+|                        |                   |                                                                                                                             | 
 
 ## system-health-context
 | Term | BuildingBlock-DDD | Definizione | 
