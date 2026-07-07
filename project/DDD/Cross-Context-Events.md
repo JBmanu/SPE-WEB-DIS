@@ -10,7 +10,7 @@
 | LobbyJoined        | lobby-browser                 | pregame-lobby                          |
 | WatcherJoined      | lobby-browser                 | match                                  |
 |                    |                               |                                        |
-| LobbyRequestSent   | pregame-lobby                 | lobby-browser                          |
+| JoinRequestSent    | pregame-lobby                 | lobby-browser                          |
 | LobbyOpened        | pregame-lobby                 | lobby-browser, game-observatory        |
 | LobbyClosed        | pregame-lobby                 | lobby-browser, game-observatory        |
 | MatchStarted       | pregame-lobby                 | lobby-browser, game-observatory, match |
