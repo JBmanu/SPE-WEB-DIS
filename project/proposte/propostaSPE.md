@@ -1,42 +1,54 @@
 # Bamboom (SPE+ASW+DS)
 
-## Project proposal
+## Project Proposal
 
-- Bamboom: gioco di carte ispirato al gioco exploding kittens a tema panda
+- Bamboom: a card game inspired by Exploding Kittens, panda-themed.
 
-## Componenti del gruppo
-- Manuel Julio Montesinos - julio@studio.unibo.it
-- Matteo Violani - Matteo.violani@studio.unibo.it
+The same project will be developed and used for the courses of
+Distributed Systems and Applicazioni e Servizi Web.
 
-Lo stesso progetto sarà sviluppato e utilizzato anche per i corsi di
-Distributed System and Applicazioni e Servizi Web.
+## Group Members
 
-## Project scenario
-Il progetto consiste nello sviluppo di una piattaforma di gioco ispirata al gioco di carte Exploding Kittens ma a tema panda.
+- Manuel Julio Montesinos - juliomanuel.buizo@studio.unibo.it
+- Matteo Violani - matteo.violani@studio.unibo.it
 
-In questa piattaforma l'utente potrà instaurare legami di amicizia con gli altri utenti, comporre mazzi di gioco a partire dai mazzi ed estensioni gia presenti nel gioco o da quelli custom precedentemente creati.
+## Project Scenario
 
-L'utente potrà: partecipare alle partite inserendosi nella lobby aspettando che la quantità dei giocatori sia soddisfatta; creare una nuova partita configurandone il mazzo da utilizzare, il numero di bombe e/o disinnesci in eccesso e altri parametri come la durata del turno.
+The project consists in the development of Bamboom, a gaming platform inspired by the card game
+Exploding Kittens, reimagined with a panda theme. The platform requires user registration.
+Users will be able to build friendships with other users and compose decks using the base sets
+and expansions already available in the game, or from previously created custom decks.
+A user can join matches and lobbies, waiting until the required number of players is reached.
+New matches can be created by configuring the deck to use, the number of additional bombs and
+defuses, and other parameters such as the turn duration.
+When creating a match, friends can join the lobby via invitation in a private waiting room,
+before the match becomes visible to all other users.
+The user can choose to participate in a match either as a player or as an observer.
+During the match, each player will see their own hand and can play cards according to the rules;
+players can interact with each other through reactions. At the end of the match, a match
+history will be available.
+The cards, decks, and expansions available in Bamboom will be managed by an administrator user,
+who will be able to create and publish them.
 
-Durante la creazione di una partita gli amici potranno inserirsi nella lobby in anticipo, su un invito, in sala d'attesa prima che diventi visbile a tutti gli altri. 
+## Domain Requirements
 
-L'utente potrà decidere se partecipare come giocatore o solo osservatore alla partita. Reazioni ??
+Platform users:
 
-Questa piattaforma richiederà la registrazione.
+**Admin**: user who manages and monitors the Bamboom platform.
+- Can create drafts and publish cards, decks, and game expansions.
+- Can view gameplay statistics for all players.
+- Can monitor the status of all platform microservices.
 
-Le carte, i mazzi e le estensioni disponibili in Bamboom saranno gestite da un utente admin la quale sarà in grado di crearle e pubblicarle.
+**User**: player who registers and plays on the Bamboom platform.
+- Account creation and management, including friendship relations with other players.
+- Creation and management of custom decks using the cards available in the game.
+- Management of public and private lobbies and ongoing matches.
+- Playing cards according to the rules and using reactions to interact during a match.
+- Viewing statistics, progress, and achievements/badges.
 
-## Domain requirements
+**Optional Requirements (User)**:
+- Replay of recently played matches.
 
-- Architettura: microservices
+## Architectural Requirements
 
-- Piattaforma di gioco per gli utenti e dashboard per l'admin
-- Sistema per fare il draft e pubblicazioni di carte, deck ed espanzioni da parte dell'admin
-- Dashboard per osservare le informazioni/statistiche di gioco della piattaforma
-- Sistema di monitoraggio per i micro-servizi della piattaforma
-- Sistema di registrazione per gli utenti e relazioni di amicizie
-- Sistema di accesso/ricerca di partite pubbliche o accesso su invito
-- Sistema di progresso per l'utente, gamification con achiviements e badge
-- Overview delle statistiche di gioco dell'utente
-- Creazioni di partite pubbliche/private per le sessioni di gioco e sistema di inviti alla lobby
-- Sistema per creare customDeck all'interno del gioco, con le carte pubblicate dall'admin
+- Microservices architecture.
