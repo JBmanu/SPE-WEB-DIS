@@ -1,54 +1,54 @@
 # Bamboom (SPE+ASW+DS)
 
-## Project proposal
+## Project Proposal
 
-- Bamboom: gioco di carte ispirato al gioco exploding kittens a tema panda
+- Bamboom: a card game inspired by Exploding Kittens, panda-themed.
 
-Lo stesso progetto sarà sviluppato e utilizzato anche per i corsi di
-Distributed System and Applicazioni e Servizi Web.
+The same project will be developed and used for the courses of
+Distributed Systems and Applicazioni e Servizi Web.
 
-## Componenti del gruppo
+## Group Members
 
-- Manuel Julio Montesinos - julio@studio.unibo.it
-- Matteo Violani - Matteo.violani@studio.unibo.it
+- Manuel Julio Montesinos - juliomanuel.buizo@studio.unibo.it
+- Matteo Violani - matteo.violani@studio.unibo.it
 
-## Project scenario
+## Project Scenario
 
-Il progetto consiste nello sviluppo di Bamboom, una piattaforma di gioco ispirata al gioco di carte 
-Exploding Kittens, rivisitato a tema panda. La piattaforma richiede la registrazione.
-Gli utenti potranno instaurare legami di amicizia e comporre mazzi di gioco a partire dai mazzi e dalle 
-estensioni già presenti nel gioco, oppure da quelli custom precedentemente creati.
-L'utente potrà partecipare a partite e lobby, attendendo che venga raggiunto il numero di giocatori richiesto. 
-È possibile creare nuove partite configurando il mazzo da utilizzare, il numero di bombe e di disinnesci 
-aggiuntivi e altri parametri come la durata del turno.
-Durante la creazione di una partita, gli amici potranno partecipare alla lobby tramite invito, in una sala 
-d'attesa privata, prima che la partita diventi visibile a tutti gli altri utenti.
-L'utente potrà scegliere se partecipare alla partita come giocatore o come osservatore. 
-Durante la partita ciascun giocatore vedrà la propria mano e potrà giocare le carte secondo il regolamento; 
-i giocatori potranno interagire fra loro tramite reazioni. Al termine della partita sarà disponibile lo storico 
-della partita.
-Le carte, i mazzi e le estensioni disponibili in Bamboom saranno gestiti da un utente amministratore, il quale 
-potrà crearli e pubblicarli.
+The project consists in the development of Bamboom, a gaming platform inspired by the card game
+Exploding Kittens, reimagined with a panda theme. The platform requires user registration.
+Users will be able to build friendships with other users and compose decks using the base sets
+and expansions already available in the game, or from previously created custom decks.
+A user can join matches and lobbies, waiting until the required number of players is reached.
+New matches can be created by configuring the deck to use, the number of additional bombs and
+defuses, and other parameters such as the turn duration.
+When creating a match, friends can join the lobby via invitation in a private waiting room,
+before the match becomes visible to all other users.
+The user can choose to participate in a match either as a player or as an observer.
+During the match, each player will see their own hand and can play cards according to the rules;
+players can interact with each other through reactions. At the end of the match, a match
+history will be available.
+The cards, decks, and expansions available in Bamboom will be managed by an administrator user,
+who will be able to create and publish them.
 
 ## Domain Requirements
 
-Utenti della piattaforma:
+Platform users:
 
-**Admin**: utente che gestisce e monitora la piattaforma Bamboom.
-- Può creare bozze e pubblicare carte, mazzi ed espansioni di gioco.
-- Può visualizzare le statistiche di gioco di tutti i giocatori.
-- Può monitorare lo stato di tutti i microservizi della piattaforma.
+**Admin**: user who manages and monitors the Bamboom platform.
+- Can create drafts and publish cards, decks, and game expansions.
+- Can view gameplay statistics for all players.
+- Can monitor the status of all platform microservices.
 
-**User**: giocatore che si registra e gioca sulla piattaforma Bamboom.
-- Creazione e gestione dell'account e delle relazioni di amicizia con altri giocatori.
-- Creazione e gestione di mazzi personalizzati con le carte disponibili nel gioco.
-- Gestione delle lobby pubbliche e private e delle partite in corso.
-- Gioco delle carte secondo il regolamento e uso delle reazioni per interagire durante la partita.
-- Visualizzazione di statistiche, progressi e achievements/badge.
+**User**: player who registers and plays on the Bamboom platform.
+- Account creation and management, including friendship relations with other players.
+- Creation and management of custom decks using the cards available in the game.
+- Management of public and private lobbies and ongoing matches.
+- Playing cards according to the rules and using reactions to interact during a match.
+- Viewing statistics, progress, and achievements/badges.
 
-**Requisiti opzionali (User)**:
-- Replay delle ultime partite disputate.
+**Optional Requirements (User)**:
+- Replay of recently played matches.
 
 ## Architectural Requirements
 
-- Architettura a microservizi.
+- Microservices architecture.
