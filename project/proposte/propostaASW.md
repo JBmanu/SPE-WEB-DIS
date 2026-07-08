@@ -1,18 +1,18 @@
 # Bamboom (SPE+ASW+DS)
 
-## Project proposal
+## Proposta del progetto
 
 - Bamboom: gioco di carte ispirato al gioco exploding kittens a tema panda
 
 Lo stesso progetto sarà sviluppato e utilizzato anche per i corsi di
-Distributed System and Applicazioni e Servizi Web.
+Distributed System and Software Process Engineering .
 
 ## Componenti del gruppo
 
-- Manuel Julio Montesinos - julio@studio.unibo.it
+- Manuel Buizo - juliomanuel.buizo@studio.unibo.it
 - Matteo Violani - Matteo.violani@studio.unibo.it
 
-## Project scenario
+## Scenario del progetto
 
 Il progetto consiste nello sviluppo di Bamboom, una piattaforma di gioco ispirata al gioco di carte
 Exploding Kittens, rivisitato a tema panda. La piattaforma richiede la registrazione.
@@ -30,7 +30,7 @@ della partita.
 Le carte, i mazzi e le estensioni disponibili in Bamboom saranno gestiti da un utente amministratore, il quale
 potrà crearli e pubblicarli.
 
-## Domain Requirements
+## Requisiti
 
 Utenti della piattaforma:
 
@@ -46,9 +46,15 @@ Utenti della piattaforma:
 - Gioco delle carte secondo il regolamento e uso delle reazioni per interagire durante la partita.
 - Visualizzazione di statistiche, progressi e achievements/badge.
 
+Il gruppo si propone di realizzare la piattaforma adottando metologie HCI in fase di design, 
+sviluppo e testing. 
+Per la progettazione dell'interfaccia utente si realizzeranno mockup ponendo particolare 
+attenzione all'accessibilità complessiva dell'applicativo. 
+
 **Requisiti opzionali (User)**:
 - Replay delle ultime partite disputate.
 
-## Architectural Requirements
+## Requisiti tecnologici
 
 - Architettura a microservizi.
+- Uso dello stack MEVN per lo sviluppo di parte del sistema per rispettare i requisiti del corso.

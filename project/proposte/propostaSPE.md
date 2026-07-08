@@ -49,6 +49,7 @@ Platform users:
 **Optional Requirements (User)**:
 - Replay of recently played matches.
 
-## Architectural Requirements
+## Technological Requirements
 
 - Microservices architecture.
+- Use of the MEVN stack to develop part of the system to meet the requirements of the ASW course.
