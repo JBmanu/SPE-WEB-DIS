@@ -1,3 +1,10 @@
+# Bamboom (SPE+ASW+DS)
+
+- Bamboom: a card game inspired by Exploding Kittens, panda-themed.
+
+The same project will be developed and used for the courses of
+Software Process Engineering and Applicazioni e Servizi Web.
+
 ## Vision
 
 The project consists in the development of Bamboom, a gaming platform inspired by the card game
@@ -41,8 +48,6 @@ Platform users:
 - Handling dynamic access to lobbies and any errors or crashes
 - Containerize and orchestrate the multi-micro-service application
 
-why it is relevant to the course and what you expect to learn
-
 ## Intended technologies and motivations
 
 - Microservices architecture.
@@ -51,5 +56,5 @@ why it is relevant to the course and what you expect to learn
 - Technologies to ensure the platform's availability.
 
 ## Group members (names + email addresses)
-- Manuel Julio Montesinos - juliomanuel.buizo@studio.unibo.it
+- Manuel Buizo - juliomanuel.buizo@studio.unibo.it
 - Matteo Violani - matteo.violani@studio.unibo.it
