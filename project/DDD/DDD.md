@@ -188,23 +188,36 @@ Scoprie le dimaniche del dominio (persone, azioni, interazioni, ...)
 
 #### Player-Identity-Context
 
-| Term               | Block-Type     | Motivation                                                                         |
-|--------------------|----------------|------------------------------------------------------------------------------------|
-| PlayerRepository   | Repository     | recupera e salva un Player per ID o email                                          |
-| PlayerFactory      | Factory        | logica di creazione del Player (validazione, hashing password, assegnazione ID)    |
-|                    |                |                                                                                    |
-| Player             | Aggregate-Root | controlla email, password, nickname, friend-list e friend-request                  |
-| Email              | Value-Object   | immutabile, unica per ogni player                                                  |
-| Password           | Value-Object   | immutabile, sostituita intera al cambio                                            |
-| Nickname           | Value-Object   | immutabile, unico per ogni player                                                  |
-| Friend             | Value-Object   | riferimento immutabile a un player amico                                           |
-| FriendRequest      | Entity         | ha stato che cambia nel tempo (pending → accepted / declined), ha identità propria |
-|                    |                |                                                                                    |
-| PlayerLoggedIn     | Domain-Event   | player online - consumato da player-progress-context e game-observatory-context    |
-| PlayerLoggedOut    | Domain-Event   | player offline - consumato da game-observatory-context                             |
-| PlayerRegistered   | Domain-Event   | nuovo player - consumato da player-progress e game-observatory-context             |
-|                    |                |                                                                                    |
-| FriendshipAccepted | Domain-Event   | richiesta confermata - consumato da player-progress                                |
+| Term                  | Block-Type     | Motivation                                                                                   |
+|-----------------------|----------------|----------------------------------------------------------------------------------------------|
+| PlayerRepository      | Repository     | recupera e salva un Player per ID o email                                                    |
+| PlayerFactory         | Factory        | logica di creazione del Player (validazione, hashing password, assegnazione ID)              |
+| FriendRepository      | Repository     | recupera e salva un Friend                                                                   |
+| FriendFactory         | Factory        | Factory per la creazione delle amicizie tra i giocatori                                      |
+|                       |                |                                                                                              |
+| Player                | Aggregate-Root | controlla email, password, nickname, friend-list e friend-request                            |
+| Email                 | Value-Object   | immutabile, unica per ogni player                                                            |
+| Password              | Value-Object   | immutabile, sostituita intera al cambio                                                      |
+| Nickname              | Value-Object   | immutabile, unico per ogni player                                                            |
+|                       |                |                                                                                              |
+| Friendships           | Aggregate-Root | aggregate responsabile delle amicizie                                                        |
+| FriendRequest         | Entity         | ha stato che cambia nel tempo (pending → accepted / declined), ha identità propria           |
+|                       |                |                                                                                              |
+| LoggedIn              | Domain-Event   | player online - consumato da player-progress-context e game-observatory-context              |
+| LoggedOut             | Domain-Event   | player offline - consumato da game-observatory-context                                       |
+| LoginFailed           | Domain-Event   | player login fallito                                                                         |
+| Registered            | Domain-Event   | nuovo player - consumato da player-progress e game-observatory-context                       |
+| RegistrationFailed    | Domain-Event   | registrazione del player fallita                                                             |
+|                       |                |                                                                                              |
+| ReceivedResetPassword | Domain-Event   | Procedura di reset password avviata - invio mail per reset (manu:"ricezione mail per reset") |
+| PasswordResetted      | Domain-Event   | Password resettata correttamente                                                             |
+| PasswordResetFailed   | Domain-Event   | Reset password fallita                                                                       |
+|                       |                |                                                                                              |
+| FriendRequestSent     | Domain-Event   | richiesta amicizia inviata                                                                   |
+| FriendAccepted        | Domain-Event   | amicizia confermata - consumato da player-progress                                           |
+| FriendDeclined        | Domain-Event   | richiesta amicizia rifiutata                                                                 |
+| FriendDeleted         | Domain-Event   | eliminazione di un Friend                                                                    |
+|                       |                |                                                                                              |
 
 #### Player-Progress-Context
 
