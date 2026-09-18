@@ -15,8 +15,6 @@
 | Badge       |                                            | Contatore/icona/stemma che rappresenta il raggiungimento di un *achievement* ottenuto da un *player*.                                                                                                                                      |
 | Achievement | Mission                                    | Obiettivo che il player deve raggiungere compiendo azioni specifiche nel gioco (es. "sopravvissuto a 5 bombe").                                                                                                                            |
 
-
-
 | Card Name            | Original Card Name | Synonyms   | Description                                                                                                                  |
 |----------------------|--------------------|------------|------------------------------------------------------------------------------------------------------------------------------|
 | Bamboom              | Exploding kitten   | Bomb       | Carta bomba: quando pescata fa perdere il giocatore a meno che non decida di utilizzare il disinnesco *Sbadiglio Disarmante* |
@@ -24,4 +22,12 @@
 | Pugno Ravvicinato    | Attacco            |            | Carta attacco: il player salta il turno senza pescare e il player successivodeve fare N turni                                |
 | Pugno Volante        | Attacco mirato     |            | Carta attacco: come la carta *Pugno Ravvicinato* con la possibilià di decidere quale player farà N turni                     |
 | Fame Infinita        | Attacco personale  |            | Carta attacco: vengono aggiunti N turni al player che l'ha giocata                                                           |
-||||
+| Meditazione Orsuta   | Cambia il futuro   |            | Permette al player di guardare le prime N carte del deck e cambairne l'ordine                                                |
+| Occhiolino Mistico   | Prevedi il futuro  |            |                                                                                                                              |
+|                      |                    |            |                                                                                                                              |
+|                      |                    |            |                                                                                                                              |
+|                      |                    |            |                                                                                                                              |
+|                      |                    |            |                                                                                                                              |
+|                      |                    |            |                                                                                                                              |
+|                      |                    |            |                                                                                                                              |
+|                      |                    |            |                                                                                                                              |
