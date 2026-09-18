@@ -1,0 +1,27 @@
+# Ubiquitous Language - Bamboom
+
+| Term        | Synonyms                                   | Definition                                                                                                                                                                                                                                 |
+|-------------|--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Player      | Participante, Giocatore, User, Participant | Utente registrato alla piattaforma che puo giocare alle partite, creare nuove partite e mazzi personalizzati                                                                                                                               |
+| Watcher     | Spectator (spettatore), osservatore        | Player che non partecipa ma osserva passivamente il match.                                                                                                                                                                                 |
+| Friend      |                                            | player amico di un altro player dopo l'accettazione della richiesta di amicizia                                                                                                                                                            |
+| Admin       | Amministrtore                              | Utente proprietario della piattaforma in grado di gestire le carte, i mazzi e le espansioni disponibili ai Player. Ha sotto controllo lo stato e le statistiche della piattaforma                                                          |
+| Deck        | Mazzo                                      | Insieme di *card* utilizzate e disponibili durante un *Match*. Può essere un *default-deck* o *custom-deck* o la loro composizione.                                                                                                        |
+| Custom-deck |                                            | *Deck* personalizzato, associato a un *user* registrato. Creato a partire da *card* singole o da altri *deck*.                                                                                                                             |
+| Expansion   | extension                                  | Insieme di carte aggiuntive utilizzabili contestualmente ad un Deck.                                                                                                                                                                       |
+| Card        |                                            | Unità base del gioco. Definita da: nome, tipo (*card-type*), effetto, immagine. Le *card* di sistema sono create dall'*admin*; le *card* all'interno di un *deck* sono istanze di una definizione.                                         |
+| Lobby       |                                            | Sala virtuale di attesa pre *match*. I *participant* si uniscono qui. Il *master* decide quando far iniziare la *match* e ne configura le caratteristiche: numero giocatori, mazzo ed estensioni da utilizzare, durata turno, inviti amici |
+| Match       | Partita, Game                              | Sessione di gioco con due o piu player che partecipano seguendo le regole di gioco.                                                                                                                                                        |
+| Badge       |                                            | Contatore/icona/stemma che rappresenta il raggiungimento di un *achievement* ottenuto da un *player*.                                                                                                                                      |
+| Achievement | Mission                                    | Obiettivo che il player deve raggiungere compiendo azioni specifiche nel gioco (es. "sopravvissuto a 5 bombe").                                                                                                                            |
+
+
+
+| Card Name            | Original Card Name | Synonyms   | Description                                                                                                                  |
+|----------------------|--------------------|------------|------------------------------------------------------------------------------------------------------------------------------|
+| Bamboom              | Exploding kitten   | Bomb       | Carta bomba: quando pescata fa perdere il giocatore a meno che non decida di utilizzare il disinnesco *Sbadiglio Disarmante* |
+| Sbadiglio Disarmante | Disinnesgatto      | Disinnesco | Carta disinnesco della bomba, permette di continuare la partita dopo aver rimesso la bomba nel mazzo                         |
+| Pugno Ravvicinato    | Attacco            |            | Carta attacco: il player salta il turno senza pescare e il player successivodeve fare N turni                                |
+| Pugno Volante        | Attacco mirato     |            | Carta attacco: come la carta *Pugno Ravvicinato* con la possibilià di decidere quale player farà N turni                     |
+| Fame Infinita        | Attacco personale  |            | Carta attacco: vengono aggiunti N turni al player che l'ha giocata                                                           |
+||||
