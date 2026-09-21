@@ -45,4 +45,6 @@
 | Pandemia di Bamboo                     | Ciotola della condivisione |            | A partire dal player che la gioca, tutti i giocatori mettono una carta sul mazzo di pesca.                                                                                                        |
 | Pancake di Panda / Panda Nudo a spasso | Streaking Kitten (mutanda) |            | Questa carta permette di non esplodere e mantenere una bomba nella propria mano.                                                                                                                  |
 |                                        | Bomba gattomica            |            | Quando attivata tutte le bombe vengono messe in cima al mazzo mescolato.                                                                                                                          |
-|                                        | Carte gatto                |            | Carte utilizzabiloi solo in combinazione con altre carte con nome simile. Le combinazioni permettono di rubare una carta casuale dalla mano di altri player o di chiederne una in modo esplicito. |
+| *                                      | Carte gatto                |            | Carte utilizzabiloi solo in combinazione con altre carte con nome simile. Le combinazioni permettono di rubare una carta casuale dalla mano di altri player o di chiederne una in modo esplicito. |
+
+*) Pandacatapanda, Melorso, Pandana, Barborso, Arcopanda, Panda Selvaggio
