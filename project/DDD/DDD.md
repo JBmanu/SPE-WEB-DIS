@@ -7,17 +7,15 @@
 
 ## Bounded-Context
 
-| Person | Done | Context                  | Responsibility                                                                                                                             |
-|--------|------|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| Client | x    | player-identity-context  | gestisce le registrazioni del cliente e le relazioni(amicizie) tra di loro                                                                 |
-| Client | x    | player-progress-context  | gestisce il progresso del cliente nella piattaforma, statistiche delle partite, missioni (achievement), badge e livello                    |
-| Client | x    | lobby-browser-context    | gestisce il processo di ricerca di una partita, scegliendo di partecipare o guardare                                                       |
-| Client | x    | pregame-lobby-context    | gestisce il flusso dalla creazione della partita, raccogliendo i giocatori nel gruppo e permettendo al master di avviarla                  |
-| Client | x    | match-context            | gestisce tutte le meccaniche di gioco effettivo (turno, attivazione carte...) e la riproduzione dello storico delle ultime partite giocate |
-| Client | x    | deck-workshop-context    | gestisce le meccaniche per creare nuovi mazzi personalizzati, con cui giocarci                                                             |
-| Admin  | x    | card-forge-context       | gestisce il sistema per creare nuovi mazzi di default e nuove carte tramite espansioni, quindi contiene la documentazione delle carte      |
-| Admin  | x    | game-observatory-context | gestisce la raccolta delle statistiche del sistema di gioco (giocatori online, partite in corso, carte più giocate, ...)                   |
-| Admin  | x    | system-health-context    | gestice il monitoraggio dei servizi della piattaforma di gioco (disponibilità, traffico, richieste, ...)                                   |
+| Person | Done | Context                  | Responsibility                                                                                                                        |
+|--------|------|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| Client | x    | player-identity-context  | gestisce le registrazioni del cliente e le relazioni(amicizie) tra di loro                                                            |
+| Client | x    | player-progress-context  | gestisce il progresso del cliente nella piattaforma, statistiche delle partite, missioni (achievement), badge e livello               |
+| Client | x    | lobby-match-context      | gestisce il processo di ricerca di una partita, scegliendo di partecipare o guardare                                                  |
+| Client | x    | deck-workshop-context    | gestisce le meccaniche per creare nuovi mazzi personalizzati, con cui giocarci                                                        |
+| Admin  | x    | card-forge-context       | gestisce il sistema per creare nuovi mazzi di default e nuove carte tramite espansioni, quindi contiene la documentazione delle carte |
+| Admin  | x    | game-observatory-context | gestisce la raccolta delle statistiche del sistema di gioco (giocatori online, partite in corso, carte più giocate, ...)              |
+| Admin  | x    | system-health-context    | gestice il monitoraggio dei servizi della piattaforma di gioco (disponibilità, traffico, richieste, ...)                              |
 
 #### Player-Identity-Context
 
